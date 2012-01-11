@@ -1,0 +1,417 @@
+//
+//  LPNAppDelegate.m
+//  LivePopNotice
+//
+//  Created by hsmikan on 1/7/12.
+//  Copyright (c) 2012 PPixy. All rights reserved.
+//
+
+#import "LPNAppDelegate.h"
+
+
+#import "Constants/mainTabIdentifier.h"
+#import "Constants/LPNUserDefaultsKey.h"
+
+#import "XMLParser/LPNFeedParser.h"
+#import "LPNWindow/LPNWindowController.h"
+
+//#import "FilteringList/FilteringViewController.h"
+#import "FilteringList/SubClass/FilteringLPNListViewController.h"
+
+#import "StatusBarMenu/LPNStatusBarMenu.h"
+
+
+
+@interface LPNAppDelegate()
+- (void)_LPN_stopRefreshTimer;
+- (void)_LPN_startRefreshTimer;
+- (void)_LPN_getAndParse:(NSTimer*)timer;
+- (void)_LPN_cahngeRemainTimeInterval:(NSTimer*)timer;
+- (void)_LPN_popUpNewEntry:(NSDictionary *)entry;
+@end
+
+
+
+@implementation LPNAppDelegate
+
+@synthesize displayIntervalTimeUntilNextRefresh = _displayIntervalTimeUntilNextRefresh;
+@synthesize window = _window;
+@synthesize mainTab = _mainTab;
+@synthesize liveListController = _liveListController;
+
+
+
+- (void)dealloc {
+    // won't be called
+    [super dealloc];
+}
+
+#pragma mark -
+#pragma mark - App Delegate
+/*========================================================================================
+ *
+ *  finalize
+ *
+ *========================================================================================*/
+- (void)applicationWillTerminate:(NSNotification *)notification {    
+    [self _LPN_stopRefreshTimer];
+    
+    if (_displayRemainTimeIntervalTimer) {
+        [_displayRemainTimeIntervalTimer invalidate];
+        _displayRemainTimeIntervalTimer = nil;
+    }
+    [_currentFeededLiveIDs release]; _currentFeededLiveIDs = nil;
+    [_currentSubFeededLiveIDs release]; _currentSubFeededLiveIDs = nil;
+    
+    [_statusBarItem release];
+    [_LPNListController release];
+    [_LPNIgnoreListController release];
+}
+
+
+
+
+/*========================================================================================
+ *
+ *  Initialize
+ *
+ *========================================================================================*/
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+    /* insert application icon in the status bar */
+    _statusBarItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    {
+        [_statusBarItem retain];
+        [_statusBarItem setTitle:@""];
+        [_statusBarItem setImage:[NSImage imageNamed:@"icon2"]];
+        [_statusBarItem setHighlightMode:YES];
+        LPNStatusBarMenu * statusBarMenu = [[LPNStatusBarMenu alloc] initWithTitle:@"LPNStatusBarMenu"
+                                                                    actionDelegate:self];
+        [_statusBarItem setMenu:[statusBarMenu autorelease]];
+    }
+    
+    
+    /* storing data */
+    NSUserDefaults * df = [NSUserDefaults standardUserDefaults];
+    {
+        /* register default UI values */
+        NSString * guidfpath = [[NSBundle mainBundle] pathForResource:@"LPNGraphicalUserInterfaceDefaults"
+                                                               ofType:@"plist"];
+        NSDictionary * guidf = [NSDictionary dictionaryWithContentsOfFile:guidfpath];
+        [df registerDefaults:guidf];
+        
+        
+        _refreshTimeInterval = [[df stringForKey:kLPNUserDefaultsRefreshIntervalKey] doubleValue];
+        _LPNDisplayTimeInterval = [[df stringForKey:kLPNUserDefaultsNoticeDurationKey] doubleValue];
+        
+    }
+    
+    
+    
+    /* --------- */
+    /* tab views */
+    /* --------- */
+    
+    // LPNList
+    _LPNListController = [[FilteringLPNListViewController alloc] initWithArrayControllerKey:kLPNListArrayControllerKey];
+    [[_mainTab tabViewItemAtIndex:kPopUpNoticeTabItemIndex] setView:[_LPNListController view]];
+    
+    // LPNIgnoreList
+    _LPNIgnoreListController = [[FilteringViewController alloc] initWithArrayControllerKey:kLPNIgnoreListArrayControllerKey];
+    [[_mainTab tabViewItemAtIndex:kIgnoreListTabItemIndex] setView:[_LPNIgnoreListController view]];
+    
+    
+    
+    
+    [self _LPN_getAndParse:nil];
+    [self _LPN_startRefreshTimer];
+    
+    /* Test */
+#ifdef DEBUG
+    LPNWindowController * testWindow;{
+        NSDictionary * lpnAttr = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  @"Live Title",@"entryDictionaryTitle",
+                                  @"Author",@"entryDictionaryAuthorName",
+                                  @"Live Summary",@"entryDictionarySummary",
+                                  @"http://google.co.jp",@"entryDictionaryURL",
+                                  nil];
+        testWindow = [[LPNWindowController alloc] initWithLPNAttribute:lpnAttr];
+    }
+    [testWindow showWindowForDuration:1000];
+    
+#endif
+}
+
+
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
+{
+    /* agent Application */
+    return NO;
+}
+
+
+
+
+
+
+
+#pragma mark -
+#pragma mark Status Bar Action
+/*========================================================================================
+ *
+ *  Status Bar Action
+ *
+ *========================================================================================*/
+
+/* AT status bar menu */
+- (IBAction)openMainWindow:(id)sender {// (NSMenuItem *)sender
+    [_window orderFrontRegardless];
+}
+
+
+
+
+#pragma mark -
+#pragma mark Tool Bar Actions
+/*========================================================================================
+ *
+ *  TabView Selection
+ *
+ *========================================================================================*/
+
+- (IBAction)selectLiveListTab:(NSToolbarItem *)sender {
+    [_window setTitle:@"LivePopNotice - Live List -"];
+    [_mainTab selectTabViewItemWithIdentifier:kLiveListTabIdentifier];
+}
+
+- (IBAction)selectPopUpListTab:(NSToolbarItem *)sender {
+    [_window setTitle:@"LivePopNotice - Pop Up Notice List -"];
+    [_mainTab selectTabViewItemWithIdentifier:kPopUpTabIdentifier];
+}
+
+- (IBAction)selectIgnoreListTab:(NSToolbarItem *)sender {
+    [_window setTitle:@"LivePopNotice - Ignore List -"];
+    [_mainTab selectTabViewItemWithIdentifier:kIgnoreListTabIdentifier];
+}
+
+
+
+/*========================================================================================
+ *
+ *  refresh
+ *
+ *========================================================================================*/
+
+- (IBAction)refreshLiveList:(NSToolbarItem *)sender {
+    [self _LPN_stopRefreshTimer];
+    [self _LPN_getAndParse:nil];
+    [self _LPN_startRefreshTimer];
+}
+
+
+const CGFloat refreshIntervalMin = 5;
+- (IBAction)changeRefreshInterval:(NSTextFieldCell *)sender {
+    if ([sender integerValue] == _refreshTimeInterval) {
+        return;
+    }
+    
+    if ([sender integerValue] < refreshIntervalMin) {
+        [sender setIntegerValue:refreshIntervalMin];
+        _refreshTimeInterval = refreshIntervalMin;
+    }
+    else {
+        _refreshTimeInterval = [sender doubleValue];
+    }
+    
+    [self _LPN_stopRefreshTimer];
+    [self _LPN_startRefreshTimer];
+    
+}
+
+
+
+/*========================================================================================
+ *
+ *  Duration of Pop Up Notice Window
+ *
+ *========================================================================================*/
+
+- (IBAction)changeLPNDisplayDuration:(NSTextField *)sender {
+    static const CGFloat LPNDisplayTimeIntervalMin = 1;
+    
+    if ( _LPNDisplayTimeInterval == [sender doubleValue] ) {
+        return;
+    }
+    
+    if ( [sender doubleValue] <= 0 ) {
+        _LPNDisplayTimeInterval = LPNDisplayTimeIntervalMin;
+        [sender setIntValue:LPNDisplayTimeIntervalMin];
+    }
+    else {
+        _LPNDisplayTimeInterval = [sender doubleValue];
+    }
+}
+
+
+
+
+
+
+
+
+#pragma mark -
+#pragma mark Action Called From Table View's Context Menu
+/*========================================================================================
+ *
+ *  Open Live URL with Default Web Browser
+ *
+ *========================================================================================*/
+- (void)openLivePage:(id)sender {
+    NSUInteger index = [_liveListController selectionIndex];
+    NSString * urlstring = [(NSDictionary*)[[_liveListController arrangedObjects] objectAtIndex:index] URL];
+    NSURL * url = [NSURL URLWithString:urlstring];
+    [[NSWorkspace sharedWorkspace] openURL:url];
+}
+
+
+
+
+
+#pragma mark -
+#pragma mark LPNXMLParser Delegate
+/*========================================================================================
+ *
+ *  LPNXMLParser delegate
+ *
+ *========================================================================================*/
+
+- (void)LPNXMLParserDidStartDocyment {
+    [_liveListController removeObjects:[_liveListController arrangedObjects]];
+    _currentSubFeededLiveIDs = [[NSMutableArray alloc] init];
+}
+
+- (void)LPNXMLParserDidEndDocument {
+    [_currentFeededLiveIDs release];
+    _currentFeededLiveIDs = [[NSArray alloc] initWithArray:_currentSubFeededLiveIDs];
+    [_currentSubFeededLiveIDs release];
+    _currentSubFeededLiveIDs = nil;
+}
+
+
+- (void)LPNXMLParserDidEndEntry:(NSDictionary *)entry {
+    
+    BOOL isIgnorable = [_LPNIgnoreListController isContainendEntry:entry];
+    if (isIgnorable) return;
+    
+    [_liveListController addObject:entry];
+    [_currentSubFeededLiveIDs addObject:[entry liveID]];
+    
+    [self _LPN_popUpNewEntry:entry];
+    
+}
+
+
+
+
+
+
+
+
+#pragma mark -
+#pragma mark Private-like Method
+/*========================================================================================
+ *
+ *  Private-like Method
+ *
+ *========================================================================================*/
+
+- (void)_LPN_stopRefreshTimer {
+    if (_refreshTimer) {
+        [_refreshTimer invalidate];
+        _refreshTimer = nil;
+    }
+}
+
+
+- (void)_LPN_startRefreshTimer {
+    if (_refreshTimeInterval < refreshIntervalMin) _refreshTimeInterval = refreshIntervalMin;
+#ifdef DEBUG
+    _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:5
+                                                     target:self
+                                                   selector:@selector(_LPN_getAndParse:)
+                                                   userInfo:nil repeats:YES];
+#else
+    _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:(_refreshTimeInterval*60.0)
+                                                     target:self
+                                                   selector:@selector(_LPN_getAndParse:)
+                                                   userInfo:nil repeats:YES];
+#endif
+}
+
+
+- (void)_LPN_getAndParse:(NSTimer*)timer {
+    _refreshTimeIntervalCount = 0;
+    if ([_displayRemainTimeIntervalTimer isValid]) {
+        [_displayRemainTimeIntervalTimer invalidate];
+        _displayRemainTimeIntervalTimer = nil;
+    }
+    _displayRemainTimeIntervalTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                                       target:self
+                                                                     selector:@selector(_LPN_cahngeRemainTimeInterval:)
+                                                                     userInfo:nil
+                                                                      repeats:YES];
+
+    LPNXMLParser * parser = [[LPNXMLParser alloc] initWithDelegate:self];
+    [parser parse];
+}
+
+
+
+
+
+
+/*========================================================================================
+ *
+ *  display remained time interval
+ *
+ *========================================================================================*/
+- (void)_LPN_cahngeRemainTimeInterval:(NSTimer *)timer {
+    unsigned int min,sec;
+    {
+        unsigned int seconds = _refreshTimeInterval*60 - (++_refreshTimeIntervalCount);
+        min = seconds/60;
+        sec = seconds%60;
+    }
+    [_displayIntervalTimeUntilNextRefresh setStringValue:[NSString stringWithFormat:@"%02u:%02u",min,sec]];
+}
+
+
+
+- (void)_LPN_popUpNewEntry:(LPNEntryDictionary *)entry {
+#ifndef DEBUG
+    if (/*--------------------------------------------------------------------------------------*/
+        
+        /* is firsrt load */
+        ( ![_currentFeededLiveIDs count] )
+        
+        /* is new live */||
+        ( [_currentFeededLiveIDs containsObject:[entry liveID]] )
+        
+        /* is able to pop up */||
+        ( ![_LPNListController isNoticeAnyLive] && ![_LPNListController isContainendEntry:entry] )
+        
+        /*--------------------------------------------------------------------------------------*/)
+    {
+        return;
+    }
+#endif
+    
+    
+    
+    LPNWindowController * win = [[LPNWindowController alloc] initWithLPNAttribute:entry];
+    [win showWindowForDuration:_LPNDisplayTimeInterval];
+    
+}
+
+
+@end

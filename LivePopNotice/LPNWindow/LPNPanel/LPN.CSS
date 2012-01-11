@@ -1,0 +1,19 @@
+div#body {
+}
+div#title {
+    float : left;
+    font-size : 1em;
+}
+div#author {
+    float : right;
+    font-size : 1em;
+    color : white;
+}
+a:link {
+    color : #00ffff;
+}
+div#summary {
+    font-size : 0.7em;
+    clear : both;
+    color : white;
+}

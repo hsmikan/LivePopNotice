@@ -1,0 +1,25 @@
+﻿/* 
+  Localizable.strings
+  LivePopNotice
+
+  Created by hsmikan on 1/11/12.
+  Copyright (c) 2012 PPixy. All rights reserved.
+*/
+
+/* Status Bar Menu */
+"LPNStatusMenuShowMainWindow"       =   "Show Main Window";
+"LPNStatusMenuAboutLivePopNOtice"   =   "About LivePopNotice";
+"LPNStatusMenuHelp"                 =   "Help";
+"LPNStatusMenuQuit"                 =   "Quit LivePopNotice";
+
+/* Live List Context Menu */
+"LPNOpenLivePageMenuItem"   =   "Open Live Page";
+
+/* Filtering Type Pop Up Button title */
+"LPNFilteringTypeAuthor"        =   "Author";
+"LPNFilteringTypeLiveTitle"     =   "Live Title";
+"LPNFilteringTypeLiveSummary"   =   "Live Summary";
+/* Filtering Table View Context Menu */
+"LPNFilteringRemoveSelectedItems"  =   "Remove Selected Items";
+
+"LPNPopUpNoticeButton"  =   "Notice Any Live";

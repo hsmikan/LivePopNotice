@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		92375B5214B9DABD00E493DC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92375B5114B9DABD00E493DC /* WebKit.framework */; };
+		923EC9FB14BDBCAE00A5064B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 923EC9F914BDBCAE00A5064B /* Localizable.strings */; };
+		923EC9FE14BDD14300A5064B /* LPNStatusBarMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 923EC9FD14BDD14200A5064B /* LPNStatusBarMenu.m */; };
+		923ECA0314BDD89B00A5064B /* LPNUserDefaultsKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 923ECA0214BDD89B00A5064B /* LPNUserDefaultsKey.m */; };
+		923ECA0914BDE0CB00A5064B /* LPNWindowMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 923ECA0814BDE0CA00A5064B /* LPNWindowMap.m */; };
+		923ECA1014BDF0FC00A5064B /* LPNWindowSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 923ECA0F14BDF0FB00A5064B /* LPNWindowSize.m */; };
+		92412E9614BBF0440084A182 /* LPNPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 92412E9514BBF0440084A182 /* LPNPanel.m */; };
+		92412E9A14BBF64C0084A182 /* LPN.CSS in Resources */ = {isa = PBXBuildFile; fileRef = 92412E9914BBF64C0084A182 /* LPN.CSS */; };
+		92412EA014BC01A50084A182 /* LPNView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92412E9F14BC01A50084A182 /* LPNView.m */; };
+		9271BD5B14B883E30021F4BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9271BD5A14B883E30021F4BA /* Cocoa.framework */; };
+		9271BD6514B883E30021F4BA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9271BD6314B883E30021F4BA /* InfoPlist.strings */; };
+		9271BD6714B883E30021F4BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BD6614B883E30021F4BA /* main.m */; };
+		9271BD6B14B883E30021F4BA /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 9271BD6914B883E30021F4BA /* Credits.rtf */; };
+		9271BD6E14B883E30021F4BA /* LPNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BD6D14B883E30021F4BA /* LPNAppDelegate.m */; };
+		9271BD7114B883E40021F4BA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9271BD6F14B883E40021F4BA /* MainMenu.xib */; };
+		9271BD7C14B890950021F4BA /* LPNGraphicalUserInterfaceDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9271BD7B14B890950021F4BA /* LPNGraphicalUserInterfaceDefaults.plist */; };
+		9271BD8714B8993A0021F4BA /* mainTabIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BD8614B8993A0021F4BA /* mainTabIdentifier.m */; };
+		9271BD8B14B89AEA0021F4BA /* filteringTypeIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BD8A14B89AEA0021F4BA /* filteringTypeIdentifier.m */; };
+		9271BD9614B89F760021F4BA /* LPNXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BD9514B89F760021F4BA /* LPNXMLParser.m */; };
+		9271BD9A14B8A5430021F4BA /* cavetubeFeedTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BD9914B8A5430021F4BA /* cavetubeFeedTag.m */; };
+		9271BDA714B8B1940021F4BA /* LPNEntryDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BDA614B8B1940021F4BA /* LPNEntryDictionary.m */; };
+		9271BDB914B8CC3A0021F4BA /* LPNWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BDB714B8CC3A0021F4BA /* LPNWindowController.m */; };
+		9271BDBC14B8CC770021F4BA /* LPNEntryDictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BDBB14B8CC770021F4BA /* LPNEntryDictionaryKeys.m */; };
+		9293B1C314BCCBF100B237AC /* FilteringTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9293B1C214BCCBF100B237AC /* FilteringTableView.m */; };
+		9293B1C714BCCD3A00B237AC /* LPNLiveListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9293B1C614BCCD3A00B237AC /* LPNLiveListTableView.m */; };
+		92A1BA6F14BE43EB002EE92E /* icon2.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 92A1BA6E14BE43EB002EE92E /* icon2.tiff */; };
+		92A3490914BC2ED8003FD04E /* FilteringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3490714BC2ED8003FD04E /* FilteringViewController.m */; };
+		92A3491014BC4EE9003FD04E /* FilteringLPNListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3490F14BC4EE9003FD04E /* FilteringLPNListViewController.m */; };
+		92A3491614BC61F5003FD04E /* FilteringTypePBCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3491714BC61F5003FD04E /* FilteringTypePBCell.m */; };
+		92A3491A14BC64FB003FD04E /* FilteringViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A3491814BC64FA003FD04E /* FilteringViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		922C935514B9305A00A429A4 /* FilteringTypePBCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilteringTypePBCell.h; path = FilteringList/FilteringTypePBCell.h; sourceTree = "<group>"; };
+		92375B5114B9DABD00E493DC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		923EC9F814BDB9D300A5064B /* LivePopNotice-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LivePopNotice-Info.plist"; sourceTree = "<group>"; };
+		923EC9FA14BDBCAE00A5064B /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		923EC9FC14BDD14200A5064B /* LPNStatusBarMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNStatusBarMenu.h; path = StatusBarMenu/LPNStatusBarMenu.h; sourceTree = "<group>"; };
+		923EC9FD14BDD14200A5064B /* LPNStatusBarMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNStatusBarMenu.m; path = StatusBarMenu/LPNStatusBarMenu.m; sourceTree = "<group>"; };
+		923ECA0014BDD65500A5064B /* ja */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		923ECA0114BDD89B00A5064B /* LPNUserDefaultsKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNUserDefaultsKey.h; path = Constants/LPNUserDefaultsKey.h; sourceTree = "<group>"; };
+		923ECA0214BDD89B00A5064B /* LPNUserDefaultsKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNUserDefaultsKey.m; path = Constants/LPNUserDefaultsKey.m; sourceTree = "<group>"; };
+		923ECA0714BDE0C900A5064B /* LPNWindowMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNWindowMap.h; path = Model/LPNWindowMap.h; sourceTree = "<group>"; };
+		923ECA0814BDE0CA00A5064B /* LPNWindowMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNWindowMap.m; path = Model/LPNWindowMap.m; sourceTree = "<group>"; };
+		923ECA0E14BDF0FB00A5064B /* LPNWindowSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNWindowSize.h; path = Constants/LPNWindowSize.h; sourceTree = "<group>"; };
+		923ECA0F14BDF0FB00A5064B /* LPNWindowSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNWindowSize.m; path = Constants/LPNWindowSize.m; sourceTree = "<group>"; };
+		92412E9414BBF0440084A182 /* LPNPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNPanel.h; path = LPNWindow/LPNPanel/LPNPanel.h; sourceTree = "<group>"; };
+		92412E9514BBF0440084A182 /* LPNPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNPanel.m; path = LPNWindow/LPNPanel/LPNPanel.m; sourceTree = "<group>"; };
+		92412E9914BBF64C0084A182 /* LPN.CSS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = LPN.CSS; path = LPNWindow/LPNPanel/LPN.CSS; sourceTree = "<group>"; };
+		92412E9E14BC01A50084A182 /* LPNView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNView.h; path = LPNWindow/LPNPanel/LPNView.h; sourceTree = "<group>"; };
+		92412E9F14BC01A50084A182 /* LPNView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNView.m; path = LPNWindow/LPNPanel/LPNView.m; sourceTree = "<group>"; };
+		9271BD5614B883E30021F4BA /* LivePopNotice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivePopNotice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9271BD5A14B883E30021F4BA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		9271BD5D14B883E30021F4BA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		9271BD5E14B883E30021F4BA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9271BD5F14B883E30021F4BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9271BD6414B883E30021F4BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9271BD6614B883E30021F4BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9271BD6814B883E30021F4BA /* LivePopNotice-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LivePopNotice-Prefix.pch"; sourceTree = "<group>"; };
+		9271BD6A14B883E30021F4BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		9271BD6C14B883E30021F4BA /* LPNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPNAppDelegate.h; sourceTree = "<group>"; };
+		9271BD6D14B883E30021F4BA /* LPNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LPNAppDelegate.m; sourceTree = "<group>"; };
+		9271BD7014B883E40021F4BA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		9271BD7B14B890950021F4BA /* LPNGraphicalUserInterfaceDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LPNGraphicalUserInterfaceDefaults.plist; sourceTree = "<group>"; };
+		9271BD8514B8993A0021F4BA /* mainTabIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mainTabIdentifier.h; path = Constants/mainTabIdentifier.h; sourceTree = "<group>"; };
+		9271BD8614B8993A0021F4BA /* mainTabIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = mainTabIdentifier.m; path = Constants/mainTabIdentifier.m; sourceTree = "<group>"; };
+		9271BD8914B89AEA0021F4BA /* filteringTypeIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filteringTypeIdentifier.h; path = Constants/filteringTypeIdentifier.h; sourceTree = "<group>"; };
+		9271BD8A14B89AEA0021F4BA /* filteringTypeIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = filteringTypeIdentifier.m; path = Constants/filteringTypeIdentifier.m; sourceTree = "<group>"; };
+		9271BD9414B89F760021F4BA /* LPNXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNXMLParser.h; path = XMLParser/LPNXMLParser.h; sourceTree = "<group>"; };
+		9271BD9514B89F760021F4BA /* LPNXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNXMLParser.m; path = XMLParser/LPNXMLParser.m; sourceTree = "<group>"; };
+		9271BD9714B89FFE0021F4BA /* LPNXMLParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNXMLParserDelegate.h; path = XMLParser/LPNXMLParserDelegate.h; sourceTree = "<group>"; };
+		9271BD9814B8A5430021F4BA /* cavetubeFeedTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cavetubeFeedTag.h; path = Constants/cavetubeFeedTag.h; sourceTree = "<group>"; };
+		9271BD9914B8A5430021F4BA /* cavetubeFeedTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = cavetubeFeedTag.m; path = Constants/cavetubeFeedTag.m; sourceTree = "<group>"; };
+		9271BDA514B8B1940021F4BA /* LPNEntryDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNEntryDictionary.h; path = XMLParser/LPNEntryDictionary.h; sourceTree = "<group>"; };
+		9271BDA614B8B1940021F4BA /* LPNEntryDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNEntryDictionary.m; path = XMLParser/LPNEntryDictionary.m; sourceTree = "<group>"; };
+		9271BDB414B8C9490021F4BA /* LPNFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNFeedParser.h; path = XMLParser/LPNFeedParser.h; sourceTree = "<group>"; };
+		9271BDB614B8CC3A0021F4BA /* LPNWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNWindowController.h; path = LPNWindow/LPNWindowController.h; sourceTree = "<group>"; };
+		9271BDB714B8CC3A0021F4BA /* LPNWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNWindowController.m; path = LPNWindow/LPNWindowController.m; sourceTree = "<group>"; };
+		9271BDBA14B8CC760021F4BA /* LPNEntryDictionaryKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNEntryDictionaryKeys.h; path = Constants/LPNEntryDictionaryKeys.h; sourceTree = "<group>"; };
+		9271BDBB14B8CC770021F4BA /* LPNEntryDictionaryKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNEntryDictionaryKeys.m; path = Constants/LPNEntryDictionaryKeys.m; sourceTree = "<group>"; };
+		9293B1C114BCCBF100B237AC /* FilteringTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilteringTableView.h; sourceTree = "<group>"; };
+		9293B1C214BCCBF100B237AC /* FilteringTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilteringTableView.m; sourceTree = "<group>"; };
+		9293B1C514BCCD3A00B237AC /* LPNLiveListTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPNLiveListTableView.h; sourceTree = "<group>"; };
+		9293B1C614BCCD3A00B237AC /* LPNLiveListTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPNLiveListTableView.m; sourceTree = "<group>"; };
+		92A1BA6E14BE43EB002EE92E /* icon2.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = icon2.tiff; path = img/icon2.tiff; sourceTree = "<group>"; };
+		92A3490614BC2ED8003FD04E /* FilteringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilteringViewController.h; path = FilteringList/FilteringViewController.h; sourceTree = "<group>"; };
+		92A3490714BC2ED8003FD04E /* FilteringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilteringViewController.m; path = FilteringList/FilteringViewController.m; sourceTree = "<group>"; };
+		92A3490E14BC4EE9003FD04E /* FilteringLPNListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilteringLPNListViewController.h; path = FilteringList/SubClass/FilteringLPNListViewController.h; sourceTree = "<group>"; };
+		92A3490F14BC4EE9003FD04E /* FilteringLPNListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilteringLPNListViewController.m; path = FilteringList/SubClass/FilteringLPNListViewController.m; sourceTree = "<group>"; };
+		92A3491714BC61F5003FD04E /* FilteringTypePBCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FilteringTypePBCell.m; path = FilteringList/FilteringTypePBCell.m; sourceTree = "<group>"; };
+		92A3491914BC64FB003FD04E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = FilteringList/en.lproj/FilteringViewController.xib; sourceTree = "<group>"; };
+		92C35BA914BDFE5F000AA447 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ja; path = ja.lproj/Credits.rtf; sourceTree = "<group>"; };
+		92C35BAA14BDFF58000AA447 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9271BD5314B883E30021F4BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92375B5214B9DABD00E493DC /* WebKit.framework in Frameworks */,
+				9271BD5B14B883E30021F4BA /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		923EC9FF14BDD14800A5064B /* StatusBarMenu */ = {
+			isa = PBXGroup;
+			children = (
+				923EC9FC14BDD14200A5064B /* LPNStatusBarMenu.h */,
+				923EC9FD14BDD14200A5064B /* LPNStatusBarMenu.m */,
+			);
+			name = StatusBarMenu;
+			sourceTree = "<group>";
+		};
+		923ECA0A14BDE0D100A5064B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				923ECA0714BDE0C900A5064B /* LPNWindowMap.h */,
+				923ECA0814BDE0CA00A5064B /* LPNWindowMap.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		92412E9814BBF04C0084A182 /* LPNPanel */ = {
+			isa = PBXGroup;
+			children = (
+				92412E9414BBF0440084A182 /* LPNPanel.h */,
+				92412E9514BBF0440084A182 /* LPNPanel.m */,
+				92412E9E14BC01A50084A182 /* LPNView.h */,
+				92412E9F14BC01A50084A182 /* LPNView.m */,
+				92412E9914BBF64C0084A182 /* LPN.CSS */,
+			);
+			name = LPNPanel;
+			sourceTree = "<group>";
+		};
+		9271BD4B14B883E30021F4BA = {
+			isa = PBXGroup;
+			children = (
+				9271BD6014B883E30021F4BA /* LivePopNotice */,
+				9271BD5914B883E30021F4BA /* Frameworks */,
+				9271BD5714B883E30021F4BA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9271BD5714B883E30021F4BA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9271BD5614B883E30021F4BA /* LivePopNotice.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9271BD5914B883E30021F4BA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				92375B5114B9DABD00E493DC /* WebKit.framework */,
+				9271BD5A14B883E30021F4BA /* Cocoa.framework */,
+				9271BD5C14B883E30021F4BA /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9271BD5C14B883E30021F4BA /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9271BD5D14B883E30021F4BA /* AppKit.framework */,
+				9271BD5E14B883E30021F4BA /* CoreData.framework */,
+				9271BD5F14B883E30021F4BA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		9271BD6014B883E30021F4BA /* LivePopNotice */ = {
+			isa = PBXGroup;
+			children = (
+				9271BD6C14B883E30021F4BA /* LPNAppDelegate.h */,
+				9271BD6D14B883E30021F4BA /* LPNAppDelegate.m */,
+				9271BD6F14B883E40021F4BA /* MainMenu.xib */,
+				923ECA0A14BDE0D100A5064B /* Model */,
+				923EC9FF14BDD14800A5064B /* StatusBarMenu */,
+				9271BD8814B899400021F4BA /* Constants */,
+				9293B1C414BCCD3A00B237AC /* LPNLiveListTableView */,
+				9271BDB514B8CBE20021F4BA /* LPNWindow */,
+				9271BD8F14B89E360021F4BA /* XMLParser */,
+				9271BD8414B894F30021F4BA /* FilteringList */,
+				9271BD6114B883E30021F4BA /* Supporting Files */,
+			);
+			path = LivePopNotice;
+			sourceTree = "<group>";
+		};
+		9271BD6114B883E30021F4BA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				92A1BA7014BE43F1002EE92E /* img */,
+				9271BD7B14B890950021F4BA /* LPNGraphicalUserInterfaceDefaults.plist */,
+				923EC9F814BDB9D300A5064B /* LivePopNotice-Info.plist */,
+				9271BD6914B883E30021F4BA /* Credits.rtf */,
+				9271BD6314B883E30021F4BA /* InfoPlist.strings */,
+				923EC9F914BDBCAE00A5064B /* Localizable.strings */,
+				9271BD6614B883E30021F4BA /* main.m */,
+				9271BD6814B883E30021F4BA /* LivePopNotice-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9271BD8414B894F30021F4BA /* FilteringList */ = {
+			isa = PBXGroup;
+			children = (
+				92A3491114BC4EF0003FD04E /* SubClass */,
+				92A3490614BC2ED8003FD04E /* FilteringViewController.h */,
+				92A3490714BC2ED8003FD04E /* FilteringViewController.m */,
+				92A3491814BC64FA003FD04E /* FilteringViewController.xib */,
+				922C935514B9305A00A429A4 /* FilteringTypePBCell.h */,
+				92A3491714BC61F5003FD04E /* FilteringTypePBCell.m */,
+				9293B1C014BCCBF100B237AC /* FilteringTableView */,
+			);
+			name = FilteringList;
+			sourceTree = "<group>";
+		};
+		9271BD8814B899400021F4BA /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				9271BD8514B8993A0021F4BA /* mainTabIdentifier.h */,
+				9271BD8614B8993A0021F4BA /* mainTabIdentifier.m */,
+				9271BD8914B89AEA0021F4BA /* filteringTypeIdentifier.h */,
+				9271BD8A14B89AEA0021F4BA /* filteringTypeIdentifier.m */,
+				9271BD9814B8A5430021F4BA /* cavetubeFeedTag.h */,
+				9271BD9914B8A5430021F4BA /* cavetubeFeedTag.m */,
+				9271BDBA14B8CC760021F4BA /* LPNEntryDictionaryKeys.h */,
+				9271BDBB14B8CC770021F4BA /* LPNEntryDictionaryKeys.m */,
+				923ECA0114BDD89B00A5064B /* LPNUserDefaultsKey.h */,
+				923ECA0214BDD89B00A5064B /* LPNUserDefaultsKey.m */,
+				923ECA0E14BDF0FB00A5064B /* LPNWindowSize.h */,
+				923ECA0F14BDF0FB00A5064B /* LPNWindowSize.m */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		9271BD8F14B89E360021F4BA /* XMLParser */ = {
+			isa = PBXGroup;
+			children = (
+				9271BDB414B8C9490021F4BA /* LPNFeedParser.h */,
+				9271BD9714B89FFE0021F4BA /* LPNXMLParserDelegate.h */,
+				9271BD9414B89F760021F4BA /* LPNXMLParser.h */,
+				9271BD9514B89F760021F4BA /* LPNXMLParser.m */,
+				9271BDA514B8B1940021F4BA /* LPNEntryDictionary.h */,
+				9271BDA614B8B1940021F4BA /* LPNEntryDictionary.m */,
+			);
+			name = XMLParser;
+			sourceTree = "<group>";
+		};
+		9271BDB514B8CBE20021F4BA /* LPNWindow */ = {
+			isa = PBXGroup;
+			children = (
+				9271BDB614B8CC3A0021F4BA /* LPNWindowController.h */,
+				9271BDB714B8CC3A0021F4BA /* LPNWindowController.m */,
+				92412E9814BBF04C0084A182 /* LPNPanel */,
+			);
+			name = LPNWindow;
+			sourceTree = "<group>";
+		};
+		9293B1C014BCCBF100B237AC /* FilteringTableView */ = {
+			isa = PBXGroup;
+			children = (
+				9293B1C114BCCBF100B237AC /* FilteringTableView.h */,
+				9293B1C214BCCBF100B237AC /* FilteringTableView.m */,
+			);
+			name = FilteringTableView;
+			path = FilteringList/FilteringTableView;
+			sourceTree = "<group>";
+		};
+		9293B1C414BCCD3A00B237AC /* LPNLiveListTableView */ = {
+			isa = PBXGroup;
+			children = (
+				9293B1C514BCCD3A00B237AC /* LPNLiveListTableView.h */,
+				9293B1C614BCCD3A00B237AC /* LPNLiveListTableView.m */,
+			);
+			path = LPNLiveListTableView;
+			sourceTree = "<group>";
+		};
+		92A1BA7014BE43F1002EE92E /* img */ = {
+			isa = PBXGroup;
+			children = (
+				92A1BA6E14BE43EB002EE92E /* icon2.tiff */,
+			);
+			name = img;
+			sourceTree = "<group>";
+		};
+		92A3491114BC4EF0003FD04E /* SubClass */ = {
+			isa = PBXGroup;
+			children = (
+				92A3490E14BC4EE9003FD04E /* FilteringLPNListViewController.h */,
+				92A3490F14BC4EE9003FD04E /* FilteringLPNListViewController.m */,
+			);
+			name = SubClass;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9271BD5514B883E30021F4BA /* LivePopNotice */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9271BD7414B883E40021F4BA /* Build configuration list for PBXNativeTarget "LivePopNotice" */;
+			buildPhases = (
+				9271BD5214B883E30021F4BA /* Sources */,
+				9271BD5314B883E30021F4BA /* Frameworks */,
+				9271BD5414B883E30021F4BA /* Resources */,
+				927D894314B957DD00D340FC /* XCode Mark */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LivePopNotice;
+			productName = LivePopNotice;
+			productReference = 9271BD5614B883E30021F4BA /* LivePopNotice.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9271BD4D14B883E30021F4BA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = PPixy;
+			};
+			buildConfigurationList = 9271BD5014B883E30021F4BA /* Build configuration list for PBXProject "LivePopNotice" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				ja,
+			);
+			mainGroup = 9271BD4B14B883E30021F4BA;
+			productRefGroup = 9271BD5714B883E30021F4BA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9271BD5514B883E30021F4BA /* LivePopNotice */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9271BD5414B883E30021F4BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9271BD6514B883E30021F4BA /* InfoPlist.strings in Resources */,
+				9271BD6B14B883E30021F4BA /* Credits.rtf in Resources */,
+				9271BD7114B883E40021F4BA /* MainMenu.xib in Resources */,
+				9271BD7C14B890950021F4BA /* LPNGraphicalUserInterfaceDefaults.plist in Resources */,
+				92412E9A14BBF64C0084A182 /* LPN.CSS in Resources */,
+				92A3491A14BC64FB003FD04E /* FilteringViewController.xib in Resources */,
+				923EC9FB14BDBCAE00A5064B /* Localizable.strings in Resources */,
+				92A1BA6F14BE43EB002EE92E /* icon2.tiff in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		927D894314B957DD00D340FC /* XCode Mark */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "XCode Mark";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "KEYWORDS=\"TODO:|FIXME:|\\?\\?\\?:|\\!\\!\\!:\"\nfind ${SRCROOT} \\( -name \"*.h\" -or -name \"*.m\" \\) -print0 | \\\nxargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | \\\nperl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9271BD5214B883E30021F4BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9271BD6714B883E30021F4BA /* main.m in Sources */,
+				9271BD6E14B883E30021F4BA /* LPNAppDelegate.m in Sources */,
+				9271BD8714B8993A0021F4BA /* mainTabIdentifier.m in Sources */,
+				9271BD8B14B89AEA0021F4BA /* filteringTypeIdentifier.m in Sources */,
+				9271BD9614B89F760021F4BA /* LPNXMLParser.m in Sources */,
+				9271BD9A14B8A5430021F4BA /* cavetubeFeedTag.m in Sources */,
+				9271BDA714B8B1940021F4BA /* LPNEntryDictionary.m in Sources */,
+				9271BDB914B8CC3A0021F4BA /* LPNWindowController.m in Sources */,
+				9271BDBC14B8CC770021F4BA /* LPNEntryDictionaryKeys.m in Sources */,
+				92A3491614BC61F5003FD04E /* FilteringTypePBCell.m in Sources */,
+				92412E9614BBF0440084A182 /* LPNPanel.m in Sources */,
+				92412EA014BC01A50084A182 /* LPNView.m in Sources */,
+				92A3490914BC2ED8003FD04E /* FilteringViewController.m in Sources */,
+				92A3491014BC4EE9003FD04E /* FilteringLPNListViewController.m in Sources */,
+				9293B1C314BCCBF100B237AC /* FilteringTableView.m in Sources */,
+				9293B1C714BCCD3A00B237AC /* LPNLiveListTableView.m in Sources */,
+				923EC9FE14BDD14300A5064B /* LPNStatusBarMenu.m in Sources */,
+				923ECA0314BDD89B00A5064B /* LPNUserDefaultsKey.m in Sources */,
+				923ECA0914BDE0CB00A5064B /* LPNWindowMap.m in Sources */,
+				923ECA1014BDF0FC00A5064B /* LPNWindowSize.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		923EC9F914BDBCAE00A5064B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				923EC9FA14BDBCAE00A5064B /* en */,
+				923ECA0014BDD65500A5064B /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		9271BD6314B883E30021F4BA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9271BD6414B883E30021F4BA /* en */,
+				92C35BAA14BDFF58000AA447 /* ja */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9271BD6914B883E30021F4BA /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9271BD6A14B883E30021F4BA /* en */,
+				92C35BA914BDFE5F000AA447 /* ja */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		9271BD6F14B883E40021F4BA /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9271BD7014B883E40021F4BA /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		92A3491814BC64FA003FD04E /* FilteringViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				92A3491914BC64FB003FD04E /* en */,
+			);
+			name = FilteringViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9271BD7214B883E40021F4BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9271BD7314B883E40021F4BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9271BD7514B883E40021F4BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LivePopNotice/LivePopNotice-Prefix.pch";
+				INFOPLIST_FILE = "LivePopNotice/LivePopNotice-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9271BD7614B883E40021F4BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LivePopNotice/LivePopNotice-Prefix.pch";
+				INFOPLIST_FILE = "LivePopNotice/LivePopNotice-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9271BD5014B883E30021F4BA /* Build configuration list for PBXProject "LivePopNotice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9271BD7214B883E40021F4BA /* Debug */,
+				9271BD7314B883E40021F4BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9271BD7414B883E40021F4BA /* Build configuration list for PBXNativeTarget "LivePopNotice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9271BD7514B883E40021F4BA /* Debug */,
+				9271BD7614B883E40021F4BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9271BD4D14B883E30021F4BA /* Project object */;
+}
