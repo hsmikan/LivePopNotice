@@ -72,7 +72,6 @@
 
 
 - (IBAction)addElement:(NSButton *)sender {
-    // TODO: addition check
     if ( ![[_filterStringTF stringValue] length] ) {
         return;
     }
@@ -84,10 +83,13 @@
 }
 - (void)addElementWithFilteringType:(NSInteger)typeIndex filteringString:(NSString *)string {
     if (!string.length) return;
-    [_filteringListController addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:
+    NSMutableDictionary * willBeAdded = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                          [NSNumber numberWithInteger:typeIndex],kFilteringTypeIdentifier,
                                          string,kFilteringStringIdentifier,
-                                         nil]];
+                                         nil];
+    if (! [[_filteringListController content] containsObject:willBeAdded] ) {
+        [_filteringListController addObject:willBeAdded];
+    }
 }
 
 
@@ -107,21 +109,22 @@
     BOOL isContained = NO;
 #define CHECKSTRING(STRING) ((STRING) ? (STRING) : @"")
     for (NSDictionary * dic in [_filteringListController content]) {
+#define DIC_FILTERINGSTRING [dic filteringString]
         NSInteger switchConstant = [[dic objectForKey:kFilteringTypeIdentifier] integerValue];
         switch (switchConstant) {
             case kFilteringTypeAuthor:
                 if (authorName == nil) authorName = CHECKSTRING([entry authorName]);
-                isContained = [authorName isEqualToString:[dic filteringString]];
+                isContained = [authorName isEqualToString:DIC_FILTERINGSTRING];
                 break;
                 
             case kFilteringTypeLiveTitle:
                 if (title == nil) title = CHECKSTRING([entry title]);
-                isContained = [title rangeOfString:[dic filteringString]].location != NSNotFound;
+                isContained = [title rangeOfString:DIC_FILTERINGSTRING].location != NSNotFound;
                 break;
                 
             case kFilteringTypeSummary:
                 if (summary == nil) summary = CHECKSTRING([entry summary]);
-                isContained = [summary rangeOfString:[dic filteringString]].location != NSNotFound;
+                isContained = [summary rangeOfString:DIC_FILTERINGSTRING].location != NSNotFound;
                 break;
                 
             default:
@@ -131,8 +134,9 @@
         if (isContained) {
             break;
         }
+#undef DIC_FILTERINGSTRING
     }
-    
+#undef CHECKSTRING
     return isContained;
 }
 

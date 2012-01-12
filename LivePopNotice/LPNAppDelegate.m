@@ -554,7 +554,7 @@ static const CGFloat refreshIntervalMin = 10;
         /* is new live */||
         ( [_currentFeededLiveIDs containsObject:[entry liveID]] )
         
-        /* is able to pop up */||
+        /* is new entry contained in notice list */||
 #endif
         ( ![_LPNListController isContainendEntry:entry] )
         
