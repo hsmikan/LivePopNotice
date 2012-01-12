@@ -432,6 +432,20 @@ static const CGFloat refreshIntervalMin = 10;
 }
 
 
+- (void)LPNXMLParserOccuredError {
+    NSBeginAlertSheet(@"LivePopNotice",
+                      @"OK",
+                      nil,
+                      nil,
+                      _window,
+                      nil,
+                      nil,
+                      nil,
+                      nil,
+                      NSLocalizedString(@"LPNXMLParserErrorMessage", @""));
+}
+
+
 
 
 

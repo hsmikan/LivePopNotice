@@ -22,3 +22,6 @@
 "LPNFilteringTypeLiveSummary"   =   "Live Summary";
 /* Filtering Table View Context Menu */
 "LPNFilteringRemoveSelectedItems"  =   "Remove Selected Items";
+
+/* LPNXMLparser */
+"LPNXMLParserErrorMessage"  =   "Parsing RSS Error Occured. The Application might not get Live Information incorrectly.";

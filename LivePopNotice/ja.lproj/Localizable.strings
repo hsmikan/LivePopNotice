@@ -22,3 +22,6 @@
 "LPNFilteringTypeLiveSummary"   =   "ライブの説明文";
 /* Filtering Table View Context Menu */
 "LPNFilteringRemoveSelectedItems"  =   "選択されているものを削除する";
+
+/* LPNXMLparser */
+"LPNXMLParserErrorMessage"  =   "RSSの解析中にエラーが起きました。正常にライブ情報を取得できていない可能性があります。";

@@ -399,7 +399,13 @@ kFeedElementName | kFeedElementTitle | kFeedElementID
 
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
-    // TODO: NSXMLParser error
+    NSLog(@"PARSER ERROR. code:%ld\tdomain:%@\tuserInfor:%@\tDescription:%@\tReason:%@\tSuggestion:%@\tOptions:%@",
+          [parseError code],[parseError domain],[parseError userInfo],[parseError localizedDescription],
+          [parseError localizedFailureReason],[parseError localizedRecoverySuggestion],[parseError localizedRecoveryOptions]
+          );
+    if ([_delegate respondsToSelector:@selector(LPNXMLParserOccuredError)]) {
+        [_delegate LPNXMLParserOccuredError];
+    }
 }
 
 

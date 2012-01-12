@@ -16,5 +16,5 @@
 - (void)LPNXMLParserDidStartDocyment;
 - (void)LPNXMLParserDidEndDocument;
 - (void)LPNXMLParserDidEndEntry:(NSDictionary *)entry;
-
+- (void)LPNXMLParserOccuredError;
 @end
