@@ -180,6 +180,12 @@ didStartElement:(NSString *)elementName
     else if (CompareString(elementName, kCaveTubeFeedElementLiveID)) {
         EnableFlag(_feedElementFlag, kFeedElementLiveID);
     }
+    
+    else if (CompareString(elementName, @"link")) {
+        if (CompareString([attributeDict objectForKey:@"rel"], @"alternate")) {
+            [_entry setURL:[attributeDict objectForKey:@"href"]];
+        }
+    }
 }
 
 
@@ -245,12 +251,12 @@ kFeedElementName | kFeedElementTitle | kFeedElementLiveURL
     }
     
     
-    else if (CompareString(elementName, kCaveTubeFeedElementLiveURL)) {
-        
-        UnenableFlag(_feedElementFlag, kFeedElementLiveURL);
-        
-        [_entry setURL:text];
-    }
+//    else if (CompareString(elementName, kCaveTubeFeedElementLiveURL)) {
+//        
+//        UnenableFlag(_feedElementFlag, kFeedElementLiveURL);
+//        
+//        [_entry setURL:text];
+//    }
     
     
     else if (CompareString(elementName, kCaveTubeFeedElementSummary)) {
