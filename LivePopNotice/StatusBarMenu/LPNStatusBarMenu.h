@@ -10,8 +10,12 @@
 
 
 enum {
+    LPNStatusBarTabShowWindow,
     LPNStatusBarTagCaveTube,
     LPNStatusBarTagLivetube,
+    LPNStatusBarTabAbout,
+    LPNStatusBarTabHelp,
+    LPNStatusBarTabQuit,
 };
 
 

@@ -17,6 +17,7 @@
                                                            action:@selector(openMainWindow:)
                                                     keyEquivalent:@""];
             [item setTarget:delegate];
+            [item setTag:LPNStatusBarTabShowWindow];
             [self addItem:[item autorelease]];
         }
         
@@ -47,6 +48,7 @@
                                                            action:@selector(orderFrontStandardAboutPanel:)
                                                     keyEquivalent:@""];
             [item setTarget:NSApp];
+            [item setTag:LPNStatusBarTabAbout];
             [self addItem:[item autorelease]];
         }
         
@@ -55,6 +57,7 @@
                                                            action:@selector(showHelp:)
                                                     keyEquivalent:@""];
             [item setTarget:NSApp];
+            [item setTag:LPNStatusBarTabHelp];
             [self addItem:[item autorelease]];
         }
         
@@ -66,6 +69,7 @@
                                                            action:@selector(terminate:)
                                                     keyEquivalent:@""];
             [item setTarget:NSApp];
+            [item setTag:LPNStatusBarTabQuit];
             [self addItem:[item autorelease]];
         }
     }
