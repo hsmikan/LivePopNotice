@@ -11,19 +11,21 @@
 //#import "LPNEntryDictionary.h"
 #import "LPNFeedParser.h"
 
-#import "../Constants/cavetubeFeedTag.h"
+#import "../Constants/FeedTag.h"
 
 
 
 
 
 #ifdef DEBUG
-static NSString * const kFeedURL    =   @"file://localhost/Users/hsmikan/index_live.xml";
+static NSString * const kCTFeedURLString    =   @"file://localhost/Users/hsmikan/index_live.xml";
+static NSString * const kLTFeedURLString    =   @"file://localhost/Users/hsmikan/index.live.xml";
 #else
-static NSString * const kFeedURL    =   @"http://gae.cavelis.net/index_live.xml";
+static NSString * const kCTFeedURLString    =   @"http://gae.cavelis.net/index_live.xml";
+static NSString * const kLTFeedURLString    =   @"http://livetube.cc/index.live.xml";
 #endif
 
-#define LPNCTLiveFeedURL [NSURL URLWithString:kFeedURL]
+#define LPNCTLiveFeedURL [NSURL URLWithString:kCTFeedURLString]
 
 
 
@@ -33,7 +35,7 @@ typedef enum {
     kFeedElementTitle       =   1 << 1,
     kFeedElementAuthor      =   1 << 2,
     kFeedElementName        =   1 << 3,
-    kFeedElementLiveURL     =   1 << 4,
+    kFeedElementID          =   1 << 4,
     kFeedElementSummary     =   1 << 5,
     kFeedElementContent     =   1 << 6,
     kFeedElementUpdated     =   1 << 7,
@@ -75,7 +77,6 @@ typedef enum {
     
     NSXMLParser * parser = [[[NSXMLParser alloc] initWithContentsOfURL:LPNCTLiveFeedURL] autorelease];
     {
-        // [parser autorelease];
         [parser setDelegate:self];
         [parser setShouldProcessNamespaces:NO];
         [parser setShouldReportNamespacePrefixes:NO];
@@ -87,6 +88,39 @@ typedef enum {
 
 }
 
+
+
+- (void)parse:(NSString *)siteurl {
+    
+    NSXMLParser * parser = [[[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:siteurl]] autorelease];
+    {
+        [parser setDelegate:self];
+        [parser setShouldProcessNamespaces:NO];
+        [parser setShouldReportNamespacePrefixes:NO];
+        [parser setShouldResolveExternalEntities:NO];
+        
+    }
+    
+    [parser parse];
+    
+}
+
+
+
+- (void)parseWithSiteMask:(LPNFeedSiteMask)mask {
+    if (!mask) {// mask == none
+        return;
+    }
+    
+    _serviceSiteMask = mask;
+    if (mask & feedSiteCaveTube) {
+        [self parse:kCTFeedURLString];
+    }
+    
+    if (mask & feedSiteLiveTube) {
+        [self parse:kLTFeedURLString];
+    }
+}
 
 
 
@@ -141,44 +175,50 @@ didStartElement:(NSString *)elementName
  qualifiedName:(NSString *)qName
     attributes:(NSDictionary *)attributeDict
 {
-    if      (CompareString(elementName, kCaveTubeFeedElementEntry)) {
+    if      (CompareString(elementName, kFeedElementNameEntry)) {
         EnableFlag(_feedElementFlag, kFeedElementEntry);
     }
     
-    else if (CompareString(elementName, kCaveTubeFeedElementTitle)) {
+    else if (CompareString(elementName, kFeedElementNameTitle)) {
         EnableFlag(_feedElementFlag, kFeedElementTitle);
     }
     
-    else if (CompareString(elementName, kCaveTubeFeedElementAuthor)) {
+    else if (CompareString(elementName, kFeedElementNameAuthor)) {
         EnableFlag(_feedElementFlag, kFeedElementAuthor);
     }
     
-    else if (CompareString(elementName, kCaveTubeFeedElementName)) {
+    else if (CompareString(elementName, kFeedElementNameName)) {
         EnableFlag(_feedElementFlag, kFeedElementName);
     }
     
-    else if (CompareString(elementName, kCaveTubeFeedElementLiveURL)) {
-        EnableFlag(_feedElementFlag, kFeedElementLiveURL);
+    else if (CompareString(elementName, kFeedElementNameID)) {
+        if (_serviceSiteMask & feedSiteLiveTube) {
+            EnableFlag(_feedElementFlag, kFeedElementID);
+        }
     }
     
-    else if (CompareString(elementName, kCaveTubeFeedElementSummary)) {
-        EnableFlag(_feedElementFlag, kFeedElementSummary);
+    else if (CompareString(elementName, kFeedElementNameSummary)) {
+        if (_serviceSiteMask & feedSiteCaveTube) {
+            EnableFlag(_feedElementFlag, kFeedElementSummary);
+        }
     }
     
-    else if (CompareString(elementName, kCaveTubeFeedElementContent)) {
+    else if (CompareString(elementName, kFeedElementNameContent)) {
         EnableFlag(_feedElementFlag, kFeedElementContent);
     }
     
-    else if (CompareString(elementName, kCaveTubeFeedElementUpdated)) {
+    else if (CompareString(elementName, kFeedElementNameUpdated)) {
         EnableFlag(_feedElementFlag, kFeedElementUpdated);
     }
     
-    else if (CompareString(elementName, kCaveTubeFeedElementPublished)) {
+    else if (CompareString(elementName, kFeedElementNamePublished)) {
         EnableFlag(_feedElementFlag, kFeedElementPublished);
     }
     
-    else if (CompareString(elementName, kCaveTubeFeedElementLiveID)) {
-        EnableFlag(_feedElementFlag, kFeedElementLiveID);
+    else if (CompareString(elementName, kFeedElementNameLiveID)) {
+        if (_serviceSiteMask & feedSiteCaveTube) {
+            EnableFlag(_feedElementFlag, kFeedElementLiveID);
+        }
     }
     
     else if (CompareString(elementName, @"link")) {
@@ -194,7 +234,7 @@ didStartElement:(NSString *)elementName
 
 NSUInteger useElementFlags
 =
-kFeedElementName | kFeedElementTitle | kFeedElementLiveURL
+kFeedElementName | kFeedElementTitle | kFeedElementID
 | kFeedElementPublished | kFeedElementLiveID | kFeedElementSummary;
 
 
@@ -212,9 +252,14 @@ kFeedElementName | kFeedElementTitle | kFeedElementLiveURL
         text = nil;
     }
     
-    if      (CompareString(elementName, kCaveTubeFeedElementEntry)) {
+    if      (CompareString(elementName, kFeedElementNameEntry)) {
         
         UnenableFlag(_feedElementFlag, kFeedElementEntry);
+        
+        
+        if (_serviceSiteMask & feedSiteLiveTube) {
+            [_entry setSummary:@""];
+        }
         
         LPNEntryDictionary * newEntry = [LPNEntryDictionary dictionaryWithDictionary:_entry];
 
@@ -225,7 +270,7 @@ kFeedElementName | kFeedElementTitle | kFeedElementLiveURL
     }
     
     
-    else if (CompareString(elementName, kCaveTubeFeedElementTitle)) {
+    else if (CompareString(elementName, kFeedElementNameTitle)) {
         
         UnenableFlag(_feedElementFlag, kFeedElementTitle);
         
@@ -233,14 +278,14 @@ kFeedElementName | kFeedElementTitle | kFeedElementLiveURL
     }
     
     
-    else if (CompareString(elementName, kCaveTubeFeedElementAuthor)) {
+    else if (CompareString(elementName, kFeedElementNameAuthor)) {
         
         UnenableFlag(_feedElementFlag, kFeedElementAuthor);
         
     }
     
     
-    else if (CompareString(elementName, kCaveTubeFeedElementName)) {
+    else if (CompareString(elementName, kFeedElementNameName)) {
         
         if (_feedElementFlag & kFeedElementAuthor) {
             
@@ -251,29 +296,31 @@ kFeedElementName | kFeedElementTitle | kFeedElementLiveURL
     }
     
     
-//    else if (CompareString(elementName, kCaveTubeFeedElementLiveURL)) {
-//        
-//        UnenableFlag(_feedElementFlag, kFeedElementLiveURL);
-//        
-//        [_entry setURL:text];
-//    }
+    else if (CompareString(elementName, kFeedElementNameID)) {
+        
+        UnenableFlag(_feedElementFlag, kFeedElementID);
+        
+        if (_serviceSiteMask & feedSiteLiveTube) {
+            [_entry setLiveID:text];
+        }
+    }
     
     
-    else if (CompareString(elementName, kCaveTubeFeedElementSummary)) {
+    else if (CompareString(elementName, kFeedElementNameSummary)) {
         
         UnenableFlag(_feedElementFlag, kFeedElementSummary);
         [_entry setSummary:text];
     }
     
     
-    else if (CompareString(elementName, kCaveTubeFeedElementContent)) {
+    else if (CompareString(elementName, kFeedElementNameContent)) {
         
         UnenableFlag(_feedElementFlag, kFeedElementContent);
         
     }
     
     
-    else if (CompareString(elementName, kCaveTubeFeedElementUpdated)) {
+    else if (CompareString(elementName, kFeedElementNameUpdated)) {
         
         UnenableFlag(_feedElementFlag, kFeedElementUpdated);
         
@@ -281,7 +328,7 @@ kFeedElementName | kFeedElementTitle | kFeedElementLiveURL
     }
     
     
-    else if (CompareString(elementName, kCaveTubeFeedElementPublished)) {
+    else if (CompareString(elementName, kFeedElementNamePublished)) {
         
         UnenableFlag(_feedElementFlag, kFeedElementPublished);
         //        2012-01-05T05:07:28Z
@@ -296,11 +343,13 @@ kFeedElementName | kFeedElementTitle | kFeedElementLiveURL
     }
     
     
-    else if (CompareString(elementName, kCaveTubeFeedElementLiveID)) {
+    else if (CompareString(elementName, kFeedElementNameLiveID)) {
         
         UnenableFlag(_feedElementFlag, kFeedElementLiveID);
         
-        [_entry setLiveID:text];
+        if (_serviceSiteMask & feedSiteCaveTube) {
+            [_entry setLiveID:text];
+        }
     }
     
     

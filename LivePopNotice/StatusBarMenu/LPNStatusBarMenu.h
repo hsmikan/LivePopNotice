@@ -8,6 +8,13 @@
 
 #import <AppKit/AppKit.h>
 
+
+enum {
+    LPNStatusBarTagCaveTube,
+    LPNStatusBarTagLivetube,
+};
+
+
 @interface LPNStatusBarMenu : NSMenu
 - (id)initWithTitle:(NSString *)aTitle actionDelegate:(id)delegate;
 @end

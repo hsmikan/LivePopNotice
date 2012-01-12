@@ -85,7 +85,7 @@ static const NSUInteger autosizingMask = (NSViewMaxXMargin | NSViewMinXMargin | 
 - (NSString *)createLPNHTMLString:(NSDictionary *)entry
 {
     NSMutableString * LPNHTML = [NSMutableString string];
-#define ELEMENT(X) [LPNHTML appendString:(X)];
+#define ELEMENT(X) if ([(X) length]) [LPNHTML appendString:(X)];
     ELEMENT(@"<html>"){
         ELEMENT(@"<head>"){
             ELEMENT(@"<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>")

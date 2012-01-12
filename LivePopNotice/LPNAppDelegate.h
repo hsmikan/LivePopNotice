@@ -16,7 +16,6 @@
 
 @class FilteringList;
 @class FilteringViewController;
-@class FilteringLPNListViewController;
 
 @class WebView;
 
@@ -57,8 +56,9 @@
     NSTabView *_mainTab;
     /* liveList Tab Item */
     NSArrayController * _liveListController;// TODO: live list viewer
+    NSMatrix *_checkedServiceMTRX;
     /* Pop Up Notice List Tab Item */
-    FilteringLPNListViewController * _LPNListController;
+    FilteringViewController * _LPNListController;
     /* Ignore List Tab Item */
     FilteringViewController * _LPNIgnoreListController;
     
@@ -71,6 +71,7 @@
 @property (assign) IBOutlet NSTabView *mainTab;
 
 @property (assign) IBOutlet NSArrayController * liveListController;
+@property (assign) IBOutlet NSMatrix *checkedServiceMTRX;
 
 
 /* status bar */
@@ -94,6 +95,8 @@
 /* live list */
 - (void)openLivePage:(id)sender;
 
+- (IBAction)changeFeedStateOfCaveTube:(NSButtonCell *)sender;
+- (IBAction)changeFeedStateOfLivetube:(NSButtonCell *)sender;
 
 
 @end

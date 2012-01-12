@@ -27,7 +27,7 @@
 		9271BD8714B8993A0021F4BA /* mainTabIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BD8614B8993A0021F4BA /* mainTabIdentifier.m */; };
 		9271BD8B14B89AEA0021F4BA /* filteringTypeIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BD8A14B89AEA0021F4BA /* filteringTypeIdentifier.m */; };
 		9271BD9614B89F760021F4BA /* LPNXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BD9514B89F760021F4BA /* LPNXMLParser.m */; };
-		9271BD9A14B8A5430021F4BA /* cavetubeFeedTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BD9914B8A5430021F4BA /* cavetubeFeedTag.m */; };
+		9271BD9A14B8A5430021F4BA /* FeedTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BD9914B8A5430021F4BA /* FeedTag.m */; };
 		9271BDA714B8B1940021F4BA /* LPNEntryDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BDA614B8B1940021F4BA /* LPNEntryDictionary.m */; };
 		9271BDB914B8CC3A0021F4BA /* LPNWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BDB714B8CC3A0021F4BA /* LPNWindowController.m */; };
 		9271BDBC14B8CC770021F4BA /* LPNEntryDictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BDBB14B8CC770021F4BA /* LPNEntryDictionaryKeys.m */; };
@@ -36,7 +36,6 @@
 		92A1BA6F14BE43EB002EE92E /* icon2.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 92A1BA6E14BE43EB002EE92E /* icon2.tiff */; };
 		92A1BA7214BE4E04002EE92E /* README.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 92A1BA7114BE4E04002EE92E /* README.rtf */; };
 		92A3490914BC2ED8003FD04E /* FilteringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3490714BC2ED8003FD04E /* FilteringViewController.m */; };
-		92A3491014BC4EE9003FD04E /* FilteringLPNListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3490F14BC4EE9003FD04E /* FilteringLPNListViewController.m */; };
 		92A3491614BC61F5003FD04E /* FilteringTypePBCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3491714BC61F5003FD04E /* FilteringTypePBCell.m */; };
 		92A3491A14BC64FB003FD04E /* FilteringViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A3491814BC64FA003FD04E /* FilteringViewController.xib */; };
 /* End PBXBuildFile section */
@@ -81,8 +80,8 @@
 		9271BD9414B89F760021F4BA /* LPNXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNXMLParser.h; path = XMLParser/LPNXMLParser.h; sourceTree = "<group>"; };
 		9271BD9514B89F760021F4BA /* LPNXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNXMLParser.m; path = XMLParser/LPNXMLParser.m; sourceTree = "<group>"; };
 		9271BD9714B89FFE0021F4BA /* LPNXMLParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNXMLParserDelegate.h; path = XMLParser/LPNXMLParserDelegate.h; sourceTree = "<group>"; };
-		9271BD9814B8A5430021F4BA /* cavetubeFeedTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cavetubeFeedTag.h; path = Constants/cavetubeFeedTag.h; sourceTree = "<group>"; };
-		9271BD9914B8A5430021F4BA /* cavetubeFeedTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = cavetubeFeedTag.m; path = Constants/cavetubeFeedTag.m; sourceTree = "<group>"; };
+		9271BD9814B8A5430021F4BA /* FeedTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedTag.h; path = Constants/FeedTag.h; sourceTree = "<group>"; };
+		9271BD9914B8A5430021F4BA /* FeedTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedTag.m; path = Constants/FeedTag.m; sourceTree = "<group>"; };
 		9271BDA514B8B1940021F4BA /* LPNEntryDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNEntryDictionary.h; path = XMLParser/LPNEntryDictionary.h; sourceTree = "<group>"; };
 		9271BDA614B8B1940021F4BA /* LPNEntryDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNEntryDictionary.m; path = XMLParser/LPNEntryDictionary.m; sourceTree = "<group>"; };
 		9271BDB414B8C9490021F4BA /* LPNFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNFeedParser.h; path = XMLParser/LPNFeedParser.h; sourceTree = "<group>"; };
@@ -98,8 +97,6 @@
 		92A1BA7114BE4E04002EE92E /* README.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = README.rtf; sourceTree = "<group>"; };
 		92A3490614BC2ED8003FD04E /* FilteringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilteringViewController.h; path = FilteringList/FilteringViewController.h; sourceTree = "<group>"; };
 		92A3490714BC2ED8003FD04E /* FilteringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilteringViewController.m; path = FilteringList/FilteringViewController.m; sourceTree = "<group>"; };
-		92A3490E14BC4EE9003FD04E /* FilteringLPNListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilteringLPNListViewController.h; path = FilteringList/SubClass/FilteringLPNListViewController.h; sourceTree = "<group>"; };
-		92A3490F14BC4EE9003FD04E /* FilteringLPNListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilteringLPNListViewController.m; path = FilteringList/SubClass/FilteringLPNListViewController.m; sourceTree = "<group>"; };
 		92A3491714BC61F5003FD04E /* FilteringTypePBCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FilteringTypePBCell.m; path = FilteringList/FilteringTypePBCell.m; sourceTree = "<group>"; };
 		92A3491914BC64FB003FD04E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = FilteringList/en.lproj/FilteringViewController.xib; sourceTree = "<group>"; };
 		92C35BA914BDFE5F000AA447 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ja; path = ja.lproj/Credits.rtf; sourceTree = "<group>"; };
@@ -224,7 +221,6 @@
 		9271BD8414B894F30021F4BA /* FilteringList */ = {
 			isa = PBXGroup;
 			children = (
-				92A3491114BC4EF0003FD04E /* SubClass */,
 				92A3490614BC2ED8003FD04E /* FilteringViewController.h */,
 				92A3490714BC2ED8003FD04E /* FilteringViewController.m */,
 				92A3491814BC64FA003FD04E /* FilteringViewController.xib */,
@@ -242,8 +238,8 @@
 				9271BD8614B8993A0021F4BA /* mainTabIdentifier.m */,
 				9271BD8914B89AEA0021F4BA /* filteringTypeIdentifier.h */,
 				9271BD8A14B89AEA0021F4BA /* filteringTypeIdentifier.m */,
-				9271BD9814B8A5430021F4BA /* cavetubeFeedTag.h */,
-				9271BD9914B8A5430021F4BA /* cavetubeFeedTag.m */,
+				9271BD9814B8A5430021F4BA /* FeedTag.h */,
+				9271BD9914B8A5430021F4BA /* FeedTag.m */,
 				9271BDBA14B8CC760021F4BA /* LPNEntryDictionaryKeys.h */,
 				9271BDBB14B8CC770021F4BA /* LPNEntryDictionaryKeys.m */,
 				923ECA0114BDD89B00A5064B /* LPNUserDefaultsKey.h */,
@@ -302,15 +298,6 @@
 				92A1BA6E14BE43EB002EE92E /* icon2.tiff */,
 			);
 			name = img;
-			sourceTree = "<group>";
-		};
-		92A3491114BC4EF0003FD04E /* SubClass */ = {
-			isa = PBXGroup;
-			children = (
-				92A3490E14BC4EE9003FD04E /* FilteringLPNListViewController.h */,
-				92A3490F14BC4EE9003FD04E /* FilteringLPNListViewController.m */,
-			);
-			name = SubClass;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,7 +395,7 @@
 				9271BD8714B8993A0021F4BA /* mainTabIdentifier.m in Sources */,
 				9271BD8B14B89AEA0021F4BA /* filteringTypeIdentifier.m in Sources */,
 				9271BD9614B89F760021F4BA /* LPNXMLParser.m in Sources */,
-				9271BD9A14B8A5430021F4BA /* cavetubeFeedTag.m in Sources */,
+				9271BD9A14B8A5430021F4BA /* FeedTag.m in Sources */,
 				9271BDA714B8B1940021F4BA /* LPNEntryDictionary.m in Sources */,
 				9271BDB914B8CC3A0021F4BA /* LPNWindowController.m in Sources */,
 				9271BDBC14B8CC770021F4BA /* LPNEntryDictionaryKeys.m in Sources */,
@@ -416,7 +403,6 @@
 				92412E9614BBF0440084A182 /* LPNPanel.m in Sources */,
 				92412EA014BC01A50084A182 /* LPNView.m in Sources */,
 				92A3490914BC2ED8003FD04E /* FilteringViewController.m in Sources */,
-				92A3491014BC4EE9003FD04E /* FilteringLPNListViewController.m in Sources */,
 				9293B1C314BCCBF100B237AC /* FilteringTableView.m in Sources */,
 				9293B1C714BCCD3A00B237AC /* LPNLiveListTableView.m in Sources */,
 				923EC9FE14BDD14300A5064B /* LPNStatusBarMenu.m in Sources */,

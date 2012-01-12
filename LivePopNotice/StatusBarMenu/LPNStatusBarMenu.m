@@ -23,6 +23,25 @@
         /* separator */
         [self addItem:[NSMenuItem separatorItem]];
         
+        /* Cavetube */{
+            NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:@"CaveTube"
+                                                           action:nil
+                                                    keyEquivalent:@""];
+            [item setTag:LPNStatusBarTagCaveTube];
+            [self addItem:[item autorelease]];
+        }
+        
+        /* livetube */{
+            NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:@"Livetube"
+                                                           action:nil
+                                                    keyEquivalent:@""];
+            [item setTag:LPNStatusBarTagLivetube];
+            [self addItem:[item autorelease]];
+        }
+        
+        /* separator */
+        [self addItem:[NSMenuItem separatorItem]];
+        
         /* about￼ */{
             NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"LPNStatusMenuAboutLivePopNOtice", @"")
                                                            action:@selector(orderFrontStandardAboutPanel:)

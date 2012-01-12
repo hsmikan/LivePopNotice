@@ -97,7 +97,7 @@
     
     BOOL isContained = NO;
     
-    for (NSDictionary * dic in [_filteringListController arrangedObjects]) {
+    for (NSDictionary * dic in [_filteringListController content]) {
         NSInteger switchConstant = [[dic objectForKey:kFilteringTypeIdentifier] integerValue];
         switch (switchConstant) {
             case kFilteringTypeAuthor:
@@ -111,7 +111,7 @@
                 break;
                 
             case kFilteringTypeSummary:
-                if (summary == nil) summary = [entry summary];
+                if (summary == nil) summary = [entry summary] ? [entry summary] : @"";
                 isContained = [summary rangeOfString:[dic filteringString]].location != NSNotFound;
                 break;
                 

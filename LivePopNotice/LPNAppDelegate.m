@@ -15,8 +15,7 @@
 #import "XMLParser/LPNFeedParser.h"
 #import "LPNWindow/LPNWindowController.h"
 
-//#import "FilteringList/FilteringViewController.h"
-#import "FilteringList/SubClass/FilteringLPNListViewController.h"
+#import "FilteringList/FilteringViewController.h"
 
 #import "StatusBarMenu/LPNStatusBarMenu.h"
 
@@ -38,7 +37,11 @@
 @synthesize window = _window;
 @synthesize mainTab = _mainTab;
 @synthesize liveListController = _liveListController;
-
+@synthesize checkedServiceMTRX = _checkedServiceMTRX;
+enum {
+    checkedSrviceTagCT = 0,
+    checkedSrviceTagLT = 1,
+};
 
 
 - (void)dealloc {
@@ -105,6 +108,9 @@
         _LPNDisplayTimeInterval = [[df stringForKey:kLPNUserDefaultsNoticeDurationKey] doubleValue];
         
     }
+    /* _checkedServiceMTRX's cell statement is saved by Shared User Defaults Controller in IB */
+    [self changeFeedStateOfCaveTube:[_checkedServiceMTRX cellWithTag:checkedSrviceTagCT]];
+    [self changeFeedStateOfLivetube:[_checkedServiceMTRX cellWithTag:checkedSrviceTagLT]];
     
     
     
@@ -113,7 +119,7 @@
     /* --------- */
     
     // LPNList
-    _LPNListController = [[FilteringLPNListViewController alloc] initWithArrayControllerKey:kLPNListArrayControllerKey];
+    _LPNListController = [[FilteringViewController alloc] initWithArrayControllerKey:kLPNListArrayControllerKey];
     [[_mainTab tabViewItemAtIndex:kPopUpNoticeTabItemIndex] setView:[_LPNListController view]];
     
     // LPNIgnoreList
@@ -209,7 +215,7 @@
 }
 
 
-const CGFloat refreshIntervalMin = 5;
+const CGFloat refreshIntervalMin = 10;
 - (IBAction)changeRefreshInterval:(NSTextFieldCell *)sender {
     if ([sender integerValue] == _refreshTimeInterval) {
         return;
@@ -275,6 +281,34 @@ const CGFloat refreshIntervalMin = 5;
 
 
 
+// FIXME: UI Action sender incorrectly become NSMatrix. 
+//  sender,NSButtonCell, is in NSMatrix
+//
+- (IBAction)changeFeedStateOfCaveTube:(NSButtonCell *)sender {
+    NSInteger state;
+    if ([sender class] == [NSMatrix class]) {
+        state = [[(NSMatrix *)sender cellWithTag:checkedSrviceTagCT] state];
+    }
+    else {
+        state = [sender state];
+    }
+    
+    [[[_statusBarItem menu] itemWithTag:LPNStatusBarTagCaveTube] setState:state];
+}
+
+- (IBAction)changeFeedStateOfLivetube:(NSButtonCell *)sender {
+    NSInteger state;
+    if ([sender class] == [NSMatrix class]) {
+        state = [[(NSMatrix *)sender cellWithTag:checkedSrviceTagLT] state];
+    }
+    else {
+        state = [sender state];
+    }
+    [[[_statusBarItem menu] itemWithTag:LPNStatusBarTagLivetube] setState:state];
+}
+
+
+
 
 
 #pragma mark -
@@ -299,7 +333,6 @@ const CGFloat refreshIntervalMin = 5;
 
 
 - (void)LPNXMLParserDidEndEntry:(NSDictionary *)entry {
-    
     BOOL isIgnorable = [_LPNIgnoreListController isContainendEntry:entry];
     if (isIgnorable) return;
     
@@ -362,7 +395,25 @@ const CGFloat refreshIntervalMin = 5;
                                                                       repeats:YES];
 
     LPNXMLParser * parser = [[LPNXMLParser alloc] initWithDelegate:self];
-    [parser parse];
+//    [parser parse];
+    LPNFeedSiteMask mask = 0;
+    for (NSCell * cell in [_checkedServiceMTRX cells] ) {
+        if ([cell state]) {
+            switch ([cell tag]) {
+                case checkedSrviceTagCT:
+                    mask |= feedSiteCaveTube;
+                    break;
+                    
+                case checkedSrviceTagLT:
+                    mask |= feedSiteLiveTube;
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+    }
+    [parser parseWithSiteMask:mask];
 }
 
 
@@ -388,9 +439,9 @@ const CGFloat refreshIntervalMin = 5;
 
 
 - (void)_LPN_popUpNewEntry:(LPNEntryDictionary *)entry {
-#ifndef DEBUG
     if (/*--------------------------------------------------------------------------------------*/
-        
+#ifndef DEBUG
+
         /* is firsrt load */
         ( ![_currentFeededLiveIDs count] )
         
@@ -398,13 +449,13 @@ const CGFloat refreshIntervalMin = 5;
         ( [_currentFeededLiveIDs containsObject:[entry liveID]] )
         
         /* is able to pop up */||
-        ( ![_LPNListController isNoticeAnyLive] && ![_LPNListController isContainendEntry:entry] )
+#endif
+        ( ![_LPNListController isContainendEntry:entry] )
         
         /*--------------------------------------------------------------------------------------*/)
     {
         return;
     }
-#endif
     
     
     

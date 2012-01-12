@@ -10,11 +10,16 @@
 
 @protocol LPNXMLParserDelegate;
 
-
-
+enum feedSiteMask {
+    feedSiteNone = 0,
+    feedSiteCaveTube = 1 << 0,
+    feedSiteLiveTube = 1 << 1,
+    };
+typedef unsigned LPNFeedSiteMask;
 
 @interface LPNXMLParser : NSObject <NSXMLParserDelegate> {
     id <LPNXMLParserDelegate> _delegate;
+    LPNFeedSiteMask _serviceSiteMask;
     NSUInteger _feedElementFlag;
     NSMutableString * _currentString;
     NSMutableDictionary * _entry;
@@ -28,8 +33,8 @@
 - (id)initWithDelegate:(id <LPNXMLParserDelegate> )delegate;
 
 
-- (void)parse;
-
+- (void)parse DEPRECATED_ATTRIBUTE;
+- (void)parseWithSiteMask:(LPNFeedSiteMask)mask;
 
 
 @end
