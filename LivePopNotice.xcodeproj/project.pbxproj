@@ -16,6 +16,7 @@
 		92412E9614BBF0440084A182 /* LPNPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 92412E9514BBF0440084A182 /* LPNPanel.m */; };
 		92412E9A14BBF64C0084A182 /* LPN.CSS in Resources */ = {isa = PBXBuildFile; fileRef = 92412E9914BBF64C0084A182 /* LPN.CSS */; };
 		92412EA014BC01A50084A182 /* LPNView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92412E9F14BC01A50084A182 /* LPNView.m */; };
+		9256CF2114BE616D008502D4 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9256CF2014BE616D008502D4 /* README.txt */; };
 		9271BD5B14B883E30021F4BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9271BD5A14B883E30021F4BA /* Cocoa.framework */; };
 		9271BD6514B883E30021F4BA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9271BD6314B883E30021F4BA /* InfoPlist.strings */; };
 		9271BD6714B883E30021F4BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9271BD6614B883E30021F4BA /* main.m */; };
@@ -59,6 +60,7 @@
 		92412E9914BBF64C0084A182 /* LPN.CSS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = LPN.CSS; path = LPNWindow/LPNPanel/LPN.CSS; sourceTree = "<group>"; };
 		92412E9E14BC01A50084A182 /* LPNView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNView.h; path = LPNWindow/LPNPanel/LPNView.h; sourceTree = "<group>"; };
 		92412E9F14BC01A50084A182 /* LPNView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNView.m; path = LPNWindow/LPNPanel/LPNView.m; sourceTree = "<group>"; };
+		9256CF2014BE616D008502D4 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		9271BD5614B883E30021F4BA /* LivePopNotice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivePopNotice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9271BD5A14B883E30021F4BA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9271BD5D14B883E30021F4BA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -207,6 +209,7 @@
 			children = (
 				92A1BA7014BE43F1002EE92E /* img */,
 				92A1BA7114BE4E04002EE92E /* README.rtf */,
+				9256CF2014BE616D008502D4 /* README.txt */,
 				9271BD7B14B890950021F4BA /* LPNGraphicalUserInterfaceDefaults.plist */,
 				923EC9F814BDB9D300A5064B /* LivePopNotice-Info.plist */,
 				9271BD6914B883E30021F4BA /* Credits.rtf */,
@@ -372,6 +375,7 @@
 				923EC9FB14BDBCAE00A5064B /* Localizable.strings in Resources */,
 				92A1BA6F14BE43EB002EE92E /* icon2.tiff in Resources */,
 				92A1BA7214BE4E04002EE92E /* README.rtf in Resources */,
+				9256CF2114BE616D008502D4 /* README.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
