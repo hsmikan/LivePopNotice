@@ -8,7 +8,7 @@ System Requirement
 		Tested On	  Mac OS X 10.7.2
 
 Summary
-	LivePopNotice is  a notification application for lives on CaveTube.
+	LivePopNotice is  a notification application for lives on CaveTube and Livetube.
 
 Links
 	CaveTube  http://gae.cavelis.net/
@@ -23,9 +23,9 @@ Links
 		動作確認は10.7.2で行いました
 
 概要
-	LivePopNoticeはCaveTubeのライブ配信通知アプリケーションです
+	LivePopNoticeはCaveTubeとLivetubeのライブ配信通知アプリケーションです
 
 
 
 
-スパゲティなのには堪忍してください
+コードがスパゲティなのには堪忍してください
