@@ -75,50 +75,50 @@
  *  Interface
  *
  *========================================================================================*/
-
+#define SETCHECK(STRING) (STRING ? STRING : @"" )
 - (void)setService:(NSString *)service {
-    [self setObject:service forKey:kLPNEntryDictionaryServiceKey];
+    [self setObject:SETCHECK(service) forKey:kLPNEntryDictionaryServiceKey];
 }
 
 
 - (void)setTitle:(NSString *)title {
     
-    [self setObject:title forKey:kLPNEntryDictionaryTitleKey];
+    [self setObject:SETCHECK(title) forKey:kLPNEntryDictionaryTitleKey];
     
 }
 
 
 - (void)setURL:(NSString *)url {
     
-    [self setObject:url forKey:kLPNEntryDictionaryURLKey];
+    [self setObject:SETCHECK(url) forKey:kLPNEntryDictionaryURLKey];
     
 }
 
 
 - (void)setAuthorName:(NSString *)author {
     
-    [self setObject:author forKey:kLPNEntryDictionaryAuthorNameKey];
+    [self setObject:SETCHECK(author) forKey:kLPNEntryDictionaryAuthorNameKey];
     
 }
 
 
 - (void)setStartedtime:(NSString *)time {
     
-    [self setObject:time forKey:kLPNEntryDictionaryStartedTime];
+    [self setObject:SETCHECK(time) forKey:kLPNEntryDictionaryStartedTime];
     
 }
 
 
 - (void)setLiveID:(NSString*)liveID {
     
-    [self setObject:liveID forKey:kLPNEntryDictionaryLiveID];
+    [self setObject:SETCHECK(liveID) forKey:kLPNEntryDictionaryLiveID];
     
 }
 
 
 - (void)setSummary:(NSString *)summary {
     
-    [self setObject:summary forKey:kLPNEntryDictionarySummary];
+    [self setObject:SETCHECK(summary) forKey:kLPNEntryDictionarySummary];
     
 }
 

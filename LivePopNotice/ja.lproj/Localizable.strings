@@ -7,20 +7,18 @@
 */
 
 /* Status Bar Menu */
-"LPNStatusMenuShowMainWindow"       =   "Show Main Window";
-"LPNStatusMenuAboutLivePopNOtice"   =   "About LivePopNotice";
-"LPNStatusMenuHelp"                 =   "Help";
-"LPNStatusMenuQuit"                 =   "Quit LivePopNotice";
+"LPNStatusMenuShowMainWindow"       =   "メインウィンドウを開く";
+"LPNStatusMenuAboutLivePopNOtice"   =   "LivePopNoticeについて";
+"LPNStatusMenuHelp"                 =   "ヘルプ";
+"LPNStatusMenuQuit"                 =   "LivePopNoticeを終了する";
 
 /* Live List Context Menu */
-"LPNOpenLivePageMenuItem"       =   "Open Live Page";
-"LPNAddToNoticeListMenuItem"    =   "Add To Pop Up Notice List";
+"LPNOpenLivePageMenuItem"       =   "配信ページを開く";
+"LPNAddToNoticeListMenuItem"    =   "通知リストへ追加する";
 
 /* Filtering Type Pop Up Button title */
-"LPNFilteringTypeAuthor"        =   "Author";
-"LPNFilteringTypeLiveTitle"     =   "Live Title";
-"LPNFilteringTypeLiveSummary"   =   "Live Summary";
+"LPNFilteringTypeAuthor"        =   "配信者";
+"LPNFilteringTypeLiveTitle"     =   "ライブタイトル";
+"LPNFilteringTypeLiveSummary"   =   "ライブの説明文";
 /* Filtering Table View Context Menu */
-"LPNFilteringRemoveSelectedItems"  =   "Remove Selected Items";
-
-"LPNPopUpNoticeButton"  =   "Notice Any Live";
+"LPNFilteringRemoveSelectedItems"  =   "選択されているものを削除する";

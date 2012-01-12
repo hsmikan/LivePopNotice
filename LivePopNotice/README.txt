@@ -11,7 +11,8 @@ Summary
 	LivePopNotice is  a notification application for lives on CaveTube and Livetube.
 
 Links
-	CaveTube  http://gae.cavelis.net/
+	CaveTube        http://gae.cavelis.net/
+	Livetube		http://livetube.cc/
 
 
 

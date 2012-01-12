@@ -36,6 +36,8 @@
     NSMutableArray * content = [NSMutableArray arrayWithArray:[df arrayForKey:_filteringListControllerKey]];
     [_filteringListController addObjects:content];
 }
+
+
 - (id)initWithArrayControllerKey:(NSString *)key {
     self = [super initWithNibName:@"FilteringViewController" bundle:nil];
     if (self) {
@@ -74,10 +76,10 @@
     if ( ![[_filterStringTF stringValue] length] ) {
         return;
     }
-    [_filteringListController addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                         [NSNumber numberWithInteger:[_filterTypePB indexOfSelectedItem]],kFilteringTypeIdentifier,
-                                         [_filterStringTF stringValue],kFilteringStringIdentifier,
-                                         nil]];
+    
+    [self addElementWithFilteringType:[_filterTypePB indexOfSelectedItem]
+                      filteringString:[_filterStringTF stringValue]];
+    
     [_filterStringTF setStringValue:@""];
 }
 - (void)addElementWithFilteringType:(NSInteger)typeIndex filteringString:(NSString *)string {
@@ -103,22 +105,22 @@
     NSString * summary = nil;
     
     BOOL isContained = NO;
-    
+#define CHECKSTRING(STRING) ((STRING) ? (STRING) : @"")
     for (NSDictionary * dic in [_filteringListController content]) {
         NSInteger switchConstant = [[dic objectForKey:kFilteringTypeIdentifier] integerValue];
         switch (switchConstant) {
             case kFilteringTypeAuthor:
-                if (authorName == nil) authorName = [entry authorName];
+                if (authorName == nil) authorName = CHECKSTRING([entry authorName]);
                 isContained = [authorName isEqualToString:[dic filteringString]];
                 break;
                 
             case kFilteringTypeLiveTitle:
-                if (title == nil) title = [entry title];
+                if (title == nil) title = CHECKSTRING([entry title]);
                 isContained = [title rangeOfString:[dic filteringString]].location != NSNotFound;
                 break;
                 
             case kFilteringTypeSummary:
-                if (summary == nil) summary = [entry summary] ? [entry summary] : @"";
+                if (summary == nil) summary = CHECKSTRING([entry summary]);
                 isContained = [summary rangeOfString:[dic filteringString]].location != NSNotFound;
                 break;
                 

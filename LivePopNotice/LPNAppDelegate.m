@@ -414,6 +414,7 @@ static const CGFloat refreshIntervalMin = 10;
 - (void)LPNXMLParserDidEndDocument {
     [_currentFeededLiveIDs release];
     _currentFeededLiveIDs = [[NSArray alloc] initWithArray:_currentSubFeededLiveIDs];
+    
     [_currentSubFeededLiveIDs release];
     _currentSubFeededLiveIDs = nil;
 }

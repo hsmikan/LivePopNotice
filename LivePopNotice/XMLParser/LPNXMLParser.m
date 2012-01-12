@@ -184,10 +184,10 @@ didStartElement:(NSString *)elementName
 {
     if      (CompareString(elementName, kFeedElementNameEntry)) {
         EnableFlag(_feedElementFlag, kFeedElementEntry);
-        if (_serviceSiteMask & feedSiteCaveTube ) {
+        if (_currentSiteMask & feedSiteCaveTube ) {
             [_entry setService:@"CaveTube"];
         }
-        else if (_serviceSiteMask & feedSiteLiveTube) {
+        else if (_currentSiteMask & feedSiteLiveTube) {
             [_entry setService:@"Livetube"];
         }
 
@@ -206,13 +206,13 @@ didStartElement:(NSString *)elementName
     }
     
     else if (CompareString(elementName, kFeedElementNameID)) {
-        if (_serviceSiteMask & feedSiteLiveTube) {
+        if (_currentSiteMask & feedSiteLiveTube) {
             EnableFlag(_feedElementFlag, kFeedElementID);
         }
     }
     
     else if (CompareString(elementName, kFeedElementNameSummary)) {
-        if (_serviceSiteMask & feedSiteCaveTube) {
+        if (_currentSiteMask & feedSiteCaveTube) {
             EnableFlag(_feedElementFlag, kFeedElementSummary);
         }
     }
@@ -230,7 +230,7 @@ didStartElement:(NSString *)elementName
     }
     
     else if (CompareString(elementName, kFeedElementNameLiveID)) {
-        if (_serviceSiteMask & feedSiteCaveTube) {
+        if (_currentSiteMask & feedSiteCaveTube) {
             EnableFlag(_feedElementFlag, kFeedElementLiveID);
         }
     }
@@ -313,7 +313,7 @@ kFeedElementName | kFeedElementTitle | kFeedElementID
         
         UnenableFlag(_feedElementFlag, kFeedElementID);
         
-        if (_serviceSiteMask & feedSiteLiveTube) {
+        if (_currentSiteMask & feedSiteLiveTube) {
             [_entry setLiveID:text];
         }
     }
@@ -362,7 +362,7 @@ kFeedElementName | kFeedElementTitle | kFeedElementID
         
         UnenableFlag(_feedElementFlag, kFeedElementLiveID);
         
-        if (_serviceSiteMask & feedSiteCaveTube) {
+        if (_currentSiteMask & feedSiteCaveTube) {
             [_entry setLiveID:text];
         }
     }

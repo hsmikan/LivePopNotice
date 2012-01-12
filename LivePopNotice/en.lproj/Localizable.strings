@@ -22,5 +22,3 @@
 "LPNFilteringTypeLiveSummary"   =   "Live Summary";
 /* Filtering Table View Context Menu */
 "LPNFilteringRemoveSelectedItems"  =   "Remove Selected Items";
-
-"LPNPopUpNoticeButton"  =   "Notice Any Live";
