@@ -222,7 +222,7 @@ enum {
 }
 
 
-const CGFloat refreshIntervalMin = 10;
+static const CGFloat refreshIntervalMin = 10;
 - (IBAction)changeRefreshInterval:(NSTextFieldCell *)sender {
     if ([sender integerValue] == _refreshTimeInterval) {
         return;

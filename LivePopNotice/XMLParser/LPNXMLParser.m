@@ -350,7 +350,9 @@ kFeedElementName | kFeedElementTitle | kFeedElementID
         NSCharacterSet * set = [NSCharacterSet characterSetWithCharactersInString:@"T:Z"];
         NSArray * timearr = [text componentsSeparatedByCharactersInSet:set];
         NSMutableString * time = [NSMutableString string];
-        [time appendFormat:@"%02d:%@:%@",[[timearr objectAtIndex:1] intValue]+9,[timearr objectAtIndex:2],[timearr objectAtIndex:3]];
+        NSInteger hour = [[timearr objectAtIndex:1] intValue]+9;
+        
+        [time appendFormat:@"%02d:%@:%@",( hour < 24 ? hour : (hour-24) ),[timearr objectAtIndex:2],[timearr objectAtIndex:3]];
         [_entry setStartedtime:time];
         
     }
