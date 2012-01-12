@@ -102,22 +102,25 @@ typedef enum {
     }
     
     [parser parse];
-    
 }
 
 
 
 - (void)parseWithSiteMask:(LPNFeedSiteMask)mask {
     if (!mask) {// mask == none
-        return;
+        [self parserDidEndDocument:nil];
     }
     
-    _serviceSiteMask = mask;
+    if (! _serviceSiteMask)
+        _serviceSiteMask = mask;
+    
     if (mask & feedSiteCaveTube) {
+        _currentSiteMask = feedSiteCaveTube;
         [self parse:kCTFeedURLString];
     }
     
-    if (mask & feedSiteLiveTube) {
+    else if (mask & feedSiteLiveTube) {
+        _currentSiteMask = feedSiteLiveTube;
         [self parse:kLTFeedURLString];
     }
 }
@@ -152,7 +155,11 @@ typedef enum {
 
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-    if ([_delegate respondsToSelector:@selector(LPNXMLParserDidEndDocument)]) {
+    if (_serviceSiteMask) {
+        _serviceSiteMask ^= _currentSiteMask;
+        [self parseWithSiteMask:_serviceSiteMask];
+    }
+    else if ([_delegate respondsToSelector:@selector(LPNXMLParserDidEndDocument)]) {
         [_delegate LPNXMLParserDidEndDocument];
     }
 }
@@ -177,6 +184,13 @@ didStartElement:(NSString *)elementName
 {
     if      (CompareString(elementName, kFeedElementNameEntry)) {
         EnableFlag(_feedElementFlag, kFeedElementEntry);
+        if (_serviceSiteMask & feedSiteCaveTube ) {
+            [_entry setService:@"CaveTube"];
+        }
+        else if (_serviceSiteMask & feedSiteLiveTube) {
+            [_entry setService:@"Livetube"];
+        }
+
     }
     
     else if (CompareString(elementName, kFeedElementNameTitle)) {
@@ -255,7 +269,6 @@ kFeedElementName | kFeedElementTitle | kFeedElementID
     if      (CompareString(elementName, kFeedElementNameEntry)) {
         
         UnenableFlag(_feedElementFlag, kFeedElementEntry);
-        
         
         if (_serviceSiteMask & feedSiteLiveTube) {
             [_entry setSummary:@""];

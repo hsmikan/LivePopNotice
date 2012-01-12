@@ -10,6 +10,7 @@
 
 #define LPNEntryDictionary NSDictionary
 @interface LPNEntryDictionary(LPNEntryDictionaryAddition)
+- (NSString*)service;
 - (NSString*)title;
 - (NSString*)URL;
 - (NSString*)authorName;
@@ -20,7 +21,7 @@
 
 #define LPNEntryMutableDictionary NSMutableDictionary
 @interface LPNEntryMutableDictionary(LPNEntryDictionaryAddition)
-
+- (void)setService:(NSString*)service;
 - (void)setTitle:(NSString*)title;
 - (void)setURL:(NSString*)url;
 - (void)setAuthorName:(NSString*)author;

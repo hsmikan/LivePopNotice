@@ -13,6 +13,9 @@
 
 @implementation LPNEntryDictionary(LPNEntryDictionaryAddition)
 
+- (NSString*)service {
+    return [self objectForKey:kLPNEntryDictionaryServiceKey];
+}
 
 - (NSString*)title {
     
@@ -72,6 +75,11 @@
  *  Interface
  *
  *========================================================================================*/
+
+- (void)setService:(NSString *)service {
+    [self setObject:service forKey:kLPNEntryDictionaryServiceKey];
+}
+
 
 - (void)setTitle:(NSString *)title {
     

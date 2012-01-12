@@ -20,6 +20,7 @@ typedef unsigned LPNFeedSiteMask;
 @interface LPNXMLParser : NSObject <NSXMLParserDelegate> {
     id <LPNXMLParserDelegate> _delegate;
     LPNFeedSiteMask _serviceSiteMask;
+    LPNFeedSiteMask _currentSiteMask;
     NSUInteger _feedElementFlag;
     NSMutableString * _currentString;
     NSMutableDictionary * _entry;

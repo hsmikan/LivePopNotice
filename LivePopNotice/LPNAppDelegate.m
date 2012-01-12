@@ -320,8 +320,6 @@ const CGFloat refreshIntervalMin = 10;
  *========================================================================================*/
 
 - (void)LPNXMLParserDidStartDocyment {
-    [_liveListController removeObjects:[_liveListController arrangedObjects]];
-    _currentSubFeededLiveIDs = [[NSMutableArray alloc] init];
 }
 
 - (void)LPNXMLParserDidEndDocument {
@@ -368,17 +366,17 @@ const CGFloat refreshIntervalMin = 10;
 
 - (void)_LPN_startRefreshTimer {
     if (_refreshTimeInterval < refreshIntervalMin) _refreshTimeInterval = refreshIntervalMin;
+    NSTimeInterval interval;
 #ifdef DEBUG
-    _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:5
-                                                     target:self
-                                                   selector:@selector(_LPN_getAndParse:)
-                                                   userInfo:nil repeats:YES];
+    interval = _refreshTimeInterval;
 #else
-    _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:(_refreshTimeInterval*60.0)
+    interval = (_refreshTimeInterval*60.0);
+#endif
+    
+    _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:interval
                                                      target:self
                                                    selector:@selector(_LPN_getAndParse:)
                                                    userInfo:nil repeats:YES];
-#endif
 }
 
 
@@ -393,10 +391,13 @@ const CGFloat refreshIntervalMin = 10;
                                                                      selector:@selector(_LPN_cahngeRemainTimeInterval:)
                                                                      userInfo:nil
                                                                       repeats:YES];
-
-    LPNXMLParser * parser = [[LPNXMLParser alloc] initWithDelegate:self];
-//    [parser parse];
+    
+    
+    [_liveListController removeObjects:[_liveListController content]];
+    _currentSubFeededLiveIDs = [[NSMutableArray alloc] init];
+    
     LPNFeedSiteMask mask = 0;
+    LPNXMLParser * parser = [[[LPNXMLParser alloc] initWithDelegate:self] autorelease];
     for (NSCell * cell in [_checkedServiceMTRX cells] ) {
         if ([cell state]) {
             switch ([cell tag]) {
@@ -413,6 +414,7 @@ const CGFloat refreshIntervalMin = 10;
             }
         }
     }
+    
     [parser parseWithSiteMask:mask];
 }
 
@@ -456,8 +458,7 @@ const CGFloat refreshIntervalMin = 10;
     {
         return;
     }
-    
-    
+        
     
     LPNWindowController * win = [[LPNWindowController alloc] initWithLPNAttribute:entry];
     [win showWindowForDuration:_LPNDisplayTimeInterval];

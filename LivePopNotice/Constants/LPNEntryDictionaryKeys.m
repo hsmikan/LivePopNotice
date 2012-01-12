@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 PPixy. All rights reserved.
 //
 
+EXTERNED NSString * const kLPNEntryDictionaryServiceKey     =   @"entryDictionaryService";
 EXTERNED NSString * const kLPNEntryDictionaryTitleKey       =   @"entryDictionaryTitle";
 EXTERNED NSString * const kLPNEntryDictionaryURLKey         =   @"entryDictionaryURL";
 EXTERNED NSString * const kLPNEntryDictionaryAuthorNameKey  =   @"entryDictionaryAuthorName";
