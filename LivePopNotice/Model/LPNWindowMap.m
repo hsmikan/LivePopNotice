@@ -33,6 +33,8 @@ NSString * const kLPNMapNumber          =   @"LPNMapNumber";
 }
 @end
 
+
+
 #define LPNMapMutableDictionary NSMutableDictionary
 @interface LPNMapMutableDictionary(LPNMap)
 + (LPNMapMutableDictionary *)LPNMapDictionaryWithPoint:(NSPoint)point;
@@ -40,6 +42,7 @@ NSString * const kLPNMapNumber          =   @"LPNMapNumber";
 - (void)setIsDisplay:(BOOL)isDisplay;
 - (void)setDisplayNumber:(NSUInteger)number;
 @end
+
 
 @implementation LPNMapMutableDictionary(LPNMap)
 

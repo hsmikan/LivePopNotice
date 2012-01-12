@@ -80,6 +80,13 @@
                                          nil]];
     [_filterStringTF setStringValue:@""];
 }
+- (void)addElementWithFilteringType:(NSInteger)typeIndex filteringString:(NSString *)string {
+    if (!string.length) return;
+    [_filteringListController addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                         [NSNumber numberWithInteger:typeIndex],kFilteringTypeIdentifier,
+                                         string,kFilteringStringIdentifier,
+                                         nil]];
+}
 
 
 - (IBAction)removeElements:(id)sender {

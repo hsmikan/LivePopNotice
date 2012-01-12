@@ -17,18 +17,28 @@
     NSUInteger row = [self rowAtPoint:[self convertPoint:[event locationInWindow] fromView:nil]];
     [self selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
     
-    NSMenu * menu = [[NSMenu alloc] initWithTitle:@"OpenLiveURL"];
+    NSMenu * menu = [[NSMenu alloc] initWithTitle:@"LiveListTableViewMenu"];
     {
-        NSMenuItem * item = [[NSMenuItem alloc] init];
-        [item setTitle:NSLocalizedString(@"LPNOpenLivePageMenuItem", @"")];
-        [item setKeyEquivalent:@""];
-        
-        if ([self selectedRow] != -1) {
-            [item setTarget:_contextMenuItemActionDelegate];
-            [item setAction:@selector(openLivePage:)];
+        NSMenuItem * openLivePageItem = [[NSMenuItem alloc] init];{
+            [openLivePageItem setTitle:NSLocalizedString(@"LPNOpenLivePageMenuItem", @"")];
+            [openLivePageItem setKeyEquivalent:@""];
         }
         
-        [menu addItem:[item autorelease]];
+        NSMenuItem * addItem = [[NSMenuItem alloc] init];{
+            [addItem setTitle:NSLocalizedString(@"LPNAddToNoticeListMenuItem", @"")];
+            [addItem setKeyEquivalent:@""];
+        }
+        
+        if ([self selectedRow] != -1) {
+            [openLivePageItem setTarget:_contextMenuItemActionDelegate];
+            [openLivePageItem setAction:@selector(openLivePage:)];
+            
+            [addItem setTarget:_contextMenuItemActionDelegate];
+            [addItem setAction:@selector(addToPopUpNoticeList:)];
+        }
+        
+        [menu addItem:[openLivePageItem autorelease]];
+        [menu addItem:[addItem autorelease]];
     }
     
     return [menu autorelease];

@@ -42,6 +42,9 @@ enum {
     checkedSrviceTagCT = 0,
     checkedSrviceTagLT = 1,
 };
+@synthesize sheetWindow = _sheetWindow;
+@synthesize filteringTypeInSheetPB = _filteringTypeInSheetPB;
+@synthesize willAddedStringToNoticeListTF = _willAddedStringToNoticeListTF;
 
 
 - (void)dealloc {
@@ -108,16 +111,20 @@ enum {
         _LPNDisplayTimeInterval = [[df stringForKey:kLPNUserDefaultsNoticeDurationKey] doubleValue];
         
     }
-    /* _checkedServiceMTRX's cell statement is saved by Shared User Defaults Controller in IB */
+    /* _checkedServiceMTRX's content cells statement is saved by Shared User Defaults Controller in IB */
     [self changeFeedStateOfCaveTube:[_checkedServiceMTRX cellWithTag:checkedSrviceTagCT]];
     [self changeFeedStateOfLivetube:[_checkedServiceMTRX cellWithTag:checkedSrviceTagLT]];
     
     
     
-    /* --------- */
-    /* tab views */
-    /* --------- */
+    /* ----- */
+    /* views */
+    /* ----- */
     
+    /* toolbar */
+    [[_window toolbar] setSelectedItemIdentifier:@"LiveListToolbarItem"];
+    
+    /* main tab */
     // LPNList
     _LPNListController = [[FilteringViewController alloc] initWithArrayControllerKey:kLPNListArrayControllerKey];
     [[_mainTab tabViewItemAtIndex:kPopUpNoticeTabItemIndex] setView:[_LPNListController view]];
@@ -128,7 +135,7 @@ enum {
     
     
     
-    
+    /* start parse timer */
     [self _LPN_getAndParse:nil];
     [self _LPN_startRefreshTimer];
     
@@ -280,6 +287,88 @@ const CGFloat refreshIntervalMin = 10;
 }
 
 
+
+
+
+
+#pragma mark -
+#pragma mark add from livelist tableview
+/*========================================================================================
+ *
+ *  add notice element from context menu
+ *
+ *========================================================================================*/
+
+- (void)sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    [sheet orderOut:nil];
+}
+
+- (void)addToPopUpNoticeList:(id)sender {
+    [NSApp beginSheet:_sheetWindow
+       modalForWindow:_window
+        modalDelegate:self
+       didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:)
+          contextInfo:nil];
+}
+
+- (NSString *)getWillBeAddedStringWithTypeIndex:(NSInteger)index {// private like
+    NSDictionary * dic = [[_liveListController selectedObjects] objectAtIndex:0];
+    NSString * str;{
+        // TODO: case constant
+        switch (index) {
+            case 0:
+                str = [dic authorName];
+                break;
+                
+            case 1:
+                str = [dic title];
+                break;
+                
+            case 2:
+                str = [dic summary];
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    return str;
+}
+
+
+- (IBAction)showWillAddedStringToNoticeList:(NSPopUpButton *)sender {
+    NSString * str = [self getWillBeAddedStringWithTypeIndex:[sender indexOfSelectedItem]];
+    [_willAddedStringToNoticeListTF setStringValue:str];
+}
+
+
+- (IBAction)sheetEndWithAdding:(NSButton *)sender {
+    NSInteger index = [_filteringTypeInSheetPB indexOfSelectedItem];
+    NSString * str = [self getWillBeAddedStringWithTypeIndex:index];
+    if (str.length) {
+        [_LPNListController addElementWithFilteringType:index
+                                        filteringString:str];
+    }
+    
+    [NSApp endSheet:_sheetWindow];
+}
+
+
+- (IBAction)sheetEnd:(id)sender {
+    [NSApp endSheet:_sheetWindow];
+}
+
+
+
+
+#pragma mark -
+#pragma mark select feed site
+/*========================================================================================
+ *
+ *  feed site
+ *
+ *========================================================================================*/
 
 // FIXME: UI Action sender incorrectly become NSMatrix. 
 //  sender,NSButtonCell, is in NSMatrix

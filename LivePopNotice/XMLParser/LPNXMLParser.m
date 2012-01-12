@@ -270,7 +270,7 @@ kFeedElementName | kFeedElementTitle | kFeedElementID
         
         UnenableFlag(_feedElementFlag, kFeedElementEntry);
         
-        if (_serviceSiteMask & feedSiteLiveTube) {
+        if (_currentSiteMask & feedSiteLiveTube) {
             [_entry setSummary:@""];
         }
         

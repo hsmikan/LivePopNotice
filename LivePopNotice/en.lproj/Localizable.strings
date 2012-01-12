@@ -13,7 +13,8 @@
 "LPNStatusMenuQuit"                 =   "Quit LivePopNotice";
 
 /* Live List Context Menu */
-"LPNOpenLivePageMenuItem"   =   "Open Live Page";
+"LPNOpenLivePageMenuItem"       =   "Open Live Page";
+"LPNAddToNoticeListMenuItem"    =   "Add To Pop Up Notice List";
 
 /* Filtering Type Pop Up Button title */
 "LPNFilteringTypeAuthor"        =   "Author";

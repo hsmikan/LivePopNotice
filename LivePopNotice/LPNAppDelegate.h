@@ -57,6 +57,9 @@
     /* liveList Tab Item */
     NSArrayController * _liveListController;// TODO: live list viewer
     NSMatrix *_checkedServiceMTRX;
+    NSWindow *_sheetWindow;
+    NSPopUpButton *_filteringTypeInSheetPB;
+    NSTextField *_willAddedStringToNoticeListTF;
     /* Pop Up Notice List Tab Item */
     FilteringViewController * _LPNListController;
     /* Ignore List Tab Item */
@@ -72,7 +75,9 @@
 
 @property (assign) IBOutlet NSArrayController * liveListController;
 @property (assign) IBOutlet NSMatrix *checkedServiceMTRX;
-
+@property (assign) IBOutlet NSWindow *sheetWindow;
+@property (assign) IBOutlet NSPopUpButton *filteringTypeInSheetPB;
+@property (assign) IBOutlet NSTextField *willAddedStringToNoticeListTF;
 
 /* status bar */
 - (IBAction)openMainWindow:(id)sender;
@@ -93,7 +98,13 @@
 
 
 /* live list */
+- (IBAction)showWillAddedStringToNoticeList:(NSPopUpButton *)sender;
+- (IBAction)sheetEndWithAdding:(NSButton *)sender;
+- (IBAction)sheetEnd:(id)sender;
+// context menu action
 - (void)openLivePage:(id)sender;
+- (void)addToPopUpNoticeList:(id)sender;
+
 
 - (IBAction)changeFeedStateOfCaveTube:(NSButtonCell *)sender;
 - (IBAction)changeFeedStateOfLivetube:(NSButtonCell *)sender;
