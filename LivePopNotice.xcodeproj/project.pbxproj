@@ -33,6 +33,7 @@
 		9293B1C314BCCBF100B237AC /* FilteringTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9293B1C214BCCBF100B237AC /* FilteringTableView.m */; };
 		9293B1C714BCCD3A00B237AC /* LPNLiveListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9293B1C614BCCD3A00B237AC /* LPNLiveListTableView.m */; };
 		92A1BA6F14BE43EB002EE92E /* icon2.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 92A1BA6E14BE43EB002EE92E /* icon2.tiff */; };
+		92A1BA7214BE4E04002EE92E /* README.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 92A1BA7114BE4E04002EE92E /* README.rtf */; };
 		92A3490914BC2ED8003FD04E /* FilteringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3490714BC2ED8003FD04E /* FilteringViewController.m */; };
 		92A3491014BC4EE9003FD04E /* FilteringLPNListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3490F14BC4EE9003FD04E /* FilteringLPNListViewController.m */; };
 		92A3491614BC61F5003FD04E /* FilteringTypePBCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3491714BC61F5003FD04E /* FilteringTypePBCell.m */; };
@@ -92,6 +93,7 @@
 		9293B1C514BCCD3A00B237AC /* LPNLiveListTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPNLiveListTableView.h; sourceTree = "<group>"; };
 		9293B1C614BCCD3A00B237AC /* LPNLiveListTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPNLiveListTableView.m; sourceTree = "<group>"; };
 		92A1BA6E14BE43EB002EE92E /* icon2.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = icon2.tiff; path = img/icon2.tiff; sourceTree = "<group>"; };
+		92A1BA7114BE4E04002EE92E /* README.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = README.rtf; sourceTree = "<group>"; };
 		92A3490614BC2ED8003FD04E /* FilteringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilteringViewController.h; path = FilteringList/FilteringViewController.h; sourceTree = "<group>"; };
 		92A3490714BC2ED8003FD04E /* FilteringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilteringViewController.m; path = FilteringList/FilteringViewController.m; sourceTree = "<group>"; };
 		92A3490E14BC4EE9003FD04E /* FilteringLPNListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilteringLPNListViewController.h; path = FilteringList/SubClass/FilteringLPNListViewController.h; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				92A1BA7014BE43F1002EE92E /* img */,
+				92A1BA7114BE4E04002EE92E /* README.rtf */,
 				9271BD7B14B890950021F4BA /* LPNGraphicalUserInterfaceDefaults.plist */,
 				923EC9F814BDB9D300A5064B /* LivePopNotice-Info.plist */,
 				9271BD6914B883E30021F4BA /* Credits.rtf */,
@@ -368,6 +371,7 @@
 				92A3491A14BC64FB003FD04E /* FilteringViewController.xib in Resources */,
 				923EC9FB14BDBCAE00A5064B /* Localizable.strings in Resources */,
 				92A1BA6F14BE43EB002EE92E /* icon2.tiff in Resources */,
+				92A1BA7214BE4E04002EE92E /* README.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
