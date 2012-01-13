@@ -24,4 +24,4 @@
 "LPNFilteringRemoveSelectedItems"  =   "Remove Selected Items";
 
 /* LPNXMLparser */
-"LPNXMLParserErrorMessage"  =   "Parsing RSS Error Occured. The Application might not get Live Information incorrectly.";
+"LPNXMLParserErrorMessage"  =   "Parsing RSS Error Occured. The Application might not get All Information of Live.";

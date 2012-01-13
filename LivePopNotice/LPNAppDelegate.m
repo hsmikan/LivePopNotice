@@ -38,6 +38,7 @@
 @synthesize mainTab = _mainTab;
 @synthesize liveListController = _liveListController;
 @synthesize checkedServiceMTRX = _checkedServiceMTRX;
+@synthesize displayInLIveCountTF = _displayInLIveCountTF;
 enum {
     checkedSrviceTagCT = 0,
     checkedSrviceTagLT = 1,
@@ -417,6 +418,8 @@ static const CGFloat refreshIntervalMin = 10;
     
     [_currentSubFeededLiveIDs release];
     _currentSubFeededLiveIDs = nil;
+    
+    [_displayInLIveCountTF setIntegerValue:[[_liveListController content] count]];
 }
 
 

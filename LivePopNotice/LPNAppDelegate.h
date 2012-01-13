@@ -57,6 +57,7 @@
     /* liveList Tab Item */
     NSArrayController * _liveListController;// TODO: live list viewer
     NSMatrix *_checkedServiceMTRX;
+    NSTextField *_displayInLIveCountTF;
     NSWindow *_sheetWindow;
     NSPopUpButton *_filteringTypeInSheetPB;
     NSTextField *_willAddedStringToNoticeListTF;
@@ -75,6 +76,7 @@
 
 @property (assign) IBOutlet NSArrayController * liveListController;
 @property (assign) IBOutlet NSMatrix *checkedServiceMTRX;
+@property (assign) IBOutlet NSTextField *displayInLIveCountTF;
 @property (assign) IBOutlet NSWindow *sheetWindow;
 @property (assign) IBOutlet NSPopUpButton *filteringTypeInSheetPB;
 @property (assign) IBOutlet NSTextField *willAddedStringToNoticeListTF;
