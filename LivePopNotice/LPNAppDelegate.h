@@ -12,14 +12,14 @@
 #import "XMLParser/LPNXMLParserDelegate.h"
 
 #import "LPNLiveListTableView/LPNLiveListTableViewContextMenuDelegate.h"
-
+#import "StatusBarMenu/LPNStatuBarMenuActionDelegate.h"
 
 @class FilteringList;
 @class FilteringViewController;
 
 @class WebView;
 
-@interface LPNAppDelegate : NSObject <NSApplicationDelegate,LPNXMLParserDelegate,LPNLiveListTableViewContextMenuDelegate> {
+@interface LPNAppDelegate : NSObject <NSApplicationDelegate,LPNXMLParserDelegate,LPNLiveListTableViewContextMenuDelegate,LPNStatuBarMenuActionDelegate> {
     
     /* ------ */
     /* Member */
@@ -80,9 +80,6 @@
 @property (assign) IBOutlet NSWindow *sheetWindow;
 @property (assign) IBOutlet NSPopUpButton *filteringTypeInSheetPB;
 @property (assign) IBOutlet NSTextField *willAddedStringToNoticeListTF;
-
-/* status bar */
-- (IBAction)openMainWindow:(id)sender;
 
 
 /* tool bar */

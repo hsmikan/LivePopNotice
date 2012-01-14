@@ -18,7 +18,8 @@ enum {
     LPNStatusBarTabQuit,
 };
 
+@protocol LPNStatuBarMenuActionDelegate;
 
 @interface LPNStatusBarMenu : NSMenu
-- (id)initWithTitle:(NSString *)aTitle actionDelegate:(id)delegate;
+- (id)initWithTitle:(NSString *)aTitle actionDelegate:(id<LPNStatuBarMenuActionDelegate>)delegate;
 @end

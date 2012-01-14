@@ -171,7 +171,7 @@ enum {
 
 
 #pragma mark -
-#pragma mark Status Bar Action
+#pragma mark Status Bar Action Delegate
 /*========================================================================================
  *
  *  Status Bar Action
@@ -179,7 +179,7 @@ enum {
  *========================================================================================*/
 
 /* AT status bar menu */
-- (IBAction)openMainWindow:(id)sender {// (NSMenuItem *)sender
+- (void)openMainWindow:(id)sender {// (NSMenuItem *)sender
     [_window orderFrontRegardless];
 }
 
@@ -444,7 +444,7 @@ static const CGFloat refreshIntervalMin = 10;
 
 
 - (void)LPNXMLParserDidEndEntry:(NSDictionary *)entry {
-    BOOL isIgnorable = [_LPNIgnoreListController isContainendEntry:entry];
+    BOOL isIgnorable = [_LPNIgnoreListController hasEntry:entry];
     if (isIgnorable) return;
     
     [_liveListController addObject:entry];
@@ -574,7 +574,7 @@ static const CGFloat refreshIntervalMin = 10;
         
         /* is new entry contained in notice list */||
 #endif
-        ( ![_LPNListController isContainendEntry:entry] )
+        ( ![_LPNListController hasEntry:entry] )
         
         /*--------------------------------------------------------------------------------------*/)
     {

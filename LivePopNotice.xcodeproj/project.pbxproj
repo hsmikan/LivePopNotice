@@ -63,6 +63,7 @@
 		92412E9F14BC01A50084A182 /* LPNView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNView.m; path = LPNWindow/LPNPanel/LPNView.m; sourceTree = "<group>"; };
 		9256CF2014BE616D008502D4 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		9265A8FF14C213F700CFAEBF /* LPNLiveListTableViewContextMenuDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPNLiveListTableViewContextMenuDelegate.h; sourceTree = "<group>"; };
+		926BDB3814C22DDF008BE6BE /* LPNStatuBarMenuActionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNStatuBarMenuActionDelegate.h; path = StatusBarMenu/LPNStatuBarMenuActionDelegate.h; sourceTree = "<group>"; };
 		9271BD5614B883E30021F4BA /* LivePopNotice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivePopNotice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9271BD5A14B883E30021F4BA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9271BD5D14B883E30021F4BA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -122,6 +123,7 @@
 		923EC9FF14BDD14800A5064B /* StatusBarMenu */ = {
 			isa = PBXGroup;
 			children = (
+				926BDB3814C22DDF008BE6BE /* LPNStatuBarMenuActionDelegate.h */,
 				923EC9FC14BDD14200A5064B /* LPNStatusBarMenu.h */,
 				923EC9FD14BDD14200A5064B /* LPNStatusBarMenu.m */,
 			);
@@ -196,9 +198,9 @@
 				9271BD6F14B883E40021F4BA /* MainMenu.xib */,
 				923EC9FF14BDD14800A5064B /* StatusBarMenu */,
 				9293B1C414BCCD3A00B237AC /* LPNLiveListTableView */,
+				9271BD8414B894F30021F4BA /* FilteringList */,
 				9271BDB514B8CBE20021F4BA /* LPNWindow */,
 				9271BD8F14B89E360021F4BA /* XMLParser */,
-				9271BD8414B894F30021F4BA /* FilteringList */,
 				9271BD6114B883E30021F4BA /* Supporting Files */,
 			);
 			path = LivePopNotice;

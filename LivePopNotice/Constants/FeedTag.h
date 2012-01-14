@@ -15,6 +15,7 @@ extern NSString * const kFeedElementNameSummary;
 extern NSString * const kFeedElementNameContent;
 extern NSString * const kFeedElementNameUpdated;
 extern NSString * const kFeedElementNamePublished;
+extern NSString * const kFeedElementNameLink;
 
 extern NSString * const kFeedElementNameLiveID;
 extern NSString * const kFeedElementNameTag;

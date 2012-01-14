@@ -101,7 +101,7 @@
 
 
 
-- (BOOL)isContainendEntry:(LPNEntryDictionary *)entry {
+- (BOOL)hasEntry:(LPNEntryDictionary *)entry {
     NSString * authorName   =   nil;
     NSString * title        =   nil;
     NSString * summary      =   nil;

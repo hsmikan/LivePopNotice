@@ -25,7 +25,7 @@
 - (IBAction)addElement:(NSButton *)sender;
 - (void)addElementWithFilteringType:(NSInteger)typeIndex filteringString:(NSString *)string;
 - (IBAction)removeElements:(id)sender;
-- (BOOL)isContainendEntry:(NSDictionary *)entry;
+- (BOOL)hasEntry:(NSDictionary *)entry;
 
 
 @end

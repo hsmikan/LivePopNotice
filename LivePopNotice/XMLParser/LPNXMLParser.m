@@ -236,7 +236,7 @@ didStartElement:(NSString *)elementName
         }
     }
     
-    else if (CompareString(elementName, @"link")) {
+    else if (CompareString(elementName, kFeedElementNameLink)) {
         if (CompareString([attributeDict objectForKey:@"rel"], @"alternate")) {
             [_entry setURL:[attributeDict objectForKey:@"href"]];
         }
