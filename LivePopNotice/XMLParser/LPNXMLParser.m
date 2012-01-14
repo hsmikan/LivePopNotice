@@ -344,7 +344,6 @@ kFeedElementName | kFeedElementTitle | kFeedElementID
         
         UnenableFlag(_feedElementFlag, kFeedElementUpdated);
         
-        //  [_entry setStartedtime:[text substringWithRange:NSMakeRange(11, 8)]];
     }
     
     

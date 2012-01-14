@@ -30,7 +30,9 @@
         frame.origin = [displayInfo mapPoint];
         frame.size = NSMakeSize(kLPNWidth, kLPNHeight);
     }
-    LPNPanel * LPN = [[LPNPanel alloc] initWithContentRect:frame entry:attribute delegate:self];
+    LPNPanel * LPN = [[LPNPanel alloc] initWithContentRect:frame
+                                                     entry:attribute
+                                                  delegate:self];
     
     self = [super initWithWindow:[LPN autorelease]];
     if (self) {
