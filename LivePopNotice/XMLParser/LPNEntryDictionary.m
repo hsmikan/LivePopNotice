@@ -59,6 +59,11 @@
     
 }
 
+
+- (NSString*)tag {
+    return [self objectForKey:kLPNEntryDictionaryTag];
+}
+
 @end
 
 
@@ -122,4 +127,10 @@
     
 }
 
+
+- (void)setTag:(NSString *)tag {
+    [self setObject:SETCHECK(tag) forKey:kLPNEntryDictionaryTag];
+}
+
+#undef SETCHECK
 @end

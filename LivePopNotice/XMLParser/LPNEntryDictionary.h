@@ -17,6 +17,7 @@
 - (NSString*)startedTime;
 - (NSString*)liveID;
 - (NSString*)summary;
+- (NSString*)tag;
 @end
 
 #define LPNEntryMutableDictionary NSMutableDictionary
@@ -28,5 +29,5 @@
 - (void)setStartedtime:(NSString*)time;
 - (void)setLiveID:(NSString*)liveID;
 - (void)setSummary:(NSString*)summary;
-
+- (void)setTag:(NSString*)tag;
 @end

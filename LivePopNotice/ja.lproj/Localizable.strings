@@ -20,6 +20,8 @@
 "LPNFilteringTypeAuthor"        =   "配信者";
 "LPNFilteringTypeLiveTitle"     =   "ライブタイトル";
 "LPNFilteringTypeLiveSummary"   =   "ライブの説明文";
+"LPNFilteringTypeTag"           =   "タグ";
+
 /* Filtering Table View Context Menu */
 "LPNFilteringRemoveSelectedItems"  =   "選択されているものを削除する";
 

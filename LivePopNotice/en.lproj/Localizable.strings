@@ -20,6 +20,8 @@
 "LPNFilteringTypeAuthor"        =   "Author";
 "LPNFilteringTypeLiveTitle"     =   "Live Title";
 "LPNFilteringTypeLiveSummary"   =   "Live Summary";
+"LPNFilteringTypeTag"           =   "Tag";
+
 /* Filtering Table View Context Menu */
 "LPNFilteringRemoveSelectedItems"  =   "Remove Selected Items";
 

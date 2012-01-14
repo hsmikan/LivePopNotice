@@ -13,3 +13,4 @@ EXTERNED NSString * const kLPNEntryDictionaryAuthorNameKey  =   @"entryDictionar
 EXTERNED NSString * const kLPNEntryDictionaryStartedTime    =   @"entryDictionaryStartedTime";
 EXTERNED NSString * const kLPNEntryDictionaryLiveID         =   @"entryDictionaryLiveID";
 EXTERNED NSString * const kLPNEntryDictionarySummary        =   @"entryDictionarySummary";
+EXTERNED NSString * const kLPNEntryDictionaryTag            =   @"entryDictionaryTag";

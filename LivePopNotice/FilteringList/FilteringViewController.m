@@ -102,9 +102,10 @@
 
 
 - (BOOL)isContainendEntry:(LPNEntryDictionary *)entry {
-    NSString * authorName = nil;
-    NSString * title = nil;
-    NSString * summary = nil;
+    NSString * authorName   =   nil;
+    NSString * title        =   nil;
+    NSString * summary      =   nil;
+    NSString * tag          =   nil;
     
     BOOL isContained = NO;
 #define CHECKSTRING(STRING) ((STRING) ? (STRING) : @"")
@@ -125,6 +126,11 @@
             case kFilteringTypeSummary:
                 if (summary == nil) summary = CHECKSTRING([entry summary]);
                 isContained = [summary rangeOfString:DIC_FILTERINGSTRING].location != NSNotFound;
+                break;
+                
+            case kFilteringTypeTag:
+                if (tag == nil) tag = CHECKSTRING([entry tag]);
+                isContained = [tag rangeOfString:DIC_FILTERINGSTRING].location != NSNotFound;
                 break;
                 
             default:

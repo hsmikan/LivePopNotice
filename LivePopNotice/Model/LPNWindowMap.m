@@ -12,9 +12,9 @@
 
 #pragma mark -
 #pragma mark Map Dictionary 
-NSString * const kLPNMapPointKey        =   @"LPNPoint";
-NSString * const kLPNMapIsDisplayKey    =   @"LPNIsDisplay";
-NSString * const kLPNMapNumber          =   @"LPNMapNumber";
+static NSString * const kLPNMapPointKey        =   @"LPNPoint";
+static NSString * const kLPNMapIsDisplayKey    =   @"LPNIsDisplay";
+static NSString * const kLPNMapNumberKey       =   @"LPNMapNumber";
 
 
 @implementation LPNMapDictionary(LPNMap)
@@ -29,7 +29,7 @@ NSString * const kLPNMapNumber          =   @"LPNMapNumber";
     return [[self objectForKey:kLPNMapIsDisplayKey] boolValue];
 }
 - (NSUInteger)mapNumber {
-    return [[self objectForKey:kLPNMapNumber] integerValue];
+    return [[self objectForKey:kLPNMapNumberKey] integerValue];
 }
 @end
 
@@ -60,7 +60,7 @@ NSString * const kLPNMapNumber          =   @"LPNMapNumber";
     [self setObject:[NSNumber numberWithBool:isDisplay] forKey:kLPNMapIsDisplayKey];
 }
 - (void)setDisplayNumber:(NSUInteger)number {
-    [self setObject:[NSNumber numberWithUnsignedInteger:number] forKey:kLPNMapNumber];
+    [self setObject:[NSNumber numberWithUnsignedInteger:number] forKey:kLPNMapNumberKey];
 }
 
 @end
@@ -149,7 +149,7 @@ static NSArray * _map = nil;
         if (![info isDisplay]) {
             [info setIsDisplay:YES];
             ret = [LPNMapDictionary dictionaryWithObjectsAndKeys:
-                   [NSNumber numberWithUnsignedInteger:mapNumber],kLPNMapNumber,
+                   [NSNumber numberWithUnsignedInteger:mapNumber],kLPNMapNumberKey,
                    [info mapPointValue],kLPNMapPointKey,
                    nil];
             break;

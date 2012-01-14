@@ -41,6 +41,7 @@ typedef enum {
     kFeedElementUpdated     =   1 << 7,
     kFeedElementPublished   =   1 << 8,
     kFeedElementLiveID      =   1 << 9,
+    kFeedElementTag      =   1 << 10,
 } elementFlag;
 
 
@@ -240,6 +241,12 @@ didStartElement:(NSString *)elementName
             [_entry setURL:[attributeDict objectForKey:@"href"]];
         }
     }
+    
+    else if (CompareString(elementName, kFeedElementNameTag)) {
+        if (_currentSiteMask & feedSiteCaveTube) {
+            EnableFlag(_feedElementFlag, kFeedElementTag);
+        }
+    }
 }
 
 
@@ -367,6 +374,14 @@ kFeedElementName | kFeedElementTitle | kFeedElementID
         }
     }
     
+    
+    else if (CompareString(elementName, kFeedElementNameTag)) {
+        if (_currentSiteMask & feedSiteCaveTube) {
+            UnenableFlag(_feedElementFlag, kFeedElementTag);
+            [_entry setTag:text];
+        }
+    }
+
     
     [_currentString deleteCharactersInRange:NSMakeRange(0, [_currentString length])];
     

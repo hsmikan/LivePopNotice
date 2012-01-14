@@ -12,3 +12,4 @@ extern NSString * const kLPNEntryDictionaryAuthorNameKey;
 extern NSString * const kLPNEntryDictionaryStartedTime;
 extern NSString * const kLPNEntryDictionaryLiveID;
 extern NSString * const kLPNEntryDictionarySummary;
+extern NSString * const kLPNEntryDictionaryTag;

@@ -14,6 +14,7 @@
                               NSLocalizedString(@"LPNFilteringTypeAuthor", @""),
                               NSLocalizedString(@"LPNFilteringTypeLiveTitle", @""),
                               NSLocalizedString(@"LPNFilteringTypeLiveSummary", @""),
+                              NSLocalizedString(@"LPNFilteringTypeTag", @""),
                               nil]];
 }
 @end

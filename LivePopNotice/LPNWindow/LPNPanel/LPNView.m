@@ -55,14 +55,14 @@
 
 
 @implementation LPNEntryView : WebView
-static const CGFloat marginBottom = 10.0;
-static const NSUInteger autosizingMask = (NSViewMaxXMargin | NSViewMinXMargin | NSViewWidthSizable |
-                                          NSViewMaxYMargin | NSViewMinYMargin | NSViewHeightSizable);
 
 - (WebView *)initWithSizeOfSuperView:(NSSize)size
                                entry:(NSDictionary *)entry
                       policyDelegate:(id)policyDelegate
 {/*--------------------------------------------------------------------------------------*/
+    static const CGFloat marginBottom = 10.0;
+    static const NSUInteger autosizingMask = (NSViewMaxXMargin | NSViewMinXMargin | NSViewWidthSizable |
+                                              NSViewMaxYMargin | NSViewMinYMargin | NSViewHeightSizable);
     NSRect frame;{
         frame.size   = NSMakeSize(size.width, size.height-marginBottom);
         frame.origin = NSMakePoint(0, marginBottom);
@@ -89,7 +89,11 @@ static const NSUInteger autosizingMask = (NSViewMaxXMargin | NSViewMinXMargin | 
     ELEMENT(@"<html>"){
         ELEMENT(@"<head>"){
             ELEMENT(@"<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>")
+#ifdef DEBUG
+            ELEMENT(@"<link rel='stylesheet' href='/Users/hsmikan/LPNTEST.CSS' type='text/css'>")
+#else
             ELEMENT(@"<link rel='stylesheet' href='Contents/Resources/LPN.CSS' type='text/css'>")
+#endif
         }ELEMENT(@"</head>")
         
         ELEMENT(@"<body>"){

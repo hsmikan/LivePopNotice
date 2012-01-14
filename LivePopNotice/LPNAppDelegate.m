@@ -11,6 +11,7 @@
 
 #import "Constants/mainTabIdentifier.h"
 #import "Constants/LPNUserDefaultsKey.h"
+#import "Constants/filteringTypeIdentifier.h"
 
 #import "XMLParser/LPNFeedParser.h"
 #import "LPNWindow/LPNWindowController.h"
@@ -315,20 +316,22 @@ static const CGFloat refreshIntervalMin = 10;
 - (NSString *)getWillBeAddedStringWithTypeIndex:(NSInteger)index {// private like
     NSDictionary * dic = [[_liveListController selectedObjects] objectAtIndex:0];
     NSString * str;{
-        // TODO: case constant
         switch (index) {
-            case 0:
+            case kFilteringTypeAuthor:
                 str = [dic authorName];
                 break;
                 
-            case 1:
+            case kFilteringTypeLiveTitle:
                 str = [dic title];
                 break;
                 
-            case 2:
+            case kFilteringTypeSummary:
                 str = [dic summary];
                 break;
-                
+            
+            case kFilteringTypeTag:
+                str = [dic tag];
+                break;
             default:
                 break;
         }
@@ -436,15 +439,7 @@ static const CGFloat refreshIntervalMin = 10;
 
 
 - (void)LPNXMLParserOccuredError {
-    NSBeginAlertSheet(@"LivePopNotice",
-                      @"OK",
-                      nil,
-                      nil,
-                      _window,
-                      nil,
-                      nil,
-                      nil,
-                      nil,
+    NSBeginAlertSheet(@"LivePopNotice",@"OK",nil,nil,_window,nil,nil,nil,nil,
                       NSLocalizedString(@"LPNXMLParserErrorMessage", @""));
 }
 
@@ -464,7 +459,7 @@ static const CGFloat refreshIntervalMin = 10;
  *========================================================================================*/
 
 - (void)_LPN_stopRefreshTimer {
-    if (_refreshTimer) {
+    if ([_refreshTimer isValid]) {
         [_refreshTimer invalidate];
         _refreshTimer = nil;
     }
@@ -501,6 +496,9 @@ static const CGFloat refreshIntervalMin = 10;
     
     
     [_liveListController removeObjects:[_liveListController content]];
+    if (_currentSubFeededLiveIDs) {
+        [_currentSubFeededLiveIDs release];
+    }
     _currentSubFeededLiveIDs = [[NSMutableArray alloc] init];
     
     LPNFeedSiteMask mask = 0;

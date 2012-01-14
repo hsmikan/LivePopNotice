@@ -17,3 +17,4 @@ EXTERNED NSString * const kFeedElementNameUpdated   =   @"updated";
 EXTERNED NSString * const kFeedElementNamePublished =   @"published";
 
 EXTERNED NSString * const kFeedElementNameLiveID    =   @"ct:stream_name";
+EXTERNED NSString * const kFeedElementNameTag       =   @"ct:tag";

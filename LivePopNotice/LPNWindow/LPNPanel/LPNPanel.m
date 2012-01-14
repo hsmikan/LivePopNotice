@@ -26,8 +26,8 @@
         
         [[self contentView] setAutoresizesSubviews:YES];
         LPNView * view = [[LPNView alloc] initWithFrame:contentRect
-                                                            entry:entry
-                                                   policyDelegate:delegate];
+                                                  entry:entry
+                                         policyDelegate:delegate];
         [self setContentView:[view autorelease]];
     }
     
@@ -40,6 +40,7 @@
 
 - (void)mouseEntered:(NSEvent *)theEvent {
     [[self windowController] mouseEntered:theEvent];
+
 }
 
 - (void)mouseExited:(NSEvent *)theEvent {

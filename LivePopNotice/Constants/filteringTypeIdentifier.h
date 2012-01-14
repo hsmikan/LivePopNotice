@@ -11,7 +11,8 @@ extern NSString * const kFilteringTypeIdentifier;
 extern NSString * const kFilteringStringIdentifier;
 
 enum  {
-    kFilteringTypeAuthor = 0,
-    kFilteringTypeLiveTitle = 1,
-    kFilteringTypeSummary = 2,
+    kFilteringTypeAuthor    =   0,
+    kFilteringTypeLiveTitle =   1,
+    kFilteringTypeSummary   =   2,
+    kFilteringTypeTag       =   3,
 };
