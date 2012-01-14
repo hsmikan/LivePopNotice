@@ -216,11 +216,23 @@ enum {
  *  refresh
  *
  *========================================================================================*/
+- (void)enableRefreshButton:(NSToolbarItem *)button {
+    [button setEnabled:YES];
+}
 
 - (IBAction)refreshLiveList:(NSToolbarItem *)sender {
+#ifdef DEBUG
+#define REENABLE_INTERVAL 5
+#else
+#define REENABLE_INTERVAL 300
+#endif
     [self _LPN_stopRefreshTimer];
     [self _LPN_getAndParse:nil];
     [self _LPN_startRefreshTimer];
+    [sender setEnabled:NO];
+    [self performSelector:@selector(enableRefreshButton:)
+               withObject:sender
+               afterDelay:REENABLE_INTERVAL];
 }
 
 
