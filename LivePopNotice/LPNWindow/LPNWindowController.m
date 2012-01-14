@@ -25,18 +25,21 @@
 
 - (id)initWithLPNAttribute:(NSDictionary *)attribute {
     NSDictionary * displayInfo = [[LPNWindowMap sharedMap] availableDisplayInfo];
-    NSRect frame;
-    {
-        frame.origin = [displayInfo mapPoint];
-        frame.size = NSMakeSize(kLPNWidth, kLPNHeight);
-    }
-    LPNPanel * LPN = [[LPNPanel alloc] initWithContentRect:frame
+    
+    originFrame.origin = [displayInfo mapPoint];
+    originFrame.size = NSMakeSize(kLPNWidth, kLPNHeight);
+    
+    LPNPanel * LPN = [[LPNPanel alloc] initWithContentRect:originFrame
                                                      entry:attribute
                                                   delegate:self];
     
+    originFrame.size.height = kLPNHeightIncludingTitleBar;
+    
+    if (LPN) {
     self = [super initWithWindow:[LPN autorelease]];
     if (self) {
         _mapNumber = [displayInfo mapNumber];
+    }
     }
     
     return self;
@@ -109,8 +112,25 @@
 }
 
 
-
 - (void)mouseEntered:(NSEvent *)theEvent {
+    static const CGFloat exposeWidth    =   14.0;//kLPNWidth/20
+    static const CGFloat exposeHeight   =   10.0;//kLPNHeight/10
+    static const CGFloat exposeX        =   7.0; //exposeWidth/2
+    static const CGFloat exposeY        =   5.0; //exposeHeight/2
+    
+    NSWindow * win = [self window];
+    
+    [win orderFront:nil];
+    NSRect exposeRect;{
+        NSSize currentSize = originFrame.size;
+        exposeRect.size   = NSMakeSize(currentSize.width+exposeWidth, currentSize.height+exposeHeight);
+        
+        NSPoint currentPoint = originFrame.origin;
+        exposeRect.origin = NSMakePoint(currentPoint.x-exposeX, currentPoint.y-exposeY);
+    }
+    [win setFrame:exposeRect display:YES animate:YES];
+    
+    
     if ([_closeTimer isValid]) {
         [_closeTimer invalidate];
         _closeTimer = nil;
@@ -118,6 +138,8 @@
 }
 
 - (void)mouseExited:(NSEvent *)theEvent {
+    [[self window] setFrame:originFrame display:YES animate:YES];
+    
     if ([[self window] isVisible]) {
         [self _LPN_closeTimerStart];
     }

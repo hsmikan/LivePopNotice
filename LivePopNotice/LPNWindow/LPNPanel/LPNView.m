@@ -89,11 +89,7 @@
     ELEMENT(@"<html>"){
         ELEMENT(@"<head>"){
             ELEMENT(@"<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>")
-#ifdef DEBUG
-            ELEMENT(@"<link rel='stylesheet' href='/Users/hsmikan/LPNTEST.CSS' type='text/css'>")
-#else
             ELEMENT(@"<link rel='stylesheet' href='Contents/Resources/LPN.CSS' type='text/css'>")
-#endif
         }ELEMENT(@"</head>")
         
         ELEMENT(@"<body>"){

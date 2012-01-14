@@ -16,6 +16,8 @@
     
     NSTimer * _closeTimer;
     NSTimeInterval _closeTimeInterval;
+    
+    NSRect originFrame;
 }
 
 - (id)initWithLPNAttribute:(NSDictionary *)attribute;
