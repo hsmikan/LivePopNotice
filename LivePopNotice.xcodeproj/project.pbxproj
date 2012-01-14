@@ -62,6 +62,7 @@
 		92412E9E14BC01A50084A182 /* LPNView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNView.h; path = LPNWindow/LPNPanel/LPNView.h; sourceTree = "<group>"; };
 		92412E9F14BC01A50084A182 /* LPNView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNView.m; path = LPNWindow/LPNPanel/LPNView.m; sourceTree = "<group>"; };
 		9256CF2014BE616D008502D4 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		9265A8FF14C213F700CFAEBF /* LPNLiveListTableViewContextMenuDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPNLiveListTableViewContextMenuDelegate.h; sourceTree = "<group>"; };
 		9271BD5614B883E30021F4BA /* LivePopNotice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivePopNotice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9271BD5A14B883E30021F4BA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9271BD5D14B883E30021F4BA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -288,6 +289,7 @@
 		9293B1C414BCCD3A00B237AC /* LPNLiveListTableView */ = {
 			isa = PBXGroup;
 			children = (
+				9265A8FF14C213F700CFAEBF /* LPNLiveListTableViewContextMenuDelegate.h */,
 				9293B1C514BCCD3A00B237AC /* LPNLiveListTableView.h */,
 				9293B1C614BCCD3A00B237AC /* LPNLiveListTableView.m */,
 			);

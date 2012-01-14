@@ -275,10 +275,10 @@ static const CGFloat refreshIntervalMin = 10;
 
 
 #pragma mark -
-#pragma mark Action Called From Table View's Context Menu
+#pragma mark LPNLiveListTableViewContextMenuDelegate
 /*========================================================================================
  *
- *  Open Live URL with Default Web Browser
+ *  LPNLiveListTableViewContextMenuDelegate
  *
  *========================================================================================*/
 - (void)openLivePage:(id)sender {
@@ -289,12 +289,17 @@ static const CGFloat refreshIntervalMin = 10;
 }
 
 
+- (void)copyLink:(id)sender {
+    NSUInteger index = [_liveListController selectionIndex];
+    NSString * urlstring = [(NSDictionary*)[[_liveListController arrangedObjects] objectAtIndex:index] URL];
+    NSPasteboard * pasteBoard = [NSPasteboard generalPasteboard];
+    [pasteBoard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+    [pasteBoard setString:urlstring forType:NSPasteboardTypeString];
+}
 
 
 
 
-#pragma mark -
-#pragma mark add from livelist tableview
 /*========================================================================================
  *
  *  add notice element from context menu

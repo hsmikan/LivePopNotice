@@ -8,8 +8,10 @@
 
 #import <AppKit/AppKit.h>
 
+@protocol LPNLiveListTableViewContextMenuDelegate;
+
 @interface LPNLiveListTableView : NSTableView {
-    id _contextMenuItemActionDelegate;
+    id <LPNLiveListTableViewContextMenuDelegate> _contextMenuItemActionDelegate;
 }
-@property (assign) IBOutlet id contextMenuItemActionDelegate;
+@property (assign) IBOutlet id <LPNLiveListTableViewContextMenuDelegate> contextMenuItemActionDelegate;
 @end

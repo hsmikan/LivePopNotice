@@ -14,6 +14,7 @@
 
 /* Live List Context Menu */
 "LPNOpenLivePageMenuItem"       =   "Open Live Page";
+"LPNCopyLinkMenuItem"           =   "Copy Live Page Adress";
 "LPNAddToNoticeListMenuItem"    =   "Add To Pop Up Notice List";
 
 /* Filtering Type Pop Up Button title */

@@ -7,6 +7,8 @@
 //
 
 #import "LPNLiveListTableView.h"
+#import "LPNLiveListTableViewContextMenuDelegate.h"
+
 
 @implementation LPNLiveListTableView
 
@@ -24,20 +26,36 @@
             [openLivePageItem setKeyEquivalent:@""];
         }
         
+        NSMenuItem * copyLinkItem = [[NSMenuItem alloc] init];{
+            [copyLinkItem setTitle:NSLocalizedString(@"LPNCopyLinkMenuItem", @"")];
+            [copyLinkItem setKeyEquivalent:@""];
+        }
+        
         NSMenuItem * addItem = [[NSMenuItem alloc] init];{
             [addItem setTitle:NSLocalizedString(@"LPNAddToNoticeListMenuItem", @"")];
             [addItem setKeyEquivalent:@""];
         }
         
+        /* set action */
         if ([self selectedRow] != -1) {
-            [openLivePageItem setTarget:_contextMenuItemActionDelegate];
-            [openLivePageItem setAction:@selector(openLivePage:)];
+            if ([_contextMenuItemActionDelegate respondsToSelector:@selector(openLivePage:)]) {
+                [openLivePageItem setTarget:_contextMenuItemActionDelegate];
+                [openLivePageItem setAction:@selector(openLivePage:)];
+            }
             
-            [addItem setTarget:_contextMenuItemActionDelegate];
-            [addItem setAction:@selector(addToPopUpNoticeList:)];
+            if ([_contextMenuItemActionDelegate respondsToSelector:@selector(copyLink:)]) {
+                [copyLinkItem setTarget:_contextMenuItemActionDelegate];
+                [copyLinkItem setAction:@selector(copyLink:)];
+            }
+            
+            if ([_contextMenuItemActionDelegate respondsToSelector:@selector(addToPopUpNoticeList:)]) {
+                [addItem setTarget:_contextMenuItemActionDelegate];
+                [addItem setAction:@selector(addToPopUpNoticeList:)];
+            }
         }
         
         [menu addItem:[openLivePageItem autorelease]];
+        [menu addItem:[copyLinkItem autorelease]];
         [menu addItem:[addItem autorelease]];
     }
     

@@ -14,6 +14,7 @@
 
 /* Live List Context Menu */
 "LPNOpenLivePageMenuItem"       =   "配信ページを開く";
+"LPNCopyLinkMenuItem"           =   "配信ページのURLをコピーする";
 "LPNAddToNoticeListMenuItem"    =   "通知リストへ追加する";
 
 /* Filtering Type Pop Up Button title */

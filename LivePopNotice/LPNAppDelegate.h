@@ -11,7 +11,7 @@
 /* feed parser */
 #import "XMLParser/LPNXMLParserDelegate.h"
 
-
+#import "LPNLiveListTableView/LPNLiveListTableViewContextMenuDelegate.h"
 
 
 @class FilteringList;
@@ -19,7 +19,7 @@
 
 @class WebView;
 
-@interface LPNAppDelegate : NSObject <NSApplicationDelegate,LPNXMLParserDelegate> {
+@interface LPNAppDelegate : NSObject <NSApplicationDelegate,LPNXMLParserDelegate,LPNLiveListTableViewContextMenuDelegate> {
     
     /* ------ */
     /* Member */
