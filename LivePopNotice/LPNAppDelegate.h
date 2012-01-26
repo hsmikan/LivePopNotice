@@ -95,8 +95,8 @@
 
 
 
-
 /* live list */
+- (IBAction)changeNoticeSoundPath:(id)sender;
 - (IBAction)showWillAddedStringToNoticeList:(NSPopUpButton *)sender;
 - (IBAction)sheetEndWithAdding:(NSButton *)sender;
 - (IBAction)sheetEnd:(id)sender;

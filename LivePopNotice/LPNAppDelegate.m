@@ -143,17 +143,12 @@ enum {
     
     /* Test */
 #ifdef DEBUG
-    LPNWindowController * testWindow;{
-        NSDictionary * lpnAttr = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  @"Live Title",@"entryDictionaryTitle",
-                                  @"Author",@"entryDictionaryAuthorName",
-                                  @"Live Summary",@"entryDictionarySummary",
-                                  @"http://google.co.jp",@"entryDictionaryURL",
-                                  nil];
-        testWindow = [[LPNWindowController alloc] initWithLPNAttribute:lpnAttr];
-    }
-    [testWindow showWindowForDuration:1000];
-    
+    [self _LPN_popUpNewEntry:[NSDictionary dictionaryWithObjectsAndKeys:
+                              @"Live Title",@"entryDictionaryTitle",
+                              @"Author",@"entryDictionaryAuthorName",
+                              @"Live Summary",@"entryDictionarySummary",
+                              @"http://google.co.jp",@"entryDictionaryURL",
+                              nil]];
 #endif
 }
 
@@ -259,7 +254,7 @@ static const CGFloat refreshIntervalMin = 10;
 
 /*========================================================================================
  *
- *  Duration of Pop Up Notice Window
+ *  Duration of Displaying Pop Up Notice Window
  *
  *========================================================================================*/
 
@@ -284,6 +279,31 @@ static const CGFloat refreshIntervalMin = 10;
 
 
 
+
+
+#pragma mark -
+#pragma mark Live List Tab
+/*========================================================================================
+ *
+ *  Live List Tab
+ *
+ *========================================================================================*/
+
+- (IBAction)changeNoticeSoundPath:(id)sender {
+    
+    NSUserDefaults * df = [NSUserDefaults standardUserDefaults];
+    if (![df boolForKey:kLPNIsPlayNoticeSound])
+        return;
+    
+    
+    NSOpenPanel * panel = [NSOpenPanel openPanel];
+    [panel runModalForTypes:[NSArray arrayWithObjects:@"aiff",@"aif",@"wav",nil]];
+    
+    NSString * filePath = [panel filename];
+    if (filePath.length) {
+        [df setValue:filePath forKey:kLPNNoticeSoundPath];
+    }
+}
 
 
 #pragma mark -
@@ -323,6 +343,12 @@ static const CGFloat refreshIntervalMin = 10;
 }
 
 - (void)addToPopUpNoticeList:(id)sender {
+    
+    // TODO: detemine default index nspopupbutton shows 
+    NSDictionary * dic = [[_liveListController selectedObjects] objectAtIndex:0];
+    [_willAddedStringToNoticeListTF setStringValue:[dic authorName]];
+    
+    
     [NSApp beginSheet:_sheetWindow
        modalForWindow:_window
         modalDelegate:self
@@ -356,6 +382,8 @@ static const CGFloat refreshIntervalMin = 10;
     
     return str;
 }
+
+
 
 
 - (IBAction)showWillAddedStringToNoticeList:(NSPopUpButton *)sender {
@@ -443,6 +471,13 @@ static const CGFloat refreshIntervalMin = 10;
 }
 
 
+#pragma mark Catch a entry
+/*========================================================================================
+ *
+ *  Catch a entry
+ *
+ *========================================================================================*/
+
 - (void)LPNXMLParserDidEndEntry:(NSDictionary *)entry {
     BOOL isIgnorable = [_LPNIgnoreListController hasEntry:entry];
     if (isIgnorable) return;
@@ -456,6 +491,7 @@ static const CGFloat refreshIntervalMin = 10;
 
 
 - (void)LPNXMLParserOccuredError {
+    // TODO: put the error in error log
     NSBeginAlertSheet(@"LivePopNotice",@"OK",nil,nil,_window,nil,nil,nil,nil,
                       NSLocalizedString(@"LPNXMLParserErrorMessage", @""));
 }
@@ -561,30 +597,48 @@ static const CGFloat refreshIntervalMin = 10;
 }
 
 
-
-- (void)_LPN_popUpNewEntry:(LPNEntryDictionary *)entry {
-    if (/*--------------------------------------------------------------------------------------*/
+- (BOOL)_isValidPopUpNotice:(LPNEntryDictionary*)entry {
+    return
 #ifndef DEBUG
-
-        /* is firsrt load */
-        ( ![_currentFeededLiveIDs count] )
-        
-        /* is new live */||
-        ( [_currentFeededLiveIDs containsObject:[entry liveID]] )
-        
-        /* is new entry contained in notice list */||
+    /* is firsrt load */
+    ( ![_currentFeededLiveIDs count] )
+    
+    ||
+    
+    /* is new live */
+    ( [_currentFeededLiveIDs containsObject:[entry liveID]] )
+    
+    ||
+    
 #endif
-        ( ![_LPNListController hasEntry:entry] )
-        
-        /*--------------------------------------------------------------------------------------*/)
-    {
+    /* is new entry contained in notice list */
+    ( ![_LPNListController hasEntry:entry] )
+    ;
+}
+
+#pragma mark -
+#pragma mark Pop Up Notice Window
+/*========================================================================================
+ *
+ *  Pop Up Notice Window
+ *
+ *========================================================================================*/
+- (void)_LPN_popUpNewEntry:(LPNEntryDictionary *)entry {
+    if ([self _isValidPopUpNotice:entry]){
         return;
     }
-        
+    NSUserDefaults * df = [NSUserDefaults standardUserDefaults];
+    if ( [df boolForKey:kLPNIsPlayNoticeSound] ) {
+        NSSound * snd;
+        {
+            snd = [[NSSound alloc] initWithContentsOfFile:[df stringForKey:kLPNNoticeSoundPath]
+                                              byReference:YES];
+            [[snd autorelease] play];
+        }
+    }
     
     LPNWindowController * win = [[LPNWindowController alloc] initWithLPNAttribute:entry];
     [win showWindowForDuration:_LPNDisplayTimeInterval];
-    
 }
 
 

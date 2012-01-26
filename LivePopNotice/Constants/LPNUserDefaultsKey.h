@@ -17,3 +17,7 @@ extern NSString * const kLPNUserDefaultsIsNoticeAnyLiveKey;
 
 extern NSString * const kLPNUserDefaultsLPNIgnoreListArrayControllerContentKey;
 #define kLPNIgnoreListArrayControllerKey kLPNUserDefaultsLPNIgnoreListArrayControllerContentKey
+
+
+extern NSString * const kLPNIsPlayNoticeSound;
+extern NSString * const kLPNNoticeSoundPath;

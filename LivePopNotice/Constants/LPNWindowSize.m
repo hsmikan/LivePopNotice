@@ -10,4 +10,4 @@
 
 EXTERNED const CGFloat kLPNWidth                    =   280.0;
 EXTERNED const CGFloat kLPNHeight                   =   100.0;
-EXTERNED const CGFloat kLPNHeightIncludingTitleBar  =   119.0;
+EXTERNED const CGFloat kLPNHeightIncludedTitleBar   =   119.0;

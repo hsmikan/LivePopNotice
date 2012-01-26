@@ -10,4 +10,4 @@
 
 extern const CGFloat kLPNWidth;
 extern const CGFloat kLPNHeight;
-extern const CGFloat kLPNHeightIncludingTitleBar;
+extern const CGFloat kLPNHeightIncludedTitleBar;

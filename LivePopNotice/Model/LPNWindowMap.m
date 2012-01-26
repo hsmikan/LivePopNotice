@@ -173,8 +173,8 @@ static NSArray * _map = nil;
     NSMutableArray * popUpWindowMap = [NSMutableArray array];
     
     int i,j;
-    for (i = (screenRect.size.width-kLPNWidth);                    i >= 0; i -= kLPNWidth)
-    for (j = (screenRect.size.height-kLPNHeightIncludingTitleBar); j >= 0; j -= kLPNHeightIncludingTitleBar)
+    for (i = (screenRect.size.width-kLPNWidth);                   i >= 0; i -= kLPNWidth)
+    for (j = (screenRect.size.height-kLPNHeightIncludedTitleBar); j >= 0; j -= kLPNHeightIncludedTitleBar)
     {
         [popUpWindowMap addObject:[LPNMapMutableDictionary LPNMapDictionaryWithPoint:NSMakePoint(i, j)]];
     }

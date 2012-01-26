@@ -6,5 +6,7 @@
 	<integer>30</integer>
 	<key>LPNNoticeDuration</key>
 	<integer>5</integer>
+	<key>LPNIsPlayNoticeSound</key>
+	<false/>
 </dict>
 </plist>

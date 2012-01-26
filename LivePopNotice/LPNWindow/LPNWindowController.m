@@ -33,7 +33,7 @@
                                                      entry:attribute
                                                   delegate:self];
     
-    originFrame.size.height = kLPNHeightIncludingTitleBar;
+    originFrame.size.height = kLPNHeightIncludedTitleBar;
     
     if (LPN) {
     self = [super initWithWindow:[LPN autorelease]];
@@ -114,9 +114,9 @@
 
 - (void)mouseEntered:(NSEvent *)theEvent {
     static const CGFloat exposeWidth    =   14.0;//kLPNWidth/20
-    static const CGFloat exposeHeight   =   10.0;//kLPNHeight/10
+    static const CGFloat exposeHeight   =   5.95;//kLPNHeightIncludedTitlbar/20
     static const CGFloat exposeX        =   7.0; //exposeWidth/2
-    static const CGFloat exposeY        =   5.0; //exposeHeight/2
+    static const CGFloat exposeY        =   2.975; //exposeHeight/2
     
     NSWindow * win = [self window];
     
@@ -150,7 +150,7 @@
 
 /*========================================================================================
  *
- *  WebView Delegate
+ *  WebView Policy Delegate
  *
  *========================================================================================*/
 /* open link */
@@ -160,6 +160,7 @@
                    newFrameName:(NSString *)frameName
                decisionListener:(id)listener
 {
+    /* TODO: graphically notice that the link is clicked */
 	NSURL *url = [[request URL] absoluteURL];
 	[[NSWorkspace sharedWorkspace] openURL:url];
 }

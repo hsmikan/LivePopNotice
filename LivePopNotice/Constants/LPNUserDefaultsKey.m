@@ -15,3 +15,8 @@ EXTERNED NSString * const kLPNUserDefaultsLPNListArrayControllerContentKey  =   
 EXTERNED NSString * const kLPNUserDefaultsIsNoticeAnyLiveKey                =   @"LPNIsNoticeAnyLive";
 
 EXTERNED NSString * const kLPNUserDefaultsLPNIgnoreListArrayControllerContentKey    =   @"LPNIgnoreList";
+
+
+EXTERNED NSString * const kLPNIsPlayNoticeSound =   @"LPNIsPlayNoticeSound";
+EXTERNED NSString * const kLPNNoticeSoundPath   =   @"LPNNoticeSoundPath";
+
