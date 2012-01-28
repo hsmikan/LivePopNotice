@@ -19,7 +19,7 @@
 
 @class WebView;
 
-@interface LPNAppDelegate : NSObject <NSApplicationDelegate,LPNXMLParserDelegate,LPNLiveListTableViewContextMenuDelegate,LPNStatuBarMenuActionDelegate> {
+@interface LPNAppDelegate : NSObject <NSApplicationDelegate,LPNXMLParserDelegate,LPNLiveListTableViewContextMenuDelegate,LPNStatuBarMenuActionDelegate,NSTableViewDelegate> {
     
     /* ------ */
     /* Member */

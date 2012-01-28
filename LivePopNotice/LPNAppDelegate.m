@@ -305,6 +305,23 @@ static const CGFloat refreshIntervalMin = 10;
     }
 }
 
+- (void)tableView:(NSTableView *)tableView
+  willDisplayCell:(id)cell
+   forTableColumn:(NSTableColumn *)tableColumn
+              row:(NSInteger)row
+{
+    [cell setDrawsBackground:YES];
+    NSColor * bgcolor;
+    NSDictionary * entryDictionaryWillBeDisplay = [[_liveListController arrangedObjects] objectAtIndex:row];
+    if ([_LPNListController hasEntry:entryDictionaryWillBeDisplay] ) {
+        bgcolor = [NSColor colorWithDeviceRed:0 green:1.0 blue:1.0 alpha:0.3];
+    }
+    else {
+        bgcolor = [NSColor whiteColor];
+    }
+    [cell setBackgroundColor:bgcolor];
+}
+
 
 #pragma mark -
 #pragma mark LPNLiveListTableViewContextMenuDelegate
