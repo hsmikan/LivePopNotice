@@ -20,6 +20,10 @@ enum {
 
 @protocol LPNStatuBarMenuActionDelegate;
 
-@interface LPNStatusBarMenu : NSMenu
+@interface LPNStatusBarMenu : NSMenu {
+    id <LPNStatuBarMenuActionDelegate> _actionDelegate;
+}
+@property (assign) id <LPNStatuBarMenuActionDelegate> actionDelegate;
 - (id)initWithTitle:(NSString *)aTitle actionDelegate:(id<LPNStatuBarMenuActionDelegate>)delegate;
+- (void)updateLiveList:(NSArray *)livelist;
 @end

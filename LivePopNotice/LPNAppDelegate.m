@@ -178,6 +178,19 @@ enum {
     [_window orderFrontRegardless];
 }
 
+- (void)clickedStatusBarLiveListSubMenu:(id)sender {
+    NSString * url;
+    for (NSDictionary * entry in [_liveListController content]) {
+        if ([[entry title] isEqualToString:[sender title]]) {
+            url = [entry URL];
+            break;
+        }
+    }
+    
+    if (url)
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
+}
+
 
 
 
@@ -305,21 +318,26 @@ static const CGFloat refreshIntervalMin = 10;
     }
 }
 
+/* livelist tableview delegate */
 - (void)tableView:(NSTableView *)tableView
   willDisplayCell:(id)cell
    forTableColumn:(NSTableColumn *)tableColumn
               row:(NSInteger)row
 {
-    [cell setDrawsBackground:YES];
-    NSColor * bgcolor;
-    NSDictionary * entryDictionaryWillBeDisplay = [[_liveListController arrangedObjects] objectAtIndex:row];
-    if ([_LPNListController hasEntry:entryDictionaryWillBeDisplay] ) {
-        bgcolor = [NSColor colorWithDeviceRed:0 green:1.0 blue:1.0 alpha:0.3];
+    [cell setDrawsBackground:YES];{
+        NSColor * bgcolor;
+        
+        NSDictionary * entryDictionaryWillBeDisplay = [[_liveListController arrangedObjects] objectAtIndex:row];
+        
+        if ([_LPNListController hasEntry:entryDictionaryWillBeDisplay] ) {
+            bgcolor = [NSColor colorWithDeviceRed:0 green:1.0 blue:1.0 alpha:0.3];
+        }
+        else {
+            bgcolor = [NSColor whiteColor];
+        }
+        
+        [cell setBackgroundColor:bgcolor];
     }
-    else {
-        bgcolor = [NSColor whiteColor];
-    }
-    [cell setBackgroundColor:bgcolor];
 }
 
 
@@ -485,6 +503,15 @@ static const CGFloat refreshIntervalMin = 10;
     _currentSubFeededLiveIDs = nil;
     
     [_displayInLIveCountTF setIntegerValue:[[_liveListController content] count]];
+    
+    
+    // update livelist in status menu
+    NSMutableArray * livetitles = [NSMutableArray array];
+    for (NSDictionary * entry in [_liveListController content]) {
+        [livetitles addObject:[entry title]];
+    }
+    LPNStatusBarMenu * statubarMenu = (LPNStatusBarMenu *)[_statusBarItem menu];
+    [statubarMenu updateLiveList:livetitles];
 }
 
 

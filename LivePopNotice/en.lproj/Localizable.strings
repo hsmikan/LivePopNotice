@@ -8,6 +8,7 @@
 
 /* Status Bar Menu */
 "LPNStatusMenuShowMainWindow"       =   "Show Main Window";
+"LPNStatusMenuJumpToLivePage"       =   "Open Live Page";
 "LPNStatusMenuAboutLivePopNOtice"   =   "About LivePopNotice";
 "LPNStatusMenuHelp"                 =   "Help";
 "LPNStatusMenuQuit"                 =   "Quit LivePopNotice";

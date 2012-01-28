@@ -8,6 +8,7 @@
 
 /* Status Bar Menu */
 "LPNStatusMenuShowMainWindow"       =   "メインウィンドウを開く";
+"LPNStatusMenuJumpToLivePage"       =   "ライブページを開く";
 "LPNStatusMenuAboutLivePopNOtice"   =   "LivePopNoticeについて";
 "LPNStatusMenuHelp"                 =   "ヘルプ";
 "LPNStatusMenuQuit"                 =   "LivePopNoticeを終了する";

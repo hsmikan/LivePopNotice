@@ -10,4 +10,5 @@
 
 @protocol LPNStatuBarMenuActionDelegate <NSObject>
 - (void)openMainWindow:(id)sender;
+- (void)clickedStatusBarLiveListSubMenu:(id)sender;
 @end
