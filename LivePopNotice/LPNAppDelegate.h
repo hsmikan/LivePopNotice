@@ -27,11 +27,8 @@
     
     /* refreshing feed */
     NSTimer * _refreshTimer;
-    NSUInteger _refreshTimeIntervalCount;
-    NSTimeInterval _refreshTimeInterval;
     
     NSTimer * _displayRemainTimeIntervalTimer;
-    NSTimeInterval _LPNDisplayTimeInterval;
     
     /* got liveIDs from feed */
     NSArray * _currentFeededLiveIDs;

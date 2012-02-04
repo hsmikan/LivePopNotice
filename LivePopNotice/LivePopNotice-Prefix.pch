@@ -6,10 +6,10 @@
     #import <Cocoa/Cocoa.h>
     #define EXTERNED
     #ifdef DEBUG
-        #define DPrint(...) printf("%d:%s:%s: ",__LINE__,[[[NSString stringWithUTF8String:__FILE__] componentsSeparatedByString:@"/"] lastObject],__func__);printf(__VA_ARGS__);printf("\n")
-        #define DLog(...) NSLog(__VA_ARGS__);
+        #define DPRINT(...) printf("%d:%s:%s: ",__LINE__,[[[NSString stringWithUTF8String:__FILE__] componentsSeparatedByString:@"/"] lastObject],__func__);printf(__VA_ARGS__);printf("\n")
+        #define DLOG(...) NSLog(__VA_ARGS__);
     #else
-        #define DPrint
-        #define DLog
+        #define DPRINT
+        #define DLOG
     #endif
 #endif

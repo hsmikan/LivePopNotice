@@ -28,6 +28,13 @@
 - (void)_LPN_getAndParse:(NSTimer*)timer;
 - (void)_LPN_cahngeRemainTimeInterval:(NSTimer*)timer;
 - (void)_LPN_popUpNewEntry:(NSDictionary *)entry;
+
+enum {
+    refreshTimeIntervalCountReset = 'rest',
+    refreshTimeIntervalCountIncrement = 'incl',
+};
+typedef int LPNRefreshTimeIntervalManipulateCommad;
+NSUInteger refreshTimeIntervalManipulator(LPNRefreshTimeIntervalManipulateCommad command);
 @end
 
 
@@ -99,7 +106,7 @@ enum {
     }
     
     
-    /* storing data */
+    /* registering data */
     NSUserDefaults * df = [NSUserDefaults standardUserDefaults];
     {
         /* register default UI values */
@@ -107,11 +114,6 @@ enum {
                                                                ofType:@"plist"];
         NSDictionary * guidf = [NSDictionary dictionaryWithContentsOfFile:guidfpath];
         [df registerDefaults:guidf];
-        
-        
-        _refreshTimeInterval = [[df stringForKey:kLPNUserDefaultsRefreshIntervalKey] doubleValue];
-        _LPNDisplayTimeInterval = [[df stringForKey:kLPNUserDefaultsNoticeDurationKey] doubleValue];
-        
     }
     /* _checkedServiceMTRX's content cells statement is saved by Shared User Defaults Controller in IB */
     [self changeFeedStateOfCaveTube:[_checkedServiceMTRX cellWithTag:checkedSrviceTagCT]];
@@ -230,9 +232,9 @@ enum {
 
 - (IBAction)refreshLiveList:(NSToolbarItem *)sender {
 #ifdef DEBUG
-#define REENABLE_INTERVAL 5
+#define RE_ENABLE_INTERVAL 5
 #else
-#define REENABLE_INTERVAL 300
+#define RE_ENABLE_INTERVAL 300
 #endif
     [self _LPN_stopRefreshTimer];
     [self _LPN_getAndParse:nil];
@@ -240,22 +242,28 @@ enum {
     [sender setEnabled:NO];
     [self performSelector:@selector(enableRefreshButton:)
                withObject:sender
-               afterDelay:REENABLE_INTERVAL];
+               afterDelay:RE_ENABLE_INTERVAL];
 }
 
 
 static const CGFloat refreshIntervalMin = 10;
 - (IBAction)changeRefreshInterval:(NSTextFieldCell *)sender {
-    if ([sender integerValue] == _refreshTimeInterval) {
+    NSUserDefaults * df = [NSUserDefaults standardUserDefaults];
+    NSInteger senderContentInteger = [sender integerValue];
+    NSInteger dfContentInteger = [df integerForKey:kLPNUserDefaultsRefreshIntervalKey];
+    
+    if (senderContentInteger == dfContentInteger) {
+//    if ([sender integerValue] == _refreshTimeInterval) {
         return;
     }
     
-    if ([sender integerValue] < refreshIntervalMin) {
+    if (senderContentInteger < dfContentInteger) {
+//    if ([sender integerValue] < refreshIntervalMin) {
         [sender setIntegerValue:refreshIntervalMin];
-        _refreshTimeInterval = refreshIntervalMin;
+        [df setInteger:refreshIntervalMin forKey:kLPNUserDefaultsRefreshIntervalKey];
     }
     else {
-        _refreshTimeInterval = [sender doubleValue];
+        [df setInteger:senderContentInteger forKey:kLPNUserDefaultsRefreshIntervalKey];
     }
     
     [self _LPN_stopRefreshTimer];
@@ -272,19 +280,18 @@ static const CGFloat refreshIntervalMin = 10;
  *========================================================================================*/
 
 - (IBAction)changeLPNDisplayDuration:(NSTextField *)sender {
-    static const CGFloat LPNDisplayTimeIntervalMin = 1;
-    
-    if ( _LPNDisplayTimeInterval == [sender doubleValue] ) {
+    static const CGFloat displayTimeIntervalMin = 1;
+    NSUserDefaults * df = [NSUserDefaults standardUserDefaults];
+    CGFloat senderContentDouble = [sender doubleValue];
+    CGFloat dfContentDouble = [df doubleForKey:kLPNUserDefaultsNoticeDurationKey];
+    if (senderContentDouble == dfContentDouble) {
         return;
     }
     
-    if ( [sender doubleValue] <= 0 ) {
-        _LPNDisplayTimeInterval = LPNDisplayTimeIntervalMin;
-        [sender setIntValue:LPNDisplayTimeIntervalMin];
+    else if ( senderContentDouble <= dfContentDouble) {
+        [df setDouble:displayTimeIntervalMin forKey:kLPNUserDefaultsNoticeDurationKey];
     }
-    else {
-        _LPNDisplayTimeInterval = [sender doubleValue];
-    }
+    
 }
 
 
@@ -317,6 +324,7 @@ static const CGFloat refreshIntervalMin = 10;
         [df setValue:filePath forKey:kLPNNoticeSoundPath];
     }
 }
+
 
 /* livelist tableview delegate */
 - (void)tableView:(NSTableView *)tableView
@@ -564,12 +572,12 @@ static const CGFloat refreshIntervalMin = 10;
 
 
 - (void)_LPN_startRefreshTimer {
-    if (_refreshTimeInterval < refreshIntervalMin) _refreshTimeInterval = refreshIntervalMin;
     NSTimeInterval interval;
+    NSUserDefaults * df = [NSUserDefaults standardUserDefaults];
 #ifdef DEBUG
-    interval = _refreshTimeInterval;
+    interval = [df doubleForKey:kLPNUserDefaultsRefreshIntervalKey];
 #else
-    interval = (_refreshTimeInterval*60.0);
+    interval = ([df doubleForKey:kLPNUserDefaultsRefreshIntervalKey]*60.0);
 #endif
     
     _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:interval
@@ -580,7 +588,7 @@ static const CGFloat refreshIntervalMin = 10;
 
 
 - (void)_LPN_getAndParse:(NSTimer*)timer {
-    _refreshTimeIntervalCount = 0;
+    refreshTimeIntervalManipulator(refreshTimeIntervalCountReset);
     if ([_displayRemainTimeIntervalTimer isValid]) {
         [_displayRemainTimeIntervalTimer invalidate];
         _displayRemainTimeIntervalTimer = nil;
@@ -630,10 +638,30 @@ static const CGFloat refreshIntervalMin = 10;
  *  display remained time interval
  *
  *========================================================================================*/
+NSUInteger refreshTimeIntervalManipulator(LPNRefreshTimeIntervalManipulateCommad command) {
+    static NSUInteger counter = 0;
+    switch (command) {
+        case refreshTimeIntervalCountReset:
+            counter = 0;
+            break;
+        
+        case refreshTimeIntervalCountIncrement:
+            counter++;
+            break;
+            
+        default:
+            break;
+    }
+    
+    return counter;
+}
+
+
 - (void)_LPN_cahngeRemainTimeInterval:(NSTimer *)timer {
     unsigned int min,sec;
     {
-        unsigned int seconds = _refreshTimeInterval*60 - (++_refreshTimeIntervalCount);
+        NSUserDefaults * df = [NSUserDefaults standardUserDefaults];
+        unsigned int seconds = [df doubleForKey:kLPNUserDefaultsRefreshIntervalKey]*60 - refreshTimeIntervalManipulator(refreshTimeIntervalCountIncrement);
         min = seconds/60;
         sec = seconds%60;
     }
@@ -660,6 +688,9 @@ static const CGFloat refreshIntervalMin = 10;
     ;
 }
 
+
+
+
 #pragma mark -
 #pragma mark Pop Up Notice Window
 /*========================================================================================
@@ -682,7 +713,7 @@ static const CGFloat refreshIntervalMin = 10;
     }
     
     LPNWindowController * win = [[LPNWindowController alloc] initWithLPNAttribute:entry];
-    [win showWindowForDuration:_LPNDisplayTimeInterval];
+    [win showWindowForDuration:[df doubleForKey:kLPNUserDefaultsNoticeDurationKey]];
 }
 
 

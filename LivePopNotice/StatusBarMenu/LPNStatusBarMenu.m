@@ -22,7 +22,7 @@
         
         
         /* show main window */{
-            NSMenuItem * item = [[NSMenuItem alloc] init];{
+            NSMenuItem * item = [[[NSMenuItem alloc] init] autorelease];{
                 [item setTitle:NSLocalizedString(@"LPNStatusMenuShowMainWindow", @"")];
                 if ([delegate respondsToSelector:@selector(openMainWindow:)]) {
                     [item setTarget:delegate];
@@ -31,11 +31,11 @@
                 [item setKeyEquivalent:@""];
             }
             [item setTag:LPNStatusBarTabShowWindow];
-            [self addItem:[item autorelease]];
+            [self addItem:item];
         }
         
         /* jump to live page */{
-            NSMenuItem * item = [[NSMenuItem alloc] init];{
+            NSMenuItem * item = [[[NSMenuItem alloc] init] autorelease];{
                 [item setTitle:NSLocalizedString(@"LPNStatusMenuJumpToLivePage", @"")];
                 [item setAction:nil];
                 [item setKeyEquivalent:@""];
@@ -45,7 +45,7 @@
                 }
                 [item setSubmenu:submenu];
             }
-            [self addItem:[item autorelease]];
+            [self addItem:item];
         }
         
         
@@ -55,24 +55,24 @@
         
         
         /* Cavetube */{
-            NSMenuItem * item = [[NSMenuItem alloc] init];{
+            NSMenuItem * item = [[[NSMenuItem alloc] init] autorelease];{
                 [item setTitle:@"CaveTube"];
                 [item setAction:nil];
                 [item setKeyEquivalent:@""];
             }
             [item setTag:LPNStatusBarTagCaveTube];
-            [self addItem:[item autorelease]];
+            [self addItem:item];
         }
         
         
         /* livetube */{
-            NSMenuItem * item = [[NSMenuItem alloc] init];{
+            NSMenuItem * item = [[[NSMenuItem alloc] init] autorelease];{
                 [item setTitle:@"Livetube"];
                 [item setAction:nil];
                 [item setKeyEquivalent:@""];
             }
             [item setTag:LPNStatusBarTagLivetube];
-            [self addItem:[item autorelease]];
+            [self addItem:item];
         }
         
         /* separator */{
@@ -81,26 +81,26 @@
         
         
         /* about￼ */{
-            NSMenuItem * item = [[NSMenuItem alloc] init];{
+            NSMenuItem * item = [[[NSMenuItem alloc] init] autorelease];{
                 [item setTitle:NSLocalizedString(@"LPNStatusMenuAboutLivePopNOtice", @"")];
                 [item setTarget:NSApp];
                 [item setAction:@selector(orderFrontStandardAboutPanel:)];
                 [item setKeyEquivalent:@""];
             }
             [item setTag:LPNStatusBarTabAbout];
-            [self addItem:[item autorelease]];
+            [self addItem:item];
         }
         
         
         /* help￼ */{
-            NSMenuItem * item = [[NSMenuItem alloc] init];{
+            NSMenuItem * item = [[[NSMenuItem alloc] init] autorelease];{
                 [item setTitle:NSLocalizedString(@"LPNStatusMenuHelp", @"")];
                 [item setTarget:NSApp];
                 [item setAction:@selector(showHelp:)];
                 [item setKeyEquivalent:@""];
             }
             [item setTag:LPNStatusBarTabHelp];
-            [self addItem:[item autorelease]];
+            [self addItem:item];
         }
         
         
@@ -110,14 +110,14 @@
         
         
         /* quit￼ */{
-            NSMenuItem * item = [[NSMenuItem alloc] init];{
+            NSMenuItem * item = [[[NSMenuItem alloc] init] autorelease];{
                 [item setTitle:NSLocalizedString(@"LPNStatusMenuQuit", @"")];
                 [item setTarget:NSApp];
                 [item setAction:@selector(terminate:)];
                 [item setKeyEquivalent:@""];
             }
             [item setTag:LPNStatusBarTabQuit];
-            [self addItem:[item autorelease]];
+            [self addItem:item];
         }
     }
     
@@ -134,9 +134,14 @@
     
     [submenu removeAllItems];
     for (NSString * title in livelistTitles) {
-        NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:title action:@selector(clickedStatusBarLiveListSubMenu:) keyEquivalent:@""];
-        [item setTarget:_actionDelegate];
-        [submenu addItem:[item autorelease]];
+        NSMenuItem * item = [[[NSMenuItem alloc] init] autorelease];
+        [item setTitle:title];
+        [item setKeyEquivalent:@""];
+        if ([_actionDelegate respondsToSelector:@selector(clickedStatusBarLiveListSubMenu:)]) {
+            [item setTarget:_actionDelegate];
+            [item setAction:@selector(clickedStatusBarLiveListSubMenu:)];
+        }
+        [submenu addItem:item];
     }
 }
 

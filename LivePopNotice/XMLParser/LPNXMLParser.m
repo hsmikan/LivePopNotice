@@ -31,17 +31,17 @@ static NSString * const kLTFeedURLString    =   @"http://livetube.cc/index.live.
 
 typedef enum {
     kFeedElementNone        =   0,
-    kFeedElementEntry       =   1 << 0,
-    kFeedElementTitle       =   1 << 1,
-    kFeedElementAuthor      =   1 << 2,
-    kFeedElementName        =   1 << 3,
-    kFeedElementID          =   1 << 4,
-    kFeedElementSummary     =   1 << 5,
-    kFeedElementContent     =   1 << 6,
-    kFeedElementUpdated     =   1 << 7,
-    kFeedElementPublished   =   1 << 8,
-    kFeedElementLiveID      =   1 << 9,
-    kFeedElementTag      =   1 << 10,
+    kFeedElementEntry       =   1UL << 0,
+    kFeedElementTitle       =   1UL << 1,
+    kFeedElementAuthor      =   1UL << 2,
+    kFeedElementName        =   1UL << 3,
+    kFeedElementID          =   1UL << 4,
+    kFeedElementSummary     =   1UL << 5,
+    kFeedElementContent     =   1UL << 6,
+    kFeedElementUpdated     =   1UL << 7,
+    kFeedElementPublished   =   1UL << 8,
+    kFeedElementLiveID      =   1UL << 9,
+    kFeedElementTag         =   1UL << 10,
 } elementFlag;
 
 

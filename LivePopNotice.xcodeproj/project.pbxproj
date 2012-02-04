@@ -15,7 +15,6 @@
 		923ECA0914BDE0CB00A5064B /* LPNWindowMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 923ECA0814BDE0CA00A5064B /* LPNWindowMap.m */; };
 		923ECA1014BDF0FC00A5064B /* LPNWindowSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 923ECA0F14BDF0FB00A5064B /* LPNWindowSize.m */; };
 		92412E9614BBF0440084A182 /* LPNPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 92412E9514BBF0440084A182 /* LPNPanel.m */; };
-		92412E9A14BBF64C0084A182 /* LPN.CSS in Resources */ = {isa = PBXBuildFile; fileRef = 92412E9914BBF64C0084A182 /* LPN.CSS */; };
 		92412EA014BC01A50084A182 /* LPNView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92412E9F14BC01A50084A182 /* LPNView.m */; };
 		9256CF2114BE616D008502D4 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9256CF2014BE616D008502D4 /* README.txt */; };
 		9271BD5B14B883E30021F4BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9271BD5A14B883E30021F4BA /* Cocoa.framework */; };
@@ -39,6 +38,7 @@
 		92A3490914BC2ED8003FD04E /* FilteringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3490714BC2ED8003FD04E /* FilteringViewController.m */; };
 		92A3491614BC61F5003FD04E /* FilteringTypePBCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3491714BC61F5003FD04E /* FilteringTypePBCell.m */; };
 		92A3491A14BC64FB003FD04E /* FilteringViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A3491814BC64FA003FD04E /* FilteringViewController.xib */; };
+		92DCD44514D5861F00B73787 /* LPN.CSS in Resources */ = {isa = PBXBuildFile; fileRef = 92DCD44414D5861F00B73787 /* LPN.CSS */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,7 +58,6 @@
 		923ECA0F14BDF0FB00A5064B /* LPNWindowSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNWindowSize.m; path = Constants/LPNWindowSize.m; sourceTree = "<group>"; };
 		92412E9414BBF0440084A182 /* LPNPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNPanel.h; path = LPNWindow/LPNPanel/LPNPanel.h; sourceTree = "<group>"; };
 		92412E9514BBF0440084A182 /* LPNPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNPanel.m; path = LPNWindow/LPNPanel/LPNPanel.m; sourceTree = "<group>"; };
-		92412E9914BBF64C0084A182 /* LPN.CSS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = LPN.CSS; path = LPNWindow/LPNPanel/LPN.CSS; sourceTree = "<group>"; };
 		92412E9E14BC01A50084A182 /* LPNView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPNView.h; path = LPNWindow/LPNPanel/LPNView.h; sourceTree = "<group>"; };
 		92412E9F14BC01A50084A182 /* LPNView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPNView.m; path = LPNWindow/LPNPanel/LPNView.m; sourceTree = "<group>"; };
 		9256CF2014BE616D008502D4 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
@@ -105,6 +104,7 @@
 		92A3491914BC64FB003FD04E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = FilteringList/en.lproj/FilteringViewController.xib; sourceTree = "<group>"; };
 		92C35BA914BDFE5F000AA447 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ja; path = ja.lproj/Credits.rtf; sourceTree = "<group>"; };
 		92C35BAA14BDFF58000AA447 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		92DCD44414D5861F00B73787 /* LPN.CSS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = LPN.CSS; path = LPNWindow/LPNPanel/LPN.CSS; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +146,7 @@
 				92412E9514BBF0440084A182 /* LPNPanel.m */,
 				92412E9E14BC01A50084A182 /* LPNView.h */,
 				92412E9F14BC01A50084A182 /* LPNView.m */,
-				92412E9914BBF64C0084A182 /* LPN.CSS */,
+				92DCD44414D5861F00B73787 /* LPN.CSS */,
 			);
 			name = LPNPanel;
 			sourceTree = "<group>";
@@ -364,13 +364,13 @@
 				9271BD6B14B883E30021F4BA /* Credits.rtf in Resources */,
 				9271BD7114B883E40021F4BA /* MainMenu.xib in Resources */,
 				9271BD7C14B890950021F4BA /* LPNGraphicalUserInterfaceDefaults.plist in Resources */,
-				92412E9A14BBF64C0084A182 /* LPN.CSS in Resources */,
 				92A3491A14BC64FB003FD04E /* FilteringViewController.xib in Resources */,
 				923EC9FB14BDBCAE00A5064B /* Localizable.strings in Resources */,
 				92A1BA6F14BE43EB002EE92E /* icon2.tiff in Resources */,
 				92A1BA7214BE4E04002EE92E /* README.rtf in Resources */,
 				9256CF2114BE616D008502D4 /* README.txt in Resources */,
 				9228458314BF4F8000E3F01D /* icon.icns in Resources */,
+				92DCD44514D5861F00B73787 /* LPN.CSS in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
