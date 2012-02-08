@@ -1,4 +1,6 @@
-LivePopNotice
+LivePopNotice  Copyright (c) 2012 PPixy
+*****************
+
 
 System Requirement
 	Mac OS X 10.5 and Later. ( Recommended 10.6 and Later )
@@ -29,8 +31,9 @@ Links
 
 
 
-LivePopNotice's License
+License
 
+LivePopNotice
 
 The MIT License
 

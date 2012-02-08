@@ -84,36 +84,33 @@
 
 - (NSString *)createLPNHTMLString:(NSDictionary *)entry
 {
-    NSMutableString * LPNHTML = [NSMutableString string];
-#define ELEMENT(X) if ([(X) length]) [LPNHTML appendString:(X)];
-    ELEMENT(@"<html>"){
-        ELEMENT(@"<head>"){
-            ELEMENT(@"<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>")
-            ELEMENT(@"<link rel='stylesheet' href='Contents/Resources/LPN.CSS' type='text/css'>")
-        }ELEMENT(@"</head>")
+#define CHECK(X) ( (X) ? (X) : @"" )
+    return
+    [NSString stringWithFormat:
+     @"<html>"
+     "<head>"
+     "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>"
+     "<link rel='stylesheet' href='Contents/Resources/LPN.CSS' type='text/css'>"
+     "</head>"
+     
+     "<body>"
+      "<div id='body'>"
+       "<div id='title'>"
+        "<a href='%@' target='_blank'>%@</a>"
+        //    [entry URL]        [entry title]
+       "</div>"
+      
+       "<div id='author'>%@&nbsp;&nbsp;さん</div>"
+        //         [entry authorname]
         
-        ELEMENT(@"<body>"){
-            ELEMENT(@"<div id='body'>"){
-                ELEMENT(@"<div id='title'>"){
-                    ELEMENT(@"<a href='")ELEMENT([entry URL])ELEMENT(@"' target='_blank'>"){
-                        ELEMENT([entry title])
-                    }ELEMENT(@"</a>")
-                }ELEMENT(@"</div>")
-                
-                ELEMENT(@"<div id='author'>"){
-                    ELEMENT([entry authorName])ELEMENT(@"&nbsp;&nbsp;さん")
-                }ELEMENT(@"</div>")
-                
-                ELEMENT(@"<div id='summary'>"){
-                    ELEMENT([entry summary])
-                }ELEMENT(@"</div>")
-                
-            }ELEMENT(@"</div>")
-        }ELEMENT(@"</body>")
-    }ELEMENT(@"</html>")
-#undef ELEMENT
-    
-    return LPNHTML;
+       "<div id='summary'>%@</div>"
+       //           [entry summary]
+     
+      "</div>"
+     "</body>"
+     "</html>"
+     ,[entry URL],[entry title],[entry authorName],[entry summary]];
+#undef CHECK
 }
 
 @end

@@ -23,14 +23,19 @@
 
 
 @interface LPNAppDelegate()
+
 - (void)_LPN_stopRefreshTimer;
 - (void)_LPN_startRefreshTimer;
+
 - (void)_LPN_getAndParse:(NSTimer*)timer;
+
 - (void)_LPN_cahngeRemainTimeInterval:(NSTimer*)timer;
+
 - (void)_LPN_popUpNewEntry:(NSDictionary *)entry;
 
+
 enum {
-    refreshTimeIntervalCountReset = 'rest',
+    refreshTimeIntervalCountReset     = 'rest',
     refreshTimeIntervalCountIncrement = 'incl',
 };
 typedef int LPNRefreshTimeIntervalManipulateCommad;
@@ -39,11 +44,15 @@ NSUInteger refreshTimeIntervalManipulator(LPNRefreshTimeIntervalManipulateCommad
 
 
 
+
 @implementation LPNAppDelegate
 
-@synthesize displayIntervalTimeUntilNextRefresh = _displayIntervalTimeUntilNextRefresh;
 @synthesize window = _window;
+
+@synthesize displayIntervalTimeUntilNextRefresh = _displayIntervalTimeUntilNextRefresh;
+
 @synthesize mainTab = _mainTab;
+
 @synthesize liveListController = _liveListController;
 @synthesize checkedServiceMTRX = _checkedServiceMTRX;
 @synthesize displayInLIveCountTF = _displayInLIveCountTF;
@@ -246,19 +255,18 @@ enum {
 }
 
 
-static const CGFloat refreshIntervalMin = 10;
 - (IBAction)changeRefreshInterval:(NSTextFieldCell *)sender {
+    static const CGFloat refreshIntervalMin = 10;
+    
     NSUserDefaults * df = [NSUserDefaults standardUserDefaults];
     NSInteger senderContentInteger = [sender integerValue];
     NSInteger dfContentInteger = [df integerForKey:kLPNUserDefaultsRefreshIntervalKey];
     
     if (senderContentInteger == dfContentInteger) {
-//    if ([sender integerValue] == _refreshTimeInterval) {
         return;
     }
     
     if (senderContentInteger < dfContentInteger) {
-//    if ([sender integerValue] < refreshIntervalMin) {
         [sender setIntegerValue:refreshIntervalMin];
         [df setInteger:refreshIntervalMin forKey:kLPNUserDefaultsRefreshIntervalKey];
     }
@@ -387,7 +395,6 @@ static const CGFloat refreshIntervalMin = 10;
 
 - (void)addToPopUpNoticeList:(id)sender {
     
-    // TODO: detemine default index nspopupbutton shows 
     NSDictionary * dic = [[_liveListController selectedObjects] objectAtIndex:0];
     [_willAddedStringToNoticeListTF setStringValue:[dic authorName]];
     

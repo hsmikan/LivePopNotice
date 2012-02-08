@@ -21,5 +21,5 @@
 @interface LPNWindowMap : NSObject
 + (LPNWindowMap *)sharedMap;
 - (NSDictionary *)availableDisplayInfo;
-- (void)unenableDisplayPointAtIndex:(NSUInteger)index;
+- (void)enableDisplayPointAtIndex:(NSUInteger)index;
 @end

@@ -17,6 +17,7 @@ static NSString * const kLPNMapIsDisplayKey    =   @"LPNIsDisplay";
 static NSString * const kLPNMapNumberKey       =   @"LPNMapNumber";
 
 
+
 @implementation LPNMapDictionary(LPNMap)
 - (NSPoint)mapPoint {
     return [[self objectForKey:kLPNMapPointKey] pointValue];
@@ -35,6 +36,10 @@ static NSString * const kLPNMapNumberKey       =   @"LPNMapNumber";
 
 
 
+
+
+
+
 #define LPNMapMutableDictionary NSMutableDictionary
 @interface LPNMapMutableDictionary(LPNMap)
 + (LPNMapMutableDictionary *)LPNMapDictionaryWithPoint:(NSPoint)point;
@@ -42,6 +47,7 @@ static NSString * const kLPNMapNumberKey       =   @"LPNMapNumber";
 - (void)setIsDisplay:(BOOL)isDisplay;
 - (void)setDisplayNumber:(NSUInteger)number;
 @end
+
 
 
 @implementation LPNMapMutableDictionary(LPNMap)
@@ -69,9 +75,15 @@ static NSString * const kLPNMapNumberKey       =   @"LPNMapNumber";
 
 
 
+
+
+
 @interface LPNWindowMap()
 + (NSArray *)popUpPositionMap;
 @end
+
+
+
 
 @implementation LPNWindowMap
 
@@ -160,7 +172,7 @@ static NSArray * _map = nil;
     return ret;
 }
 
-- (void)unenableDisplayPointAtIndex:(NSUInteger)index {
+- (void)enableDisplayPointAtIndex:(NSUInteger)index {
     if (_map) {
         [[_map objectAtIndex:index] setIsDisplay:NO];
     }

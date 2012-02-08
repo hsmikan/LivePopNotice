@@ -19,18 +19,14 @@
 
 @class WebView;
 
-@interface LPNAppDelegate : NSObject <NSApplicationDelegate,LPNXMLParserDelegate,LPNLiveListTableViewContextMenuDelegate,LPNStatuBarMenuActionDelegate,NSTableViewDelegate> {
-    
-    /* ------ */
-    /* Member */
-    /* ------ */
-    
-    /* refreshing feed */
+@interface LPNAppDelegate : NSObject <NSApplicationDelegate,LPNXMLParserDelegate,LPNLiveListTableViewContextMenuDelegate,LPNStatuBarMenuActionDelegate,NSTableViewDelegate>
+{
+    /* refresh timer */
     NSTimer * _refreshTimer;
-    
     NSTimer * _displayRemainTimeIntervalTimer;
     
-    /* got liveIDs from feed */
+    
+    /* liveIDs container */
     NSArray * _currentFeededLiveIDs;
     NSMutableArray * _currentSubFeededLiveIDs;
     
@@ -40,27 +36,28 @@
     /* View & Related Outlet */
     /* --------------------- */
     
-    /* status menu */
+    /* status bar */
     NSStatusItem * _statusBarItem;
-    
-    /* tool bar */
-    NSTextField *_displayIntervalTimeUntilNextRefresh;
     
     /* main window */
     NSWindow * _window;
     
+    /* tool bar */
+    NSTextField *_displayIntervalTimeUntilNextRefresh;
+    
     /* main tabView */
     NSTabView *_mainTab;
-    /* liveList Tab Item */
-    NSArrayController * _liveListController;// TODO: live list viewer
-    NSMatrix *_checkedServiceMTRX;
-    NSTextField *_displayInLIveCountTF;
-    NSWindow *_sheetWindow;
-    NSPopUpButton *_filteringTypeInSheetPB;
-    NSTextField *_willAddedStringToNoticeListTF;
-    /* Pop Up Notice List Tab Item */
+    // liveList Tab Item
+    //    TODO: live list viewer
+    NSArrayController * _liveListController;
+    NSMatrix      * _checkedServiceMTRX;
+    NSTextField   * _displayInLIveCountTF;
+    NSWindow      * _sheetWindow;
+    NSPopUpButton * _filteringTypeInSheetPB;
+    NSTextField   * _willAddedStringToNoticeListTF;
+    // Pop Up Notice List Tab Item
     FilteringViewController * _LPNListController;
-    /* Ignore List Tab Item */
+    // Ignore List Tab Item
     FilteringViewController * _LPNIgnoreListController;
     
 }
@@ -97,9 +94,6 @@
 - (IBAction)showWillAddedStringToNoticeList:(NSPopUpButton *)sender;
 - (IBAction)sheetEndWithAdding:(NSButton *)sender;
 - (IBAction)sheetEnd:(id)sender;
-// context menu action
-- (void)openLivePage:(id)sender;
-- (void)addToPopUpNoticeList:(id)sender;
 
 
 - (IBAction)changeFeedStateOfCaveTube:(NSButtonCell *)sender;

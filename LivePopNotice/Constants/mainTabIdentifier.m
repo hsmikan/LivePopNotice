@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 PPixy. All rights reserved.
 //
 
+#import "mainTabIdentifier.h"
 
 EXTERNED NSString * const kLiveListTabIdentifier     =   @"liveListTab";
 EXTERNED NSString * const kPopUpTabIdentifier        =   @"popUpListTab";

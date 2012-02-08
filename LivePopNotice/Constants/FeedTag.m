@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 PPixy. All rights reserved.
 //
 
+#import "FeedTag.h"
+
 EXTERNED NSString * const kFeedElementNameEntry     =   @"entry";
 EXTERNED NSString * const kFeedElementNameTitle     =   @"title";
 EXTERNED NSString * const kFeedElementNameAuthor    =   @"author";

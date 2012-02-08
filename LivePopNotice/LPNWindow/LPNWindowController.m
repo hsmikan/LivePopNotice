@@ -80,7 +80,7 @@
 
 - (void)windowWillClose:(NSNotification *)notification {
     LPNWindowMap * map = [LPNWindowMap sharedMap];
-    [map unenableDisplayPointAtIndex:_mapNumber];
+    [map enableDisplayPointAtIndex:_mapNumber];
     [self autorelease];
 }
 
@@ -112,12 +112,21 @@
 }
 
 
+
+
+#pragma mark -
+#pragma mark mouse event
+/*========================================================================================
+ *
+ *  mouse event
+ *
+ *========================================================================================*/
 - (void)mouseEntered:(NSEvent *)theEvent {
     static const CGFloat exposeWidth    =   14.0;//kLPNWidth/20
     static const CGFloat exposeHeight   =   5.95;//kLPNHeightIncludedTitlbar/20
     static const CGFloat exposeX        =   7.0; //exposeWidth/2
-    static const CGFloat exposeY        =   2.975; //exposeHeight/2
-    
+    static const CGFloat exposeY        =   2.975; //exposeHeight/2    
+
     NSWindow * win = [self window];
     
     [win orderFront:nil];
@@ -160,7 +169,6 @@
                    newFrameName:(NSString *)frameName
                decisionListener:(id)listener
 {
-    /* TODO: graphically notice that the link is clicked */
 	NSURL *url = [[request URL] absoluteURL];
 	[[NSWorkspace sharedWorkspace] openURL:url];
 }
