@@ -147,8 +147,8 @@ typedef enum {
  *========================================================================================*/
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
-    if ([_delegate respondsToSelector:@selector(LPNXMLParserDidStartDocyment)]) {
-        [_delegate LPNXMLParserDidStartDocyment];
+    if ([_delegate respondsToSelector:@selector(LPNXMLParserDidStartDocument)]) {
+        [_delegate LPNXMLParserDidStartDocument];
     }
 }
 
@@ -252,18 +252,16 @@ didStartElement:(NSString *)elementName
 
 
 
-
-NSUInteger useElementFlags
-=
-kFeedElementName | kFeedElementTitle | kFeedElementID
-| kFeedElementPublished | kFeedElementLiveID | kFeedElementSummary;
-
-
 - (void)parser:(NSXMLParser *)parser
  didEndElement:(NSString *)elementName
   namespaceURI:(NSString *)namespaceURI
  qualifiedName:(NSString *)qName
 {
+    NSUInteger useElementFlags
+    =
+    kFeedElementName      | kFeedElementTitle  | kFeedElementID |
+    kFeedElementPublished | kFeedElementLiveID | kFeedElementSummary;
+    
     NSString * text;
     if ( _feedElementFlag &  useElementFlags )
     {

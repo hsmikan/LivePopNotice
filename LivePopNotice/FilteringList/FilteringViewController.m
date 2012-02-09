@@ -148,4 +148,45 @@
 
 
 
+
+#pragma mark -
+#pragma mark tableview delegate
+/*========================================================================================
+ *
+ *  tableview delegate
+ *
+ *========================================================================================*/
+
+// ???:
+// NSArrayControllerを使った場合
+// IBでセルを編集可能に設定しても機能しない
+//
+- (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+    if ([[tableColumn identifier] isEqualToString:@"SearchColumn"]) {
+        if ([cell isEditable]) ;
+        else {
+            [cell setEditable:YES];
+        }
+    }
+}
+
+
+#pragma mark -
+#pragma mark tableview datasource
+/*========================================================================================
+ *
+ *  tableview datasource
+ *
+ *========================================================================================*/
+
+// ???:
+// NSArrayControllerを使った場合
+// NSTableViewから編集しても、内容の更新はされないようだ
+//
+- (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+    if ([[tableColumn identifier] isEqualToString:@"SearchColumn"]) {
+        [[[_filteringListController arrangedObjects] objectAtIndex:row] setObject:object forKey:kFilteringStringIdentifier];
+    }
+}
+
 @end

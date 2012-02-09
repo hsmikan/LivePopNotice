@@ -34,11 +34,10 @@
 - (void)_LPN_popUpNewEntry:(NSDictionary *)entry;
 
 
-enum {
+typedef enum {
     refreshTimeIntervalCountReset     = 'rest',
     refreshTimeIntervalCountIncrement = 'incl',
-};
-typedef int LPNRefreshTimeIntervalManipulateCommad;
+} LPNRefreshTimeIntervalManipulateCommad;
 NSUInteger refreshTimeIntervalManipulator(LPNRefreshTimeIntervalManipulateCommad command);
 @end
 
@@ -241,9 +240,9 @@ enum {
 
 - (IBAction)refreshLiveList:(NSToolbarItem *)sender {
 #ifdef DEBUG
-#define RE_ENABLE_INTERVAL 5
+#define RE_START_INTERVAL 5
 #else
-#define RE_ENABLE_INTERVAL 300
+#define RE_START_INTERVAL 300
 #endif
     [self _LPN_stopRefreshTimer];
     [self _LPN_getAndParse:nil];
@@ -251,7 +250,7 @@ enum {
     [sender setEnabled:NO];
     [self performSelector:@selector(enableRefreshButton:)
                withObject:sender
-               afterDelay:RE_ENABLE_INTERVAL];
+               afterDelay:RE_START_INTERVAL];
 }
 
 
@@ -507,7 +506,7 @@ enum {
  *
  *========================================================================================*/
 
-- (void)LPNXMLParserDidStartDocyment {
+- (void)LPNXMLParserDidStartDocument {
 }
 
 - (void)LPNXMLParserDidEndDocument {
@@ -523,7 +522,8 @@ enum {
     // update livelist in status menu
     NSMutableArray * livetitles = [NSMutableArray array];
     for (NSDictionary * entry in [_liveListController content]) {
-        [livetitles addObject:[entry title]];
+        NSString * livetitle = [NSString stringWithFormat:@"%@\t|\t%@",[entry authorName],[entry title]];
+        [livetitles addObject:livetitle];
     }
     LPNStatusBarMenu * statubarMenu = (LPNStatusBarMenu *)[_statusBarItem menu];
     [statubarMenu updateLiveList:livetitles];

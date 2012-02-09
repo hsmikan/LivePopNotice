@@ -40,6 +40,13 @@
                 [item setAction:nil];
                 [item setKeyEquivalent:@""];
                 
+                //
+                // Live list submenu
+                //  in order to update this submenu
+                //  call
+                //      - (void)updateLiveList:(NSArray *)livelistTitles
+                //
+                //
                 NSMenu * submenu;{
                     submenu = [[[NSMenu alloc] initWithTitle:@"livelist"] autorelease];
                 }
@@ -95,8 +102,10 @@
         /* help￼ */{
             NSMenuItem * item = [[[NSMenuItem alloc] init] autorelease];{
                 [item setTitle:NSLocalizedString(@"LPNStatusMenuHelp", @"")];
+                /* TODO: create help page
                 [item setTarget:NSApp];
                 [item setAction:@selector(showHelp:)];
+                 */
                 [item setKeyEquivalent:@""];
             }
             [item setTag:LPNStatusBarTabHelp];

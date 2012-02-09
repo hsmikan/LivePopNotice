@@ -13,7 +13,7 @@
 @protocol LPNXMLParserDelegate <NSObject>
 
 //    @optional
-- (void)LPNXMLParserDidStartDocyment;
+- (void)LPNXMLParserDidStartDocument;
 - (void)LPNXMLParserDidEndDocument;
 - (void)LPNXMLParserDidEndEntry:(NSDictionary *)entry;
 - (void)LPNXMLParserOccuredError;

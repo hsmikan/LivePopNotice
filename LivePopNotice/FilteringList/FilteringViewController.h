@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface FilteringViewController : NSViewController<NSTableViewDelegate> {
+@interface FilteringViewController : NSViewController<NSTableViewDelegate,NSTableViewDataSource> {
     
     NSArrayController * _filteringListController;
     NSString * _filteringListControllerKey;
