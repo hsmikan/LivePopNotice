@@ -22,6 +22,15 @@
 
 
 
+
+#ifdef DEBUG
+#define POPUP_TEST 1
+#endif
+
+
+
+
+
 @interface LPNAppDelegate()
 
 - (void)_LPN_stopRefreshTimer;
@@ -152,7 +161,7 @@ enum {
     [self _LPN_startRefreshTimer];
     
     /* Test */
-#ifdef DEBUG
+#ifdef POPUP_TEST
     [self _LPN_popUpNewEntry:[NSDictionary dictionaryWithObjectsAndKeys:
                               @"Live Title",@"entryDictionaryTitle",
                               @"Author",@"entryDictionaryAuthorName",
@@ -698,22 +707,20 @@ NSUInteger refreshTimeIntervalManipulator(LPNRefreshTimeIntervalManipulateCommad
 }
 
 
-- (BOOL)_isValidPopUpNotice:(LPNEntryDictionary*)entry {
+- (BOOL)_canPopUpWithEntry:(LPNEntryDictionary*)entry {// LPNEntryDictionary == NSDictionary
     return
-#ifndef DEBUG
+#ifndef POPUP_TEST
     /* is firsrt load */
-    ( ![_currentFeededLiveIDs count] )
+    ( [_currentFeededLiveIDs count] )
     
-    ||
-    
+    &&
     /* is new live */
-    ( [_currentFeededLiveIDs containsObject:[entry liveID]] )
+    ( ![_currentFeededLiveIDs containsObject:[entry liveID]] )
     
-    ||
-    
+    &&
 #endif
-    /* is new entry contained in notice list */
-    ( ![_LPNListController hasEntry:entry] )
+    /* is entry contained in notice list */
+    ( [_LPNListController hasEntry:entry] )
     ;
 }
 
@@ -728,9 +735,11 @@ NSUInteger refreshTimeIntervalManipulator(LPNRefreshTimeIntervalManipulateCommad
  *
  *========================================================================================*/
 - (void)_LPN_popUpNewEntry:(LPNEntryDictionary *)entry {
-    if ([self _isValidPopUpNotice:entry]){
+    if (![self _canPopUpWithEntry:entry]){
         return;
     }
+    
+    
     NSUserDefaults * df = [NSUserDefaults standardUserDefaults];
     if ( [df boolForKey:kLPNIsPlayNoticeSound] ) {
         NSSound * snd;

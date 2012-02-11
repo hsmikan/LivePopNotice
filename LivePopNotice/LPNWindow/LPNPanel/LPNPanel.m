@@ -21,7 +21,7 @@
     if (self) {
         [self setDelegate:delegate];
         [self setReleasedWhenClosed:YES];
-        [self setRestorable:NO];
+        //[self setRestorable:NO];
         [self setHidesOnDeactivate:NO];
         
         [[self contentView] setAutoresizesSubviews:YES];
