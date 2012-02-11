@@ -252,24 +252,36 @@ didStartElement:(NSString *)elementName
 
 
 
+static const NSUInteger useElementFlags
+=
+kFeedElementName      | kFeedElementTitle  | kFeedElementID      | kFeedElementTag |
+kFeedElementPublished | kFeedElementLiveID | kFeedElementSummary;
+
 - (void)parser:(NSXMLParser *)parser
  didEndElement:(NSString *)elementName
   namespaceURI:(NSString *)namespaceURI
  qualifiedName:(NSString *)qName
 {
-    NSUInteger useElementFlags
-    =
-    kFeedElementName      | kFeedElementTitle  | kFeedElementID |
-    kFeedElementPublished | kFeedElementLiveID | kFeedElementSummary;
+    NSUInteger foundStringsLength = [_currentString length];
     
-    NSString * text;
-    if ( _feedElementFlag &  useElementFlags )
-    {
-        text = [_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString * foundStrings;
+    if ( _feedElementFlag &  useElementFlags ) {
+        //
+        // TODO: trimming strings got from rss
+        //
+        //
+        //
+        if ( CompareString(elementName, kFeedElementNameTag) ) {
+            foundStrings = [NSString stringWithString:_currentString];
+        }
+        else {
+            foundStrings = [_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        }
     }
     else {
-        text = nil;
+        foundStrings = nil;
     }
+    
     
     if      (CompareString(elementName, kFeedElementNameEntry)) {
         
@@ -292,7 +304,7 @@ didStartElement:(NSString *)elementName
         
         UnenableFlag(_feedElementFlag, kFeedElementTitle);
         
-        [_entry setTitle:text];
+        [_entry setTitle:foundStrings];
     }
     
     
@@ -309,7 +321,7 @@ didStartElement:(NSString *)elementName
             
             UnenableFlag(_feedElementFlag, kFeedElementName);
             
-            [_entry setAuthorName:text];
+            [_entry setAuthorName:foundStrings];
         }
     }
     
@@ -319,7 +331,7 @@ didStartElement:(NSString *)elementName
         UnenableFlag(_feedElementFlag, kFeedElementID);
         
         if (_currentSiteMask & feedSiteLiveTube) {
-            [_entry setLiveID:text];
+            [_entry setLiveID:foundStrings];
         }
     }
     
@@ -327,7 +339,7 @@ didStartElement:(NSString *)elementName
     else if (CompareString(elementName, kFeedElementNameSummary)) {
         
         UnenableFlag(_feedElementFlag, kFeedElementSummary);
-        [_entry setSummary:text];
+        [_entry setSummary:foundStrings];
     }
     
     
@@ -352,7 +364,7 @@ didStartElement:(NSString *)elementName
         // FIXME: time calc
         // NSDate
         NSCharacterSet * set = [NSCharacterSet characterSetWithCharactersInString:@"T:Z"];
-        NSArray * timearr = [text componentsSeparatedByCharactersInSet:set];
+        NSArray * timearr = [foundStrings componentsSeparatedByCharactersInSet:set];
         NSMutableString * time = [NSMutableString string];
         NSInteger hour = [[timearr objectAtIndex:1] intValue]+9;
         
@@ -367,7 +379,7 @@ didStartElement:(NSString *)elementName
         UnenableFlag(_feedElementFlag, kFeedElementLiveID);
         
         if (_currentSiteMask & feedSiteCaveTube) {
-            [_entry setLiveID:text];
+            [_entry setLiveID:foundStrings];
         }
     }
     
@@ -375,12 +387,14 @@ didStartElement:(NSString *)elementName
     else if (CompareString(elementName, kFeedElementNameTag)) {
         if (_currentSiteMask & feedSiteCaveTube) {
             UnenableFlag(_feedElementFlag, kFeedElementTag);
-            [_entry setTag:text];
+            [_entry setTag:foundStrings];
         }
     }
-
     
-    [_currentString deleteCharactersInRange:NSMakeRange(0, [_currentString length])];
+    
+    
+    if ( foundStringsLength )
+        [_currentString deleteCharactersInRange:NSMakeRange(0, [_currentString length])];
     
 }
 
@@ -435,7 +449,9 @@ didStartElement:(NSString *)elementName
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     
-    [_currentString appendString:string];
+    if ( _feedElementFlag &  useElementFlags ) {
+        [_currentString appendString:string];
+    }
     
 }
 

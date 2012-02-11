@@ -356,6 +356,28 @@ enum {
 }
 
 
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
+    CGFloat columnWidth = [[tableView tableColumnWithIdentifier:@"liveListTitle"] width];
+    
+    NSSize stringSize;{
+        NSDictionary * entry  = [[_liveListController arrangedObjects] objectAtIndex:row];
+        
+        NSString * title = [entry title];
+        NSDictionary * stringAttr = [NSDictionary dictionaryWithObject:[NSFont systemFontOfSize:13.0] forKey:NSFontAttributeName];
+        
+        stringSize = [title sizeWithAttributes:stringAttr];
+    }
+    
+    
+    if ( stringSize.width <= columnWidth ) {
+        return stringSize.height;
+    }
+    else {
+        return ( stringSize.height * ceil(stringSize.width/columnWidth) );
+    }
+}
+
+
 #pragma mark -
 #pragma mark LPNLiveListTableViewContextMenuDelegate
 /*========================================================================================
