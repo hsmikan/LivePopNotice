@@ -71,17 +71,7 @@
 
 
 
-- (IBAction)addElement:(NSButton *)sender {
-    if ( ![[_filterStringTF stringValue] length] ) {
-        return;
-    }
-    
-    [self addElementWithFilteringType:[_filterTypePB indexOfSelectedItem]
-                      filteringString:[_filterStringTF stringValue]];
-    
-    [_filterStringTF setStringValue:@""];
-}
-- (void)addElementWithFilteringType:(NSInteger)typeIndex filteringString:(NSString *)string {
+- (void)_addElementWithFilteringType:(NSInteger)typeIndex filteringString:(NSString *)string {
     if (!string.length) return;
     NSMutableDictionary * willBeAdded = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                          [NSNumber numberWithInteger:typeIndex],kFilteringTypeIdentifier,
@@ -90,6 +80,30 @@
     if (! [[_filteringListController content] containsObject:willBeAdded] ) {
         [_filteringListController addObject:willBeAdded];
     }
+}
+
+- (void)addElementWithFilteringType:(NSInteger)typeIndex filteringString:(NSString *)string comment:(NSString *)comment {
+    if (!string.length) return;
+    NSMutableDictionary * willBeAdded = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                         [NSNumber numberWithInteger:typeIndex],kFilteringTypeIdentifier,
+                                         string,kFilteringStringIdentifier,
+                                         comment,kFilteringCommentIdentifier,
+                                         nil];
+    if (! [[_filteringListController content] containsObject:willBeAdded] ) {
+        [_filteringListController addObject:willBeAdded];
+    }
+}
+
+
+- (IBAction)addElement:(NSButton *)sender {
+    if ( ![[_filterStringTF stringValue] length] ) {
+        return;
+    }
+    
+    [self _addElementWithFilteringType:[_filterTypePB indexOfSelectedItem]
+                      filteringString:[_filterStringTF stringValue]];
+    
+    [_filterStringTF setStringValue:@""];
 }
 
 
@@ -158,11 +172,12 @@
  *========================================================================================*/
 
 // ???:
-// NSArrayControllerを使った場合
 // IBでセルを編集可能に設定しても機能しない
+// XCode4のバグ？
 //
 - (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    if ([[tableColumn identifier] isEqualToString:@"SearchColumn"]) {
+    NSString * identifier = [tableColumn identifier];
+    if ([identifier isEqualToString:@"SearchColumn"] || [identifier isEqualToString:@"commentColumn"]) {
         if ([cell isEditable]) ;
         else {
             [cell setEditable:YES];
@@ -180,12 +195,15 @@
  *========================================================================================*/
 
 // ???:
-// NSArrayControllerを使った場合
+// XCode4のバグ？
 // NSTableViewから編集しても、内容の更新はされないようだ
 //
 - (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     if ([[tableColumn identifier] isEqualToString:@"SearchColumn"]) {
         [[[_filteringListController arrangedObjects] objectAtIndex:row] setObject:object forKey:kFilteringStringIdentifier];
+    }
+    else if ( [[tableColumn identifier] isEqualToString:@"commentColumn"] ) {
+        [[[_filteringListController arrangedObjects] objectAtIndex:row] setObject:object forKey:kFilteringCommentIdentifier];
     }
 }
 

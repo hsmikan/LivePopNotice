@@ -9,7 +9,7 @@
 
 extern NSString * const kFilteringTypeIdentifier;
 extern NSString * const kFilteringStringIdentifier;
-
+extern NSString * const kFilteringCommentIdentifier;
 enum  {
     kFilteringTypeAuthor    =   0,
     kFilteringTypeLiveTitle =   1,

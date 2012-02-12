@@ -10,3 +10,4 @@
 
 EXTERNED NSString * const kFilteringTypeIdentifier      =   @"LPNFilteringType";
 EXTERNED NSString * const kFilteringStringIdentifier    =   @"LPNFilteringString";
+EXTERNED NSString * const kFilteringCommentIdentifier   =   @"LPNFilteringComment";

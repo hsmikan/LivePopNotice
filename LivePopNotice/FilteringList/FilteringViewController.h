@@ -23,7 +23,7 @@
 - (id)initWithArrayControllerKey:(NSString *)key;
 
 - (IBAction)addElement:(NSButton *)sender;
-- (void)addElementWithFilteringType:(NSInteger)typeIndex filteringString:(NSString *)string;
+- (void)addElementWithFilteringType:(NSInteger)typeIndex filteringString:(NSString *)string comment:(NSString *)comment;
 - (IBAction)removeElements:(id)sender;
 - (BOOL)hasEntry:(NSDictionary *)entry;
 

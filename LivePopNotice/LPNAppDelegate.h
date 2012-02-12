@@ -55,6 +55,7 @@
     NSWindow      * _sheetWindow;
     NSPopUpButton * _filteringTypeInSheetPB;
     NSTextField   * _willAddedStringToNoticeListTF;
+    NSTextField   * _filteringCommentInSheetTF;
     // Pop Up Notice List Tab Item
     FilteringViewController * _LPNListController;
     // Ignore List Tab Item
@@ -74,7 +75,7 @@
 @property (assign) IBOutlet NSWindow *sheetWindow;
 @property (assign) IBOutlet NSPopUpButton *filteringTypeInSheetPB;
 @property (assign) IBOutlet NSTextField *willAddedStringToNoticeListTF;
-
+@property (assign) IBOutlet NSTextField *filteringCommentInSheetTF;
 
 /* tool bar */
 - (IBAction)refreshLiveList:(NSToolbarItem *)sender;

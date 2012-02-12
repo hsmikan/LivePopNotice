@@ -24,7 +24,8 @@
 
 
 #ifdef DEBUG
-#define POPUP_TEST 1
+#define POPUP_TEST_IGNORE_GOT 1
+#define POPUP_TEST_IGNORE_LIST 1
 #endif
 
 
@@ -52,6 +53,9 @@
 - (void)_LPN_cahngeRemainTimeInterval:(NSTimer*)timer;
 
 - (void)_LPN_popUpNewEntry:(NSDictionary *)entry;
+
+
+- (NSDictionary *)_manipulateSwapedAddingEntry:(NSDictionary *)entry command:(int)command;
 
 
 typedef enum {
@@ -82,7 +86,7 @@ enum {
 @synthesize sheetWindow = _sheetWindow;
 @synthesize filteringTypeInSheetPB = _filteringTypeInSheetPB;
 @synthesize willAddedStringToNoticeListTF = _willAddedStringToNoticeListTF;
-
+@synthesize filteringCommentInSheetTF = _filteringCommentInSheetTF;
 
 - (void)dealloc {
     // won't be called
@@ -109,6 +113,8 @@ enum {
     [_statusBarItem release];
     [_LPNListController release];
     [_LPNIgnoreListController release];
+    
+    [self _manipulateSwapedAddingEntry:nil command:'free'];
 }
 
 
@@ -172,14 +178,14 @@ enum {
     [self _LPN_startRefreshTimer];
     
     /* Test */
-#ifdef POPUP_TEST
+    /*
     [self _LPN_popUpNewEntry:[NSDictionary dictionaryWithObjectsAndKeys:
                               @"Live Title",@"entryDictionaryTitle",
                               @"Author",@"entryDictionaryAuthorName",
                               @"Live Summary",@"entryDictionarySummary",
                               @"http://google.co.jp",@"entryDictionaryURL",
                               nil]];
-#endif
+     */
 }
 
 
@@ -432,6 +438,40 @@ enum {
  *
  *========================================================================================*/
 
+enum SwapAddingEntryCommand {
+    SWAP_ADDING_ENTRY_REGISTER  = 'regs',
+    SWAP_ADDING_ENTRY_FREE      = 'free',
+    SWAP_ADDING_ENTRY_GET       = 'fetc',
+};
+- (NSDictionary *)_manipulateSwapedAddingEntry:(NSDictionary *)entry command:(int)command {
+    static NSDictionary * swap = nil;
+    
+    id ret;
+    
+    switch (command) {
+        case SWAP_ADDING_ENTRY_REGISTER:
+            if   (swap == nil) ;
+            else [swap release];
+            swap = [entry copy];
+            ret = nil;
+            break;
+            
+        case SWAP_ADDING_ENTRY_FREE:
+            [swap release];
+            swap = nil;
+            ret = nil;
+            break;
+            
+        case SWAP_ADDING_ENTRY_GET:
+            ret = swap;
+            break;
+            
+        default:
+            break;
+    }
+    
+    return ret;
+}
 - (void)sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     [sheet orderOut:nil];
 }
@@ -439,8 +479,16 @@ enum {
 - (void)addToPopUpNoticeList:(id)sender {
     
     NSDictionary * dic = [[_liveListController selectedObjects] objectAtIndex:0];
+    [self _manipulateSwapedAddingEntry:dic command:SWAP_ADDING_ENTRY_REGISTER];
+    
     [_willAddedStringToNoticeListTF setStringValue:[dic authorName]];
     
+    [_filteringCommentInSheetTF setSelectable:YES];
+    [_filteringCommentInSheetTF becomeFirstResponder];
+    if ([_filteringCommentInSheetTF isEditable]) ;
+    else {
+        [_filteringCommentInSheetTF setEditable:YES];
+    }
     
     [NSApp beginSheet:_sheetWindow
        modalForWindow:_window
@@ -450,7 +498,7 @@ enum {
 }
 
 - (NSString *)getWillBeAddedStringWithTypeIndex:(NSInteger)index {// private like
-    NSDictionary * dic = [[_liveListController selectedObjects] objectAtIndex:0];
+    NSDictionary * dic = [self _manipulateSwapedAddingEntry:nil command:SWAP_ADDING_ENTRY_GET];
     NSString * str;{
         switch (index) {
             case kFilteringTypeAuthor:
@@ -465,7 +513,7 @@ enum {
                 str = [dic summary];
                 break;
             
-            case kFilteringTypeTag:
+            case kFilteringTypeTag:;
                 str = [dic tag];
                 break;
             default:
@@ -480,17 +528,38 @@ enum {
 
 
 - (IBAction)showWillAddedStringToNoticeList:(NSPopUpButton *)sender {
-    NSString * str = [self getWillBeAddedStringWithTypeIndex:[sender indexOfSelectedItem]];
-    [_willAddedStringToNoticeListTF setStringValue:str];
+    if ( [sender indexOfSelectedItem] == kFilteringTypeTag) {
+    }
+    else {
+        NSString * str = [self getWillBeAddedStringWithTypeIndex:[sender indexOfSelectedItem]];
+        [_willAddedStringToNoticeListTF setStringValue:str];
+    }
 }
 
 
 - (IBAction)sheetEndWithAdding:(NSButton *)sender {
     NSInteger index = [_filteringTypeInSheetPB indexOfSelectedItem];
     NSString * str = [self getWillBeAddedStringWithTypeIndex:index];
-    if (str.length) {
-        [_LPNListController addElementWithFilteringType:index
-                                        filteringString:str];
+    NSString * comment = [NSString stringWithString:[_filteringCommentInSheetTF stringValue]];
+    
+    
+    if (index == kFilteringTypeTag) {
+        NSArray * tags = [str componentsSeparatedByString:@"\n"];
+        for (NSString * tag in tags) {
+            NSString * trimmedTag = [tag substringFromIndex:2];
+            if (trimmedTag.length) {
+                [_LPNListController addElementWithFilteringType:index
+                                                filteringString:trimmedTag
+                                                        comment:comment];
+            }
+        }
+    }
+    else {
+        if (str.length) {
+            [_LPNListController addElementWithFilteringType:index
+                                            filteringString:str
+                                                comment:comment];
+        }
     }
     
     [NSApp endSheet:_sheetWindow];
@@ -722,7 +791,8 @@ NSUInteger refreshTimeIntervalManipulator(LPNRefreshTimeIntervalManipulateCommad
 
 - (BOOL)_canPopUpWithEntry:(LPNEntryDictionary*)entry {// LPNEntryDictionary == NSDictionary
     return
-#ifndef POPUP_TEST
+    
+#ifndef POPUP_TEST_IGNORE_GOT
     /* is firsrt load */
     ( [_currentFeededLiveIDs count] )
     
@@ -732,9 +802,16 @@ NSUInteger refreshTimeIntervalManipulator(LPNRefreshTimeIntervalManipulateCommad
     
     &&
 #endif
+    
+    
+#ifdef POPUP_TEST_IGNORE_LIST
+    YES;
+#else
     /* is entry contained in notice list */
     ( [_LPNListController hasEntry:entry] )
     ;
+#endif
+
 }
 
 

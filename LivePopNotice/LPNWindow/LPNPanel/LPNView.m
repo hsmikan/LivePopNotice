@@ -95,6 +95,9 @@
      
      "<body>"
       "<div id='body'>"
+#ifdef DEBUG
+     "<font color=red>debug</font>"
+#endif
        "<div id='title'>"
         "<a href='%@' target='_blank'>%@</a>"
         //    [entry URL]        [entry title]
