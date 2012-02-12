@@ -3,7 +3,7 @@ LivePopNotice  Copyright (c) 2012 PPixy
 
 
 System Requirement
-	Mac OS X 10.5 and Later. ( Recommended 10.6 and Later )
+	Mac OS X 10.6 and Later. (Perhaps executable on 10.5)
 		Tested On	  Mac OS X 10.7.2
 
 Summary
@@ -20,7 +20,7 @@ Links
 
 
 システム要件
-	Mac OS X 10.5以上（10.6以上をおすすめします）
+	Mac OS X 10.6以上(もしかしたら10.5でも動く)
 		動作確認は10.7.2で行いました
 
 概要
