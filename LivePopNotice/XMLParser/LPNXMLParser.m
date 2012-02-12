@@ -48,9 +48,15 @@ typedef enum {
 
 
 
-
-
 @implementation LPNXMLParser
+
+
+static const NSUInteger useElementFlags
+=
+kFeedElementName      | kFeedElementTitle  | kFeedElementID      | kFeedElementTag |
+kFeedElementPublished | kFeedElementLiveID | kFeedElementSummary;
+
+
 
 @synthesize delegate = _delegate;
 
@@ -252,10 +258,6 @@ didStartElement:(NSString *)elementName
 
 
 
-static const NSUInteger useElementFlags
-=
-kFeedElementName      | kFeedElementTitle  | kFeedElementID      | kFeedElementTag |
-kFeedElementPublished | kFeedElementLiveID | kFeedElementSummary;
 
 - (void)parser:(NSXMLParser *)parser
  didEndElement:(NSString *)elementName
@@ -386,9 +388,29 @@ kFeedElementPublished | kFeedElementLiveID | kFeedElementSummary;
     
     else if (CompareString(elementName, kFeedElementNameTag)) {
         if (_currentSiteMask & feedSiteCaveTube) {
+            
+#define TAG_SEPARATOR @" "
+#define TAG_FORMAT @"\n* %@"
+            
             UnenableFlag(_feedElementFlag, kFeedElementTag);
-            [_entry setTag:foundStrings];
+            NSMutableString * trimmedTag = [NSMutableString string];{
+                for (NSString * tag in [foundStrings componentsSeparatedByString:TAG_SEPARATOR]) {
+                    if ([[tag stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]) {
+                        [trimmedTag appendFormat:TAG_FORMAT,tag];
+                    }
+                }
+                
+                NSUInteger trimmedTagLength = [trimmedTag length];
+                if ( trimmedTagLength ) {
+                    [trimmedTag deleteCharactersInRange:NSMakeRange(0, 1)];
+                }
+            }
+            [_entry setTag:trimmedTag];
+            
+#undef TAG_SEPARATOR
+#undef TAG_SEPARATOR
         }
+        
     }
     
     

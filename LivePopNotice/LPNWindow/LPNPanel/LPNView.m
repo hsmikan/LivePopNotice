@@ -84,7 +84,7 @@
 
 - (NSString *)createLPNHTMLString:(NSDictionary *)entry
 {
-#define CHECK(X) ( (X) ? (X) : @"" )
+#define CHECK(X) ( [(X) length] ? (X) : @"" )
     return
     [NSString stringWithFormat:
      @"<html>"

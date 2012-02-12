@@ -28,6 +28,17 @@
 #endif
 
 
+#ifdef DEBUG
+#define RE_START_INTERVAL 5
+#else
+#define RE_START_INTERVAL 300
+#endif
+
+#define REFRESH_INTEVAL_MIN 10
+
+#define DISPLAY_TIMEINTERVAL_MIN 1
+
+
 
 
 
@@ -248,11 +259,6 @@ enum {
 }
 
 - (IBAction)refreshLiveList:(NSToolbarItem *)sender {
-#ifdef DEBUG
-#define RE_START_INTERVAL 5
-#else
-#define RE_START_INTERVAL 300
-#endif
     [self _LPN_stopRefreshTimer];
     [self _LPN_getAndParse:nil];
     [self _LPN_startRefreshTimer];
@@ -264,7 +270,7 @@ enum {
 
 
 - (IBAction)changeRefreshInterval:(NSTextFieldCell *)sender {
-    static const CGFloat refreshIntervalMin = 10;
+    static const CGFloat refreshIntervalMin = REFRESH_INTEVAL_MIN;
     
     NSUserDefaults * df = [NSUserDefaults standardUserDefaults];
     NSInteger senderContentInteger = [sender integerValue];
@@ -296,7 +302,7 @@ enum {
  *========================================================================================*/
 
 - (IBAction)changeLPNDisplayDuration:(NSTextField *)sender {
-    static const CGFloat displayTimeIntervalMin = 1;
+    static const CGFloat displayTimeIntervalMin = DISPLAY_TIMEINTERVAL_MIN;
     NSUserDefaults * df = [NSUserDefaults standardUserDefaults];
     CGFloat senderContentDouble = [sender doubleValue];
     CGFloat dfContentDouble = [df doubleForKey:kLPNUserDefaultsNoticeDurationKey];
@@ -365,18 +371,13 @@ enum {
 }
 
 
-- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
-    CGFloat columnWidth = [[tableView tableColumnWithIdentifier:@"liveListTitle"] width];
+- (CGFloat)_getCellRowWithColumn:(NSTableColumn *)column string:(NSString *)string {
+    CGFloat columnWidth = [column width];
     
     NSSize stringSize;{
-        NSDictionary * entry  = [[_liveListController arrangedObjects] objectAtIndex:row];
-        
-        NSString * title = [entry title];
         NSDictionary * stringAttr = [NSDictionary dictionaryWithObject:[NSFont systemFontOfSize:13.0] forKey:NSFontAttributeName];
-        
-        stringSize = [title sizeWithAttributes:stringAttr];
+        stringSize = [string sizeWithAttributes:stringAttr];
     }
-    
     
     if ( stringSize.width <= columnWidth ) {
         return stringSize.height;
@@ -384,6 +385,18 @@ enum {
     else {
         return ( stringSize.height * ceil(stringSize.width/columnWidth) );
     }
+
+}
+
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
+    NSDictionary * entry  = [[_liveListController arrangedObjects] objectAtIndex:row];
+    
+    CGFloat titleHeight =   [self _getCellRowWithColumn:[tableView tableColumnWithIdentifier:@"liveListTitle"] string:[entry title]];
+    CGFloat tagHeight   =   [self _getCellRowWithColumn:[tableView tableColumnWithIdentifier:@"liveListTag"] string:[entry tag]];
+    
+    //#define MAX(A,B)	({ __typeof__(A) __a = (A); __typeof__(B) __b = (B); __a < __b ? __b : __a; })
+    //return MAX(titleHeight,tagHeith);
+    return ( (titleHeight > tagHeight)? titleHeight : tagHeight );
 }
 
 
