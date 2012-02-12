@@ -377,9 +377,7 @@ enum {
 }
 
 
-- (CGFloat)_getCellRowWithColumn:(NSTableColumn *)column string:(NSString *)string {
-    CGFloat columnWidth = [column width];
-    
+- (CGFloat)_getCellRowWithColumnWidth:(CGFloat)columnWidth string:(NSString *)string {
     NSSize stringSize;{
         NSDictionary * stringAttr = [NSDictionary dictionaryWithObject:[NSFont systemFontOfSize:13.0] forKey:NSFontAttributeName];
         stringSize = [string sizeWithAttributes:stringAttr];
@@ -394,11 +392,23 @@ enum {
 
 }
 
+- (CGFloat)_getCellRowWithColumnWidth:(CGFloat)columnWidth tags:(NSString *)tags {
+    CGFloat ret = 0;
+    
+    NSArray * tagsArray = [tags componentsSeparatedByString:@"\n"];
+    for (NSString * tag in tagsArray) {
+        CGFloat tagHeight = [self _getCellRowWithColumnWidth:columnWidth string:tag];
+        if (ret < tagHeight) ret = tagHeight;
+    }
+    
+    return ret;
+}
+
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
     NSDictionary * entry  = [[_liveListController arrangedObjects] objectAtIndex:row];
     
-    CGFloat titleHeight =   [self _getCellRowWithColumn:[tableView tableColumnWithIdentifier:@"liveListTitle"] string:[entry title]];
-    CGFloat tagHeight   =   [self _getCellRowWithColumn:[tableView tableColumnWithIdentifier:@"liveListTag"] string:[entry tag]];
+    CGFloat titleHeight =   [self _getCellRowWithColumnWidth:[[tableView tableColumnWithIdentifier:@"liveListTitle"] width] string:[entry title]];
+    CGFloat tagHeight   =   [self _getCellRowWithColumnWidth:[[tableView tableColumnWithIdentifier:@"liveListTag"] width] string:[entry tag]];
     
     //#define MAX(A,B)	({ __typeof__(A) __a = (A); __typeof__(B) __b = (B); __a < __b ? __b : __a; })
     //return MAX(titleHeight,tagHeith);
