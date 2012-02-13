@@ -11,6 +11,7 @@ enum {
     kPopUpNoticeTabItemIndex = 1,
     kIgnoreListTabItemIndex = 2,
 };
+
 extern NSString * const kLiveListTabIdentifier;
 extern NSString * const kPopUpTabIdentifier;
 extern NSString * const kIgnoreListTabIdentifier;
