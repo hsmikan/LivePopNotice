@@ -24,8 +24,14 @@
 
 
 #ifdef DEBUG
+
+//#define POPUP_TEST 1
+
+#ifdef POPUP_TEST
 #define POPUP_TEST_IGNORE_GOT 1
 #define POPUP_TEST_IGNORE_LIST 1
+#endif
+
 #endif
 
 
@@ -34,6 +40,7 @@
 #else
 #define RE_START_INTERVAL 300
 #endif
+
 
 #define REFRESH_INTEVAL_MIN 10
 

@@ -1383,8 +1383,8 @@
 												<object class="NSSearchFieldCell" key="NSCell" id="506643396">
 													<int key="NSCellFlags">343014976</int>
 													<int key="NSCellFlags2">268436544</int>
-													<string key="NSContents"/>
 													<reference key="NSSupport" ref="375842967"/>
+													<string key="NSPlaceholderString">ALL</string>
 													<string key="NSCellIdentifier">_NS:918</string>
 													<reference key="NSControlView" ref="137073308"/>
 													<bool key="NSDrawsBackground">YES</bool>
@@ -1666,7 +1666,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 										<nil key="NSNextResponder"/>
 										<int key="NSvFlags">256</int>
 										<string key="NSFrameSize">{480, 360}</string>
-										<reference key="NSNextKeyView" ref="101016088"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:620</string>
 									</object>
 									<string key="NSLabel">PopUpList</string>
@@ -1679,7 +1679,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 										<nil key="NSNextResponder"/>
 										<int key="NSvFlags">256</int>
 										<string key="NSFrameSize">{480, 360}</string>
-										<reference key="NSNextKeyView" ref="101016088"/>
+										<reference key="NSNextKeyView"/>
 									</object>
 									<string key="NSLabel">IgnoreList</string>
 									<reference key="NSColor" ref="898365861"/>
@@ -2424,20 +2424,83 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<string key="label">predicate: filterPredicate</string>
 						<reference key="source" ref="137073308"/>
 						<reference key="destination" ref="743847020"/>
-						<object class="NSNibBindingConnector" key="connector">
+						<object class="NSNibBindingConnector" key="connector" id="282268886">
 							<reference key="NSSource" ref="137073308"/>
 							<reference key="NSDestination" ref="743847020"/>
 							<string key="NSLabel">predicate: filterPredicate</string>
 							<string key="NSBinding">predicate</string>
 							<string key="NSKeyPath">filterPredicate</string>
 							<dictionary key="NSOptions">
-								<string key="NSDisplayName">predicate</string>
-								<string key="NSPredicateFormat">(entryDictionaryTitle contains $value) or (entryDictionaryAuthorName contains $value)or (entryDictionaryService contains $value)</string>
+								<string key="NSDisplayName">ALL</string>
+								<string key="NSPredicateFormat">(entryDictionaryTitle contains $value) or (entryDictionaryTag contains $value) or (entryDictionaryAuthorName contains $value)</string>
 							</dictionary>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">873</int>
+					<int key="connectionID">1019</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">predicate2: filterPredicate</string>
+						<reference key="source" ref="137073308"/>
+						<reference key="destination" ref="743847020"/>
+						<object class="NSNibBindingConnector" key="connector" id="238476702">
+							<reference key="NSSource" ref="137073308"/>
+							<reference key="NSDestination" ref="743847020"/>
+							<string key="NSLabel">predicate2: filterPredicate</string>
+							<string key="NSBinding">predicate2</string>
+							<string key="NSKeyPath">filterPredicate</string>
+							<dictionary key="NSOptions">
+								<string key="NSDisplayName">Title</string>
+								<string key="NSPredicateFormat">entryDictionaryTitle contains $value</string>
+							</dictionary>
+							<reference key="NSPreviousConnector" ref="282268886"/>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">1022</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">predicate3: filterPredicate</string>
+						<reference key="source" ref="137073308"/>
+						<reference key="destination" ref="743847020"/>
+						<object class="NSNibBindingConnector" key="connector" id="237912301">
+							<reference key="NSSource" ref="137073308"/>
+							<reference key="NSDestination" ref="743847020"/>
+							<string key="NSLabel">predicate3: filterPredicate</string>
+							<string key="NSBinding">predicate3</string>
+							<string key="NSKeyPath">filterPredicate</string>
+							<dictionary key="NSOptions">
+								<string key="NSDisplayName">Author</string>
+								<string key="NSPredicateFormat">entryDictionaryAuthorName contains $value</string>
+							</dictionary>
+							<reference key="NSPreviousConnector" ref="238476702"/>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">1030</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">predicate4: filterPredicate</string>
+						<reference key="source" ref="137073308"/>
+						<reference key="destination" ref="743847020"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="137073308"/>
+							<reference key="NSDestination" ref="743847020"/>
+							<string key="NSLabel">predicate4: filterPredicate</string>
+							<string key="NSBinding">predicate4</string>
+							<string key="NSKeyPath">filterPredicate</string>
+							<dictionary key="NSOptions">
+								<string key="NSDisplayName">Tag</string>
+								<string key="NSPredicateFormat">entryDictionaryTag contains $value</string>
+							</dictionary>
+							<reference key="NSPreviousConnector" ref="237912301"/>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">1031</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3838,7 +3901,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">981</int>
+			<int key="maxID">1031</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
