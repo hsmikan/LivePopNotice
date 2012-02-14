@@ -173,7 +173,7 @@ enum {
     // LPNList
     _LPNListController = [[FilteringViewController alloc] initWithArrayControllerKey:kLPNListArrayControllerKey];
     [[_mainTab tabViewItemAtIndex:kPopUpNoticeTabItemIndex] setView:[_LPNListController view]];
-    
+
     // LPNIgnoreList
     _LPNIgnoreListController = [[FilteringViewController alloc] initWithArrayControllerKey:kLPNIgnoreListArrayControllerKey];
     [[_mainTab tabViewItemAtIndex:kIgnoreListTabItemIndex] setView:[_LPNIgnoreListController view]];
@@ -224,7 +224,8 @@ enum {
 - (void)clickedStatusBarLiveListSubMenu:(id)sender {
     NSString * url;
     for (NSDictionary * entry in [_liveListController content]) {
-        if ([[entry title] isEqualToString:[sender title]]) {
+        //TODO: display format
+        if ([[sender title] isEqualToString:[NSString stringWithFormat:@"%@\t|\t%@",[entry authorName],[entry title]]]) {
             url = [entry URL];
             break;
         }
@@ -652,6 +653,7 @@ enum SwapAddingEntryCommand {
     // update livelist in status menu
     NSMutableArray * livetitles = [NSMutableArray array];
     for (NSDictionary * entry in [_liveListController content]) {
+        // TODO: display format
         NSString * livetitle = [NSString stringWithFormat:@"%@\t|\t%@",[entry authorName],[entry title]];
         [livetitles addObject:livetitle];
     }
